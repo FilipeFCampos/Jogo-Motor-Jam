@@ -2,55 +2,47 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float horizontalVelocity;
-    public float speed = 5f;
-    public float jumpForce = 10f;
-    private bool isFacingRight = true;
+    /* Basic player movement variables */
+    private Vector2 moveDir;
+    [SerializeField] private float moveSpeed = 200f;
+
+    /* References to components */
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Awake is called when the script instance is being loaded
+    void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null) {
+            Debug.LogError("Rigidbody2D component is missing from the PlayerController GameObject.");
+        }
 
+        moveDir = Vector2.zero;
+    }
+
+    // Handle player input
+    private void GetInput()
+    {
+        moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
+    }
+
+    private void MovePlayer()
+    {
+        rb.linearVelocity = moveSpeed * Time.fixedDeltaTime * moveDir;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Get horizontal input
-        horizontalVelocity = Input.GetAxisRaw("Horizontal");
-
-        // Handle jumping
-        if (Input.GetButtonDown("Jump") && IsGrounded()) {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        }
-
-        Flip();
-    }
-
-    // Check if the player is grounded
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.4f, groundLayer);
+        GetInput();
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(horizontalVelocity * speed, rb.linearVelocity.y);
+        // Move the player based on input
+        MovePlayer();
     }
-    
-    // Flip the player character based on the direction of movement
-    private void Flip()
-    {
-        if (isFacingRight && horizontalVelocity < 0f || !isFacingRight && horizontalVelocity > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
+
 }
