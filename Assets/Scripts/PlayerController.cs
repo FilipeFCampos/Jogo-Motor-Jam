@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
     [SerializeField] private float meleeRange = 1f;
+    private bool canTakeDamage = true; // Flag to control if the player can take damage
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -58,22 +59,40 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1"))
+        {
             Attack();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Trap")) {
+            Debug.Log("Player has entered a trap!");
+
+            if (canTakeDamage) {
+                TakeDamage(1f); // Take damage from the trap
+                canTakeDamage = false; // Disable further damage until reset
+            }
         }
     }
 
     // Handles player death and game over logic
     private void Die()
     {
-        Debug.Log("Player has died.");
-        // GameOver logic would go here (change to game over screen, reset level, etc.)
-        // For now, we will just reset health
-        Destroy(gameObject); // Destroy the player object
+        Debug.Log("Player has died!");
+        // Here you can implement game over logic, like restarting the level or showing a game over screen
+        // For now, we will just reset the player's health
+        gameObject.SetActive(false); // Deactivate the player GameObject
+        canTakeDamage = true; // Reset damage taking ability
+        rb.linearVelocity = Vector2.zero; // Stop player movement
+        animator.SetTrigger("Die"); // Trigger death animation
+        canMove = false; // Disable movement on death
+        canAttack = false; // Disable attack on death
     }
 
     // Handles player damage taking logic
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0) {
