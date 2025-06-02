@@ -487,6 +487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 200
   rb: {fileID: 1502799308}
+  animator: {fileID: 1254762363}
+  spriteRenderer: {fileID: 1254762364}
   health: 0
   maxHealth: 3
   meleeDamage: 1
@@ -507,7 +509,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a45d0241c485625488fd6bfeab4d76dc, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
