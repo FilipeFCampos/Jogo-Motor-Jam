@@ -59,8 +59,7 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
-        if (Input.GetButtonDown("Fire1"))
-        {
+        if (Input.GetButtonDown("Fire1")) {
             Attack();
         }
     }
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
             if (canTakeDamage) {
                 TakeDamage(1f); // Take damage from the trap
-                canTakeDamage = false; // Disable further damage until reset
+                //canTakeDamage = false; // Disable further damage until reset
             }
         }
     }
@@ -80,15 +79,15 @@ public class PlayerController : MonoBehaviour
     // Handles player death and game over logic
     private void Die()
     {
-        Debug.Log("Player has died!");
-        // Here you can implement game over logic, like restarting the level or showing a game over screen
-        // For now, we will just reset the player's health
         gameObject.SetActive(false); // Deactivate the player GameObject
         canTakeDamage = true; // Reset damage taking ability
         rb.linearVelocity = Vector2.zero; // Stop player movement
         animator.SetTrigger("Die"); // Trigger death animation
-        canMove = false; // Disable movement on death
-        canAttack = false; // Disable attack on death
+        canMove = true; // Disable movement on death
+        canAttack = true; // Disable attack on death
+        currentDirection = Directions.DOWN;
+        health = maxHealth;
+        FindFirstObjectByType<GameManager>().PlayerDied(); // Notify the GameManager that the player has died
     }
 
     // Handles player damage taking logic
