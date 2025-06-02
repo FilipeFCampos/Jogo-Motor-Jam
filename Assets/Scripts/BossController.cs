@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public enum Estado { Idle, Perseguindo, Atacando, Dano, Morto }
+    public enum Estado { Idle, Andando, Atacando, Dano, Morto }
     public Estado estadoAtual = Estado.Idle;
 
     public Transform alvo;
@@ -19,6 +19,8 @@ public class BossController : MonoBehaviour
     private Rigidbody2D rb;
     private bool podeAtacar = true;
 
+    private int direcaoAtual = 1; // 0=cima, 1=baixo, 2=esquerda, 3=direita
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -31,7 +33,8 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
-        if (estadoAtual == Estado.Morto) return;
+        if (estadoAtual == Estado.Morto)
+            return;
 
         float distancia = Vector2.Distance(transform.position, alvo.position);
 
@@ -43,13 +46,20 @@ public class BossController : MonoBehaviour
             case Estado.Idle:
                 AtualizarAnimacao(Vector2.zero);
                 if (distancia < 5f)
-                    estadoAtual = Estado.Perseguindo;
+                    MudarEstado(Estado.Andando);
                 break;
 
-            case Estado.Perseguindo:
+            case Estado.Andando:
                 if (distancia <= alcanceDeAtaque)
                 {
-                    estadoAtual = Estado.Atacando;
+                    if (podeAtacar)
+                    {
+                        MudarEstado(Estado.Atacando);
+                    }
+                    else
+                    {
+                        PararMovimento();
+                    }
                 }
                 else
                 {
@@ -58,15 +68,11 @@ public class BossController : MonoBehaviour
                 break;
 
             case Estado.Atacando:
-                if (podeAtacar)
-                    StartCoroutine(Atacar());
-
-                if (distancia > alcanceDeAtaque + 0.5f)
-                    estadoAtual = Estado.Perseguindo;
+                // Durante ataque não faz nada para evitar reiniciar ataque
                 break;
 
             case Estado.Dano:
-                AtualizarAnimacao(Vector2.zero);
+                // Durante dano não faz nada para evitar conflito
                 break;
         }
     }
@@ -74,82 +80,125 @@ public class BossController : MonoBehaviour
     void MoverAteAlvo()
     {
         Vector2 direcao = (alvo.position - transform.position).normalized;
+        AtualizarDirecao(direcao);
         rb.MovePosition(rb.position + direcao * velocidade * Time.deltaTime);
         AtualizarAnimacao(direcao);
+    }
+
+    void PararMovimento()
+    {
+        AtualizarAnimacao(Vector2.zero);
+    }
+
+    void AtualizarDirecao(Vector2 direcaoMovimento)
+    {
+        if (direcaoMovimento != Vector2.zero)
+        {
+            if (Mathf.Abs(direcaoMovimento.x) > Mathf.Abs(direcaoMovimento.y))
+                direcaoAtual = direcaoMovimento.x > 0 ? 3 : 2;
+            else
+                direcaoAtual = direcaoMovimento.y > 0 ? 0 : 1;
+        }
     }
 
     IEnumerator Atacar()
     {
         podeAtacar = false;
-        AtualizarAnimacao(Vector2.zero);
 
-        yield return new WaitForSeconds(1.5f);
+        anim.SetInteger("direcao", direcaoAtual);
+        anim.SetInteger("estado", 2); // ataque
+
+        float tempoAnimacaoAtaque = 1.2f; // ajuste conforme sua animação
+
+        yield return new WaitForSeconds(tempoAnimacaoAtaque);
+
+        if (estadoAtual != Estado.Morto)
+            MudarEstado(Estado.Andando);
 
         podeAtacar = true;
-
-        if (estadoAtual == Estado.Atacando)
-            estadoAtual = Estado.Perseguindo;
     }
 
     public void LevarDano(int dano)
     {
-        if (estadoAtual == Estado.Morto) return;
+        if (estadoAtual == Estado.Morto)
+            return;
 
         vida -= dano;
-        estadoAtual = Estado.Dano;
-
-        AtualizarAnimacao(Vector2.zero);
-
         if (vida <= 0)
         {
             vida = 0;
-            estadoAtual = Estado.Morto;
-
+            MudarEstado(Estado.Morto);
             rb.linearVelocity = Vector2.zero;
             GetComponent<Collider2D>().enabled = false;
-
-            AtualizarAnimacao(Vector2.zero);
-
             if (barraUI != null)
                 barraUI.SetActive(false);
-
+            anim.SetInteger("estado", 4); // morto
             Destroy(gameObject, 3f);
         }
         else
         {
-            Invoke(nameof(VoltarAPerseguir), 0.5f);
+            MudarEstado(Estado.Dano);
+            StartCoroutine(VoltarAoAndarDepoisDano());
         }
     }
 
-    void VoltarAPerseguir()
+    IEnumerator VoltarAoAndarDepoisDano()
     {
+        anim.SetInteger("direcao", direcaoAtual);
+        anim.SetInteger("estado", 3); // dano
+        yield return new WaitForSeconds(0.7f);
         if (estadoAtual != Estado.Morto)
-            estadoAtual = Estado.Perseguindo;
+            MudarEstado(Estado.Andando);
+    }
+
+    void MudarEstado(Estado novoEstado)
+    {
+        if (estadoAtual == novoEstado)
+            return;
+
+        estadoAtual = novoEstado;
+
+        switch (estadoAtual)
+        {
+            case Estado.Idle:
+                anim.SetInteger("estado", 0);
+                break;
+
+            case Estado.Andando:
+                anim.SetInteger("estado", 1);
+                break;
+
+            case Estado.Atacando:
+                StartCoroutine(Atacar());
+                break;
+
+            case Estado.Dano:
+                // animação e lógica no coroutine VoltarAoAndarDepoisDano
+                break;
+
+            case Estado.Morto:
+                anim.SetInteger("estado", 4);
+                break;
+        }
+
+        anim.SetInteger("direcao", direcaoAtual);
     }
 
     void AtualizarAnimacao(Vector2 direcaoMovimento)
     {
-        int direcao = 1; // Padrão: Baixo
+        AtualizarDirecao(direcaoMovimento);
 
-        if (direcaoMovimento != Vector2.zero)
-        {
-            if (Mathf.Abs(direcaoMovimento.x) > Mathf.Abs(direcaoMovimento.y))
-                direcao = direcaoMovimento.x > 0 ? 3 : 2; // Direita ou Esquerda
-            else
-                direcao = direcaoMovimento.y > 0 ? 0 : 1; // Cima ou Baixo
-        }
-
-        int estado = estadoAtual switch
+        int estadoAnimacao = estadoAtual switch
         {
             Estado.Idle => 0,
-            Estado.Perseguindo => 1,
+            Estado.Andando => 1,
             Estado.Atacando => 2,
             Estado.Dano => 3,
             Estado.Morto => 4,
             _ => 0
         };
 
-        anim.SetInteger("direcao", direcao);
-        anim.SetInteger("estado", estado);
+        anim.SetInteger("direcao", direcaoAtual);
+        anim.SetInteger("estado", estadoAnimacao);
     }
 }
