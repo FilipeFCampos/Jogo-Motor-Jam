@@ -4,7 +4,7 @@ using System.Collections;
 public class Trap : MonoBehaviour
 {
     public GameObject efeitoDaArmadilha; // O GameObject que tem o Animator
-    public float duracaoAnimacao = 1.0f; // Tempo da animação Ativar em segundos
+    public float duracaoAnimacao = 1.0f; // Tempo da animaï¿½ï¿½o Ativar em segundos
 
     private Animator anim;
 
@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour
             anim = efeitoDaArmadilha.GetComponent<Animator>();
             if (anim == null)
             {
-                Debug.LogError("Animator não encontrado no efeitoDaArmadilha!");
+                Debug.LogError("Animator nï¿½o encontrado no efeitoDaArmadilha!");
             }
         }
     }
@@ -26,9 +26,9 @@ public class Trap : MonoBehaviour
         {
             Debug.Log("Jogador ativou a armadilha!");
 
-            anim.SetTrigger("Ativar"); // Dispara a animação
+            anim.SetTrigger("Ativar"); // Dispara a animaï¿½ï¿½o
 
-            // Começa coroutine para voltar para o estado Idle depois da animação
+            // Comeï¿½a coroutine para voltar para o estado Idle depois da animaï¿½ï¿½o
             StartCoroutine(VoltarParaIdleDepois(duracaoAnimacao));
         }
     }
