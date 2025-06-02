@@ -35,10 +35,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2614972902660900546}
@@ -62,12 +62,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 1
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5832691081405217877}
   m_Solo: 0
@@ -143,10 +143,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: Hit
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8464680424025879425}
@@ -171,10 +171,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 2
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6720795242995157498}
@@ -251,10 +251,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 1
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: Hit
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3891949639969344309}
@@ -279,10 +279,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 2
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: Hit
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -695893569869567820}
@@ -306,11 +306,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 4
-  - m_ConditionMode: 3
-    m_ConditionEvent: direcao
+  - m_ConditionMode: 1
+    m_ConditionEvent: Die
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6465346956665543160}
@@ -318,7 +315,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
@@ -361,11 +358,11 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 3
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 2
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5263847106659686802}
   m_Solo: 0
@@ -441,14 +438,44 @@ AnimatorController:
   m_Name: bossController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: direcao
+  - m_Name: Direction
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: estado
-    m_Type: 3
+  - m_Name: Attack
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: CanAttack
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 9100000}
+  - m_Name: CanMove
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 1
+    m_Controller: {fileID: 9100000}
+  - m_Name: IsMoving
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Hit
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Die
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -475,10 +502,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 3
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: Hit
     m_EventTreshold: 3
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4956429549612715664}
@@ -528,12 +555,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: direcao
-    m_EventTreshold: -1
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: -1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 772631239071651974}
   m_Solo: 0
@@ -556,11 +580,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 2
-  - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5464738682695627754}
@@ -599,7 +623,7 @@ AnimatorStateMachine:
     m_Position: {x: 210, y: -550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6465346956665543160}
-    m_Position: {x: -260, y: -290, z: 0}
+    m_Position: {x: -110, y: -320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3891949639969344309}
     m_Position: {x: 340, y: -170, z: 0}
@@ -646,7 +670,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 40, y: -290, z: 0}
+  m_AnyStatePosition: {x: 130, y: -380, z: 0}
   m_EntryPosition: {x: 40, y: -190, z: 0}
   m_ExitPosition: {x: 900, y: -320, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -738,11 +762,11 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 1
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 1
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8240582432794044279}
   m_Solo: 0
@@ -792,10 +816,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+    m_ConditionEvent: Direction
     m_EventTreshold: 3
-  - m_ConditionMode: 6
-    m_ConditionEvent: estado
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -863664606183204929}
@@ -845,12 +869,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: direcao
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
     m_EventTreshold: 0
   - m_ConditionMode: 6
-    m_ConditionEvent: estado
-    m_EventTreshold: 2
+    m_ConditionEvent: Direction
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7350087939080311675}
   m_Solo: 0

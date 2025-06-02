@@ -1,204 +1,178 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class BossController : MonoBehaviour
 {
-    public enum Estado { Idle, Andando, Atacando, Dano, Morto }
-    public Estado estadoAtual = Estado.Idle;
+    public enum Estado { Andando, Atacando, TomandoDano, Morto }
 
-    public Transform alvo;
-    public GameObject barraUI;
+    private Estado estadoAtual = Estado.Andando;
 
-    public float alcanceDeAtaque = 3f;
-    public float velocidade = 5f;
+    [SerializeField] private float vidaMaxima = 10f;
+    private float vidaAtual;
 
-    public int vidaMaxima = 100;
-    public int vida = 100;
+    public float VidaAtual => vidaAtual;
+    public float VidaMaxima => vidaMaxima;
 
-    private Animator anim;
+    [SerializeField] private float velocidade = 2f;
+    [SerializeField] private float distanciaAtaque = 1.5f;
+    [SerializeField] private float tempoEntreAtaques = 2f;
+    private float tempoUltimoAtaque;
+
+    private Transform jogador;
     private Rigidbody2D rb;
+    private Animator anim;
+    private SpriteRenderer sr;
+
+    private Vector2 direcao;
+    private int direcaoAtual;
+
     private bool podeAtacar = true;
+    private bool podeMover = true;
 
-    private int direcaoAtual = 1; // 0=cima, 1=baixo, 2=esquerda, 3=direita
-
-    void Start()
+    private void Start()
     {
-        anim = GetComponent<Animator>();
+        jogador = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-        vida = vidaMaxima;
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
-        if (barraUI != null)
-            barraUI.SetActive(false);
+        vidaAtual = vidaMaxima;
+        tempoUltimoAtaque = -tempoEntreAtaques;
     }
 
-    void Update()
+    private void Update()
     {
-        if (estadoAtual == Estado.Morto)
-            return;
+        if (estadoAtual == Estado.Morto) return;
 
-        float distancia = Vector2.Distance(transform.position, alvo.position);
+        AtualizarDirecao();
+        AtualizarFlagsAnimator();
 
-        if (estadoAtual != Estado.Idle && barraUI != null && !barraUI.activeSelf)
-            barraUI.SetActive(true);
-
-        switch (estadoAtual)
+        if (estadoAtual == Estado.Andando)
         {
-            case Estado.Idle:
-                AtualizarAnimacao(Vector2.zero);
-                if (distancia < 5f)
-                    MudarEstado(Estado.Andando);
-                break;
+            float distancia = Vector2.Distance(transform.position, jogador.position);
+            if (distancia <= distanciaAtaque && Time.time - tempoUltimoAtaque >= tempoEntreAtaques)
+            {
+                MudarEstado(Estado.Atacando);
+                StartCoroutine(Atacar());
+            }
+        }
 
-            case Estado.Andando:
-                if (distancia <= alcanceDeAtaque)
-                {
-                    if (podeAtacar)
-                    {
-                        MudarEstado(Estado.Atacando);
-                    }
-                    else
-                    {
-                        PararMovimento();
-                    }
-                }
-                else
-                {
-                    MoverAteAlvo();
-                }
-                break;
+        AtualizarAnimacoes();
+    }
 
-            case Estado.Atacando:
-                // Durante ataque não faz nada para evitar reiniciar ataque
-                break;
-
-            case Estado.Dano:
-                // Durante dano não faz nada para evitar conflito
-                break;
+    private void FixedUpdate()
+    {
+        if (estadoAtual == Estado.Andando && podeMover && EstaNaCamera())
+        {
+            Mover();
         }
     }
 
-    void MoverAteAlvo()
+    private void Mover()
     {
-        Vector2 direcao = (alvo.position - transform.position).normalized;
-        AtualizarDirecao(direcao);
-        rb.MovePosition(rb.position + direcao * velocidade * Time.deltaTime);
-        AtualizarAnimacao(direcao);
+        Vector2 direcaoMovimento = (jogador.position - transform.position).normalized;
+        rb.MovePosition(rb.position + direcaoMovimento * velocidade * Time.fixedDeltaTime);
     }
 
-    void PararMovimento()
+    private void AtualizarDirecao()
     {
-        AtualizarAnimacao(Vector2.zero);
+        Vector2 diff = jogador.position - transform.position;
+        if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+            direcaoAtual = (diff.x > 0) ? 3 : 2; // Right : Left
+        else
+            direcaoAtual = (diff.y > 0) ? 0 : 1; // Up : Down
     }
 
-    void AtualizarDirecao(Vector2 direcaoMovimento)
+    private void AtualizarAnimacoes()
     {
-        if (direcaoMovimento != Vector2.zero)
-        {
-            if (Mathf.Abs(direcaoMovimento.x) > Mathf.Abs(direcaoMovimento.y))
-                direcaoAtual = direcaoMovimento.x > 0 ? 3 : 2;
-            else
-                direcaoAtual = direcaoMovimento.y > 0 ? 0 : 1;
-        }
+        anim.SetInteger("Direction", direcaoAtual);
+        anim.SetBool("IsMoving", estadoAtual == Estado.Andando);
+        sr.flipX = (direcaoAtual == 3); // Flip se for Right
     }
 
-    IEnumerator Atacar()
+    private IEnumerator Atacar()
     {
         podeAtacar = false;
+        podeMover = false;
 
-        anim.SetInteger("direcao", direcaoAtual);
-        anim.SetInteger("estado", 2); // ataque
+        anim.SetTrigger("Attack");
+        tempoUltimoAtaque = Time.time;
 
-        float tempoAnimacaoAtaque = 1.2f; // ajuste conforme sua animação
-
-        yield return new WaitForSeconds(tempoAnimacaoAtaque);
+        yield return new WaitForSeconds(1f);
 
         if (estadoAtual != Estado.Morto)
+        {
             MudarEstado(Estado.Andando);
+        }
 
         podeAtacar = true;
+        podeMover = true;
     }
 
-    public void LevarDano(int dano)
+    public void TomarDano(float dano)
     {
-        if (estadoAtual == Estado.Morto)
-            return;
+        if (estadoAtual == Estado.Morto) return;
 
-        vida -= dano;
-        if (vida <= 0)
+        vidaAtual -= dano;
+
+        if (vidaAtual <= 0)
         {
-            vida = 0;
-            MudarEstado(Estado.Morto);
-            rb.linearVelocity = Vector2.zero;
-            GetComponent<Collider2D>().enabled = false;
-            if (barraUI != null)
-                barraUI.SetActive(false);
-            anim.SetInteger("estado", 4); // morto
-            Destroy(gameObject, 3f);
+            Morrer();
         }
         else
         {
-            MudarEstado(Estado.Dano);
-            StartCoroutine(VoltarAoAndarDepoisDano());
+            StartCoroutine(TomarDanoCoroutine());
         }
     }
 
-    IEnumerator VoltarAoAndarDepoisDano()
+    private IEnumerator TomarDanoCoroutine()
     {
-        anim.SetInteger("direcao", direcaoAtual);
-        anim.SetInteger("estado", 3); // dano
-        yield return new WaitForSeconds(0.7f);
+        MudarEstado(Estado.TomandoDano);
+        anim.SetTrigger("Hit");
+
+        podeMover = false;
+
+        yield return new WaitForSeconds(0.5f);
+
         if (estadoAtual != Estado.Morto)
+        {
             MudarEstado(Estado.Andando);
-    }
-
-    void MudarEstado(Estado novoEstado)
-    {
-        if (estadoAtual == novoEstado)
-            return;
-
-        estadoAtual = novoEstado;
-
-        switch (estadoAtual)
-        {
-            case Estado.Idle:
-                anim.SetInteger("estado", 0);
-                break;
-
-            case Estado.Andando:
-                anim.SetInteger("estado", 1);
-                break;
-
-            case Estado.Atacando:
-                StartCoroutine(Atacar());
-                break;
-
-            case Estado.Dano:
-                // animação e lógica no coroutine VoltarAoAndarDepoisDano
-                break;
-
-            case Estado.Morto:
-                anim.SetInteger("estado", 4);
-                break;
+            podeMover = true;
         }
-
-        anim.SetInteger("direcao", direcaoAtual);
     }
 
-    void AtualizarAnimacao(Vector2 direcaoMovimento)
+    private void Morrer()
     {
-        AtualizarDirecao(direcaoMovimento);
+        MudarEstado(Estado.Morto);
+        anim.SetTrigger("Die");
+        podeMover = false;
+        rb.linearVelocity = Vector2.zero;
+        Destroy(gameObject, 2f);
+    }
 
-        int estadoAnimacao = estadoAtual switch
-        {
-            Estado.Idle => 0,
-            Estado.Andando => 1,
-            Estado.Atacando => 2,
-            Estado.Dano => 3,
-            Estado.Morto => 4,
-            _ => 0
-        };
+    private void AtualizarFlagsAnimator()
+    {
+        podeMover = anim.GetBool("CanMove");
+        podeAtacar = anim.GetBool("CanAttack");
+    }
 
-        anim.SetInteger("direcao", direcaoAtual);
-        anim.SetInteger("estado", estadoAnimacao);
+    private void MudarEstado(Estado novoEstado)
+    {
+        estadoAtual = novoEstado;
+    }
+
+    // ✅ Novo método: verifica se o boss está visível na câmera
+    private bool EstaNaCamera()
+    {
+        if (Camera.main == null) return false;
+
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(transform.position);
+
+        // Margem interna da tela (aumente para reduzir o campo de visão do boss)
+        float margem = 0.2f;
+
+        return viewportPos.x >= margem && viewportPos.x <= 1f - margem &&
+               viewportPos.y >= margem && viewportPos.y <= 1f - margem &&
+               viewportPos.z > 0;
     }
 }

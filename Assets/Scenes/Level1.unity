@@ -11112,7 +11112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bf8d6684a8d4a42ab6e003863acdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 685748927}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &551326865
@@ -14228,9 +14228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 200
-  rb: {fileID: 0}
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  rb: {fileID: 1502799308}
+  animator: {fileID: 1254762363}
+  spriteRenderer: {fileID: 1254762364}
   health: 0
   maxHealth: 3
   meleeDamage: 1
@@ -14243,14 +14243,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502799306}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: a45d0241c485625488fd6bfeab4d76dc, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -14628,13 +14628,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e109cbc39f85d247ad8a2e7ae25a792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estadoAtual: 0
-  alvo: {fileID: 0}
-  barraUI: {fileID: 1601484976}
-  alcanceDeAtaque: 1.5
-  velocidade: 10
   vidaMaxima: 100
-  vida: 100
+  velocidade: 3
+  distanciaAtaque: 1
+  tempoEntreAtaques: 2
 --- !u!50 &1652597828
 Rigidbody2D:
   serializedVersion: 5
