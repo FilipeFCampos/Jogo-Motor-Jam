@@ -30,14 +30,16 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null) {
+        if (rb == null)
+        {
             Debug.LogError("Rigidbody2D component is missing from the PlayerController GameObject.");
         }
         health = maxHealth;
         moveDir = Vector2.zero;
         currentDirection = Directions.DOWN; // Default direction
         canMove = animator.GetBool("CanMove");
-        if (animator == null) {
+        if (animator == null)
+        {
             Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
         canAttack = animator.GetBool("CanAttack");
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour
     // Handles player attack logic
     private void Attack()
     {
-        if (!canAttack) {
+        if (!canAttack)
+        {
             Debug.Log("Cannot attack right now.");
             return; // Exit if the player cannot attack
         }
@@ -59,7 +62,8 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1"))
+        {
             Attack();
         }
     }
@@ -94,7 +98,8 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health <= 0) {
+        if (health <= 0)
+        {
             Die();
         }
     }
@@ -103,21 +108,25 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         rb.linearVelocity = (canMove ? 1 : 0) * moveSpeed * Time.fixedDeltaTime * moveDir;
-        rb.linearVelocity.Normalize();       
+        rb.linearVelocity.Normalize();
     }
 
     private void CalculateFacingDirection()
     {
-        if (moveDir.x > 0) {
+        if (moveDir.x > 0)
+        {
             currentDirection = Directions.RIGHT;
         }
-        else if (moveDir.x < 0) {
+        else if (moveDir.x < 0)
+        {
             currentDirection = Directions.LEFT;
         }
-        if (moveDir.y > 0) {
+        if (moveDir.y > 0)
+        {
             currentDirection = Directions.UP;
         }
-        else if (moveDir.y < 0) {
+        else if (moveDir.y < 0)
+        {
             currentDirection = Directions.DOWN;
         }
     }
@@ -130,10 +139,12 @@ public class PlayerController : MonoBehaviour
         // Update animator parameters based on direction
         animator.SetInteger("Direction", (int)currentDirection);
 
-        if (currentDirection == Directions.LEFT || currentDirection == Directions.RIGHT) {
+        if (currentDirection == Directions.LEFT || currentDirection == Directions.RIGHT)
+        {
             spriteRenderer.flipX = currentDirection == Directions.RIGHT;
         }
-        else {
+        else
+        {
             spriteRenderer.flipX = false; // Reset flip for vertical movement
         }
     }
