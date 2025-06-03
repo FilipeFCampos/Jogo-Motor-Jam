@@ -15479,6 +15479,7 @@ MonoBehaviour:
   velocidade: 3
   distanciaAtaque: 1.5
   tempoEntreAtaques: 2
+  cenaVitoria: WinScene
   danoAtaque: 2
 --- !u!50 &1652597828
 Rigidbody2D:

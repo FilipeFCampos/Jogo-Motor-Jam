@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class BossController : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class BossController : MonoBehaviour
 
     private bool podeAtacar = true;
     private bool podeMover = true;
+
+    [SerializeField] private string cenaVitoria = "WinScene";
+
 
     [SerializeField] private float danoAtaque = 1f; // Dano que o boss causa ao jogador
 
@@ -172,7 +177,23 @@ public class BossController : MonoBehaviour
         anim.SetTrigger("Die");
         podeMover = false;
         rb.linearVelocity = Vector2.zero;
+
+        // Salvar dados para a tela de vitória
+        PlayerPrefs.SetInt("SlimesDefeated", PlayerPrefs.GetInt("SlimesDefeated", 0));
+        PlayerPrefs.SetFloat("PlayTime", Time.timeSinceLevelLoad); // ou outro tempo do jogo
+        PlayerPrefs.Save();
+
+        // Carrega a cena de vitória após um pequeno delay
+        StartCoroutine(CarregarCenaVitoria());
+
         Destroy(gameObject, 2f);
+    }
+
+   private IEnumerator CarregarCenaVitoria()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Carregando cena da vitória...");
+        SceneManager.LoadScene(cenaVitoria);
     }
 
     private void AtualizarFlagsAnimator()
