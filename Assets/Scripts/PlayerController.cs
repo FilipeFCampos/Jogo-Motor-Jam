@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     /* Basic player movement variables */
     private Vector2 moveDir;
-    [SerializeField] private float moveSpeed = 200f;
+    [SerializeField] private float moveSpeed = 251f;
     private Directions currentDirection;
     private bool canMove = true; // Flag to control player movement
 
@@ -26,12 +26,14 @@ public class PlayerController : MonoBehaviour
     private bool isInvulnerable = false;
 
     private bool canAttack = true; // Flag to control attack state
-    [SerializeField] private float maxHealth = 3f;
+    [SerializeField] private float maxHealth = 5f;
     [SerializeField] private float meleeDamage = 1f;
     [SerializeField] private float meleeRange = 1f;
+    private bool isDead = false; // Flag to check if the player is dead
     private bool canTakeDamage = true; // Flag to control if the player can take damage
 
     [SerializeField] private LayerMask enemyLayer;
+    public Timer timer;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -50,6 +52,11 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
         canAttack = animator.GetBool("CanAttack");
+        timer = FindFirstObjectByType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogError("Timer component not found in the scene.");
+        }
     }
 
     // Handles player attack logic
@@ -116,6 +123,7 @@ public class PlayerController : MonoBehaviour
 
         // Desabilita colisões se necessário
         GetComponent<Collider2D>().enabled = false;
+        isDead = true; // Set the dead flag to true to prevent multiple deaths
 
         // Mostra Game Over
         SceneManager.LoadScene("GameOverScene", LoadSceneMode.Additive);
@@ -148,7 +156,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Ativa invulnerabilidade temporária
-    isInvulnerable = true;
+        isInvulnerable = true;
     StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
 }
 
@@ -218,6 +226,10 @@ public class PlayerController : MonoBehaviour
         GetInput();
         CalculateFacingDirection();
         HandleAnimations();
+        if (timer.timeElapsed <= 0 && isDead == false)
+        {
+            Die();
+        }
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations

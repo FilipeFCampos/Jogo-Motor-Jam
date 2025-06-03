@@ -9,10 +9,12 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeElapsed > 0) {
+        if (timeElapsed > 0)
+        {
             UpdateTimer();
         }
-        else {
+        else
+        {
             timerText.text = "0.0";
             enabled = false;
         }
@@ -23,5 +25,12 @@ public class Timer : MonoBehaviour
     {
         timeElapsed -= Time.deltaTime;
         timerText.text = timeElapsed.ToString("F1");
+    }
+
+    public void ResetTimer()
+    {
+        timeElapsed = 25.1f;
+        timerText.text = timeElapsed.ToString("F1");
+        enabled = true; // Re-enable the timer if it was disabled
     }
 }
