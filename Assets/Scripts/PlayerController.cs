@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,9 +18,12 @@ public class PlayerController : MonoBehaviour
     // Animation related references
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    
 
     /* Combat related variables */
     public float health;
+    private bool isInvulnerable = false;
+
     private bool canAttack = true; // Flag to control attack state
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
@@ -60,7 +64,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Attack");
         canMove = false; // Disable movement during attack
 
-        // Novo: detectar inimigos na �rea de ataque
+        // Novo: detectar inimigos na �rea de ataque
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, meleeRange, enemyLayer);
 
         foreach (Collider2D enemy in hitEnemies)
@@ -114,12 +118,42 @@ public class PlayerController : MonoBehaviour
 
     // Handles player damage taking logic
     public void TakeDamage(float damage)
+{
+    if (isInvulnerable)
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
+        Debug.Log("Jogador está invulnerável. Ignorando dano.");
+        return;
+    }
+
+    health -= damage;
+
+    // Atualiza os corações na tela
+    if (HealthSystem.Instance != null)
+    {
+        HealthSystem.Instance.UpdateHearts((int)health);
+    }
+
+    if (health <= 0)
+    {
+        Die();
+    }
+
+    // Ativa invulnerabilidade temporária
+    isInvulnerable = true;
+    StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
+}
+
+    IEnumerator ResetInvulnerability(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isInvulnerable = false;
+    }
+    
+    void Start()
+    {
+        // Inicializa o HUD com vida máxima
+        if (HealthSystem.Instance != null)
+            HealthSystem.Instance.UpdateHearts((int)maxHealth);
     }
 
     // Move the player based on move direction and speed
