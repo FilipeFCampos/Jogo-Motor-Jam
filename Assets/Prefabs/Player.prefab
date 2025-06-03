@@ -316,8 +316,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7367951850140502443}
   health: 0
   maxHealth: 3
-  meleeDamage: 1
+  meleeDamage: 100
   meleeRange: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!95 &6730776717518885296
 Animator:
   serializedVersion: 7
