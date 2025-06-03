@@ -1,10 +1,16 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public GameObject efeitoDaArmadilha; // O GameObject que tem o Animator
-    public float duracaoAnimacao = 1.0f; // Tempo da animação Ativar em segundos
+    [Header("ConfiguraÃ§Ãµes")]
+    public GameObject efeitoDaArmadilha;
+    public float duracaoAnimacao = 1.0f;
+    public int dano = 1;
+
+    [Header("Cooldown")]
+    public float tempoRecarga = 2f;
+    private bool podeDarDano = true;
 
     private Animator anim;
 
@@ -13,30 +19,46 @@ public class Trap : MonoBehaviour
         if (efeitoDaArmadilha != null)
         {
             anim = efeitoDaArmadilha.GetComponent<Animator>();
-            if (anim == null)
-            {
-                Debug.LogError("Animator não encontrado no efeitoDaArmadilha!");
-            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && anim != null)
+        if (other.CompareTag("Player") && podeDarDano)
         {
-            Debug.Log("Jogador ativou a armadilha!");
+            Debug.Log("Armadilha ativada!");
 
-            anim.SetTrigger("Ativar"); // Dispara a animação
+            // Ativa animaÃ§Ã£o da armadilha
+            if (anim != null)
+            {
+                anim.SetTrigger("Ativar");
+                StartCoroutine(VoltarParaIdleDepois(duracaoAnimacao));
+            }
 
-            // Começa coroutine para voltar para o estado Idle depois da animação
-            StartCoroutine(VoltarParaIdleDepois(duracaoAnimacao));
+            // Aplica dano ao jogador, se ele tiver o componente PlayerController
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.TakeDamage(dano);
+                StartCoroutine(RecarregarArmadilha());
+            }
+            else
+            {
+                Debug.LogWarning("O objeto com tag 'Player' nÃ£o possui o script PlayerController!");
+            }
         }
     }
 
     private IEnumerator VoltarParaIdleDepois(float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (anim != null) anim.Play("Idle");
+    }
 
-        anim.Play("Idle"); // Volta para o estado inicial "Idle"
+    private IEnumerator RecarregarArmadilha()
+    {
+        podeDarDano = false;
+        yield return new WaitForSeconds(tempoRecarga);
+        podeDarDano = true;
     }
 }

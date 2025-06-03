@@ -10542,6 +10542,7 @@ GameObject:
   - component: {fileID: 346676135}
   - component: {fileID: 346676134}
   - component: {fileID: 346676136}
+  - component: {fileID: 346676137}
   m_Layer: 0
   m_Name: HealthContainer
   m_TagString: Untagged
@@ -10637,6 +10638,27 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &346676137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346676132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b38c25edd62c4246ae003b4ee7ac6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHeart: {fileID: 1564688358316481467, guid: 2f326515c2510374ebd2dd64cd7195e8, type: 3}
+  emptyHeart: {fileID: 4537193172801868870, guid: 2f326515c2510374ebd2dd64cd7195e8, type: 3}
+  maxHearts: 5
+  heartImages:
+  - {fileID: 1655066580}
+  - {fileID: 610575803}
+  - {fileID: 1082845268}
+  - {fileID: 2138897979}
+  - {fileID: 1183842959}
 --- !u!1 &348828855
 GameObject:
   m_ObjectHideFlags: 0
@@ -10764,6 +10786,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   efeitoDaArmadilha: {fileID: 348828855}
   duracaoAnimacao: 1
+  dano: 1
+  tempoRecarga: 2
 --- !u!61 &348828860
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13300,6 +13324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   efeitoDaArmadilha: {fileID: 1247615350}
   duracaoAnimacao: 1
+  dano: 1
+  tempoRecarga: 2
 --- !u!61 &1247615355
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14380,6 +14406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   efeitoDaArmadilha: {fileID: 1472382557}
   duracaoAnimacao: 1
+  dano: 1
+  tempoRecarga: 2
 --- !u!61 &1472382562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15215,6 +15243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   efeitoDaArmadilha: {fileID: 1790896020}
   duracaoAnimacao: 1
+  dano: 1
+  tempoRecarga: 2
 --- !u!61 &1790896025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15415,6 +15445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   efeitoDaArmadilha: {fileID: 1802521111}
   duracaoAnimacao: 1
+  dano: 1
+  tempoRecarga: 2
 --- !u!61 &1802521116
 BoxCollider2D:
   m_ObjectHideFlags: 0

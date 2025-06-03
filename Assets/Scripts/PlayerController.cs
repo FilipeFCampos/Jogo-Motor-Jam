@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,9 +18,12 @@ public class PlayerController : MonoBehaviour
     // Animation related references
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    
 
     /* Combat related variables */
     public float health;
+    private bool isInvulnerable = false;
+
     private bool canAttack = true; // Flag to control attack state
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
@@ -73,19 +77,34 @@ public class PlayerController : MonoBehaviour
     }
 
     // Handles player damage taking logic
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
+        
         health -= damage;
-        if (health <= 0) {
-            Die();
-        }
+        isInvulnerable = true;
+        StartCoroutine(ResetInvulnerability(1f));
+        HealthSystem.Instance?.UpdateHearts((int)health);
+    }
+
+    IEnumerator ResetInvulnerability(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isInvulnerable = false;
+    }
+    
+    void Start()
+    {
+        // Inicializa o HUD com vida máxima
+        if (HealthSystem.Instance != null)
+            HealthSystem.Instance.UpdateHearts((int)maxHealth);
     }
 
     // Move the player based on move direction and speed
     private void MovePlayer()
     {
         rb.linearVelocity = (canMove ? 1 : 0) * moveSpeed * Time.fixedDeltaTime * moveDir;
-        rb.linearVelocity.Normalize();       
+        rb.linearVelocity.Normalize();
     }
 
     private void CalculateFacingDirection()
