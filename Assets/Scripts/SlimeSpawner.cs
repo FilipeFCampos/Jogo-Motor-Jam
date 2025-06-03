@@ -7,10 +7,10 @@ public class SlimeSpawner : MonoBehaviour
     public GameObject[] slimePrefabs;
 
     [Header("Spawn Settings")]
-    public float timeBetweenWaves = 6f;
+    public float timeBetweenWaves = 10f;
     public float delayBetweenEachSlime = 0.6f;
     public int minSlimesPerWave = 1;
-    public int maxSlimesPerWave = 4;
+    public int maxSlimesPerWave = 2;
     public static int slimeCount = 0;
     public int maxSlimes = 10;
 

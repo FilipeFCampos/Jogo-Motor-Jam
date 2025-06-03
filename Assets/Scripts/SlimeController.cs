@@ -93,7 +93,7 @@ public class SlimeController : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                playerController.TakeDamage(1);
+                playerController.TakeDamage(5.02);
             }
         }
     }

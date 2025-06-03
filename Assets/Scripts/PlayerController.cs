@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     
 
     /* Combat related variables */
-    public float health;
+    public double health;
     private bool isInvulnerable = false;
     private bool isDead = false; // Flag to check if the player is dead
     private bool canAttack = true; // Flag to control attack state
@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
 
     // Handles player damage taking logic
-    public void TakeDamage(float damage)
+    public void TakeDamage(double damage)
     {
         if (isInvulnerable)
         {
