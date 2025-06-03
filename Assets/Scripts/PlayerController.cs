@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     /* Combat related variables */
     public float health;
     private bool isInvulnerable = false;
-
+    private bool isDead = false; // Flag to check if the player is dead
     private bool canAttack = true; // Flag to control attack state
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool canTakeDamage = true; // Flag to control if the player can take damage
 
     [SerializeField] private LayerMask enemyLayer;
+    public Timer timer;
 
     // Awake is called when the script instance is being loaded
     void Awake()
@@ -50,6 +51,11 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
         canAttack = animator.GetBool("CanAttack");
+        timer = FindFirstObjectByType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogError("Timer component not found in the scene.");
+        }
     }
 
     private void Attack()
@@ -130,6 +136,7 @@ public class PlayerController : MonoBehaviour
 
         // Desabilita colisões se necessário
         GetComponent<Collider2D>().enabled = false;
+        isDead = true;
 
         // Mostra Game Over
         SceneManager.LoadScene("GameOverScene", LoadSceneMode.Additive);
@@ -171,12 +178,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(time);
         isInvulnerable = false;
     }
-    
+
     void Start()
     {
         // Inicializa o HUD com vida máxima
         if (HealthSystem.Instance != null)
             HealthSystem.Instance.UpdateHearts((int)maxHealth);
+        isDead = false; // Reset dead state at start
     }
 
     // Move the player based on move direction and speed
@@ -232,6 +240,10 @@ public class PlayerController : MonoBehaviour
         GetInput();
         CalculateFacingDirection();
         HandleAnimations();
+        if (timer.timeElapsed <= 0 && isDead == false)
+        {
+            Die();
+        }
     }
 
     // FixedUpdate is called at a fixed interval and is used for physics calculations

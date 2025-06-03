@@ -16,6 +16,7 @@ public class SlimeController : MonoBehaviour
     private Vector2 wanderDirection;
     private float wanderTimer;
     
+    Timer timer;
 
     private void Awake()
     {
@@ -33,6 +34,11 @@ public class SlimeController : MonoBehaviour
 
         wanderTimer = wanderInterval;
         wanderDirection = Random.insideUnitCircle.normalized;
+        timer = FindFirstObjectByType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogError("Timer não encontrado na cena.");
+        }
     }
 
     private void Update()
@@ -76,6 +82,7 @@ public class SlimeController : MonoBehaviour
     private void Die()
     {
         SlimeSpawner.slimeCount--; // Diminui o contador global
+        timer.ResetTimer(); // Reseta o timer
         Destroy(gameObject);
     }
 
