@@ -28,19 +28,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
     [SerializeField] private float meleeRange = 1f;
+    private bool canTakeDamage = true; // Flag to control if the player can take damage
+
+    [SerializeField] private LayerMask enemyLayer;
 
     // Awake is called when the script instance is being loaded
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null) {
+        if (rb == null)
+        {
             Debug.LogError("Rigidbody2D component is missing from the PlayerController GameObject.");
         }
         health = maxHealth;
         moveDir = Vector2.zero;
         currentDirection = Directions.DOWN; // Default direction
         canMove = animator.GetBool("CanMove");
-        if (animator == null) {
+        if (animator == null)
+        {
             Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
         canAttack = animator.GetBool("CanAttack");
@@ -49,31 +54,66 @@ public class PlayerController : MonoBehaviour
     // Handles player attack logic
     private void Attack()
     {
-        if (!canAttack) {
+        if (!canAttack)
+        {
             Debug.Log("Cannot attack right now.");
             return; // Exit if the player cannot attack
         }
+
         Debug.Log("Player attacks with melee damage: " + meleeDamage);
         animator.SetTrigger("Attack");
         canMove = false; // Disable movement during attack
+
+        // Novo: detectar inimigos na �rea de ataque
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, meleeRange, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            // Verifica se o inimigo tem o script do boss
+            BossController boss = enemy.GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.TomarDano(meleeDamage);
+                Debug.Log("Boss atingido: " + enemy.name);
+            }
+        }
     }
+
 
     // Handles player input
     private void GetInput()
     {
         moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1"))
+        {
             Attack();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Trap")) {
+            Debug.Log("Player has entered a trap!");
+
+            if (canTakeDamage) {
+                TakeDamage(1f); // Take damage from the trap
+                //canTakeDamage = false; // Disable further damage until reset
+            }
         }
     }
 
     // Handles player death and game over logic
     private void Die()
     {
-        Debug.Log("Player has died.");
-        // GameOver logic would go here (change to game over screen, reset level, etc.)
-        // For now, we will just reset health
-        Destroy(gameObject); // Destroy the player object
+        gameObject.SetActive(false); // Deactivate the player GameObject
+        canTakeDamage = true; // Reset damage taking ability
+        rb.linearVelocity = Vector2.zero; // Stop player movement
+        animator.SetTrigger("Die"); // Trigger death animation
+        canMove = true; // Disable movement on death
+        canAttack = true; // Disable attack on death
+        currentDirection = Directions.DOWN;
+        health = maxHealth;
+        FindFirstObjectByType<GameManager>().PlayerDied(); // Notify the GameManager that the player has died
     }
 
     // Handles player damage taking logic
@@ -86,14 +126,10 @@ public class PlayerController : MonoBehaviour
         }
 
         health -= damage;
-        isInvulnerable = true;
-        StartCoroutine(ResetInvulnerability(1f)); // ou o tempo desejado
-        HealthSystem.Instance?.UpdateHearts((int)health);
-
-            if (health <= 0)
-            {
-                Die();
-            }
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
 
@@ -119,16 +155,20 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateFacingDirection()
     {
-        if (moveDir.x > 0) {
+        if (moveDir.x > 0)
+        {
             currentDirection = Directions.RIGHT;
         }
-        else if (moveDir.x < 0) {
+        else if (moveDir.x < 0)
+        {
             currentDirection = Directions.LEFT;
         }
-        if (moveDir.y > 0) {
+        if (moveDir.y > 0)
+        {
             currentDirection = Directions.UP;
         }
-        else if (moveDir.y < 0) {
+        else if (moveDir.y < 0)
+        {
             currentDirection = Directions.DOWN;
         }
     }
@@ -141,10 +181,12 @@ public class PlayerController : MonoBehaviour
         // Update animator parameters based on direction
         animator.SetInteger("Direction", (int)currentDirection);
 
-        if (currentDirection == Directions.LEFT || currentDirection == Directions.RIGHT) {
+        if (currentDirection == Directions.LEFT || currentDirection == Directions.RIGHT)
+        {
             spriteRenderer.flipX = currentDirection == Directions.RIGHT;
         }
-        else {
+        else
+        {
             spriteRenderer.flipX = false; // Reset flip for vertical movement
         }
     }
