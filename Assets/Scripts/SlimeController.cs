@@ -16,6 +16,7 @@ public class SlimeController : MonoBehaviour
     private Vector2 wanderDirection;
     private float wanderTimer;
     
+    Timer timer;
 
     private void Awake()
     {
@@ -33,6 +34,11 @@ public class SlimeController : MonoBehaviour
 
         wanderTimer = wanderInterval;
         wanderDirection = Random.insideUnitCircle.normalized;
+        timer = FindFirstObjectByType<Timer>();
+        if (timer == null)
+        {
+            Debug.LogError("Timer não encontrado na cena.");
+        }
     }
 
     private void Update()
@@ -75,27 +81,28 @@ public class SlimeController : MonoBehaviour
 
     private void Die()
     {
+<<<<<<< HEAD
         SlimeSpawner.slimeCount--;
         
         // Registra slime morto
         int defeated = PlayerPrefs.GetInt("SlimesDefeated", 0);
         PlayerPrefs.SetInt("SlimesDefeated", defeated + 1);
         
+=======
+        SlimeSpawner.slimeCount--; // Diminui o contador global
+        timer.ResetTimer(); // Reseta o timer
+>>>>>>> develop
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("PlayerAttack"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            TakeDamage(1f);
-        }
-        else if (other.CompareTag("Player"))
-        {
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                playerController.TakeDamage(1);
+                playerController.TakeDamage(5.02);
             }
         }
     }

@@ -15,7 +15,7 @@ public class BossController : MonoBehaviour
     public float VidaAtual => vidaAtual;
     public float VidaMaxima => vidaMaxima;
 
-    [SerializeField] private float velocidade = 2f;
+    [SerializeField] private float velocidade = 125.5f;
     [SerializeField] private float distanciaAtaque = 1.5f;
     [SerializeField] private float tempoEntreAtaques = 2f;
     private float tempoUltimoAtaque;
