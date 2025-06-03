@@ -14209,7 +14209,7 @@ GameObject:
   - component: {fileID: 1652597828}
   - component: {fileID: 1652597827}
   - component: {fileID: 1652597832}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14230,8 +14230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vidaMaxima: 100
   velocidade: 3
-  distanciaAtaque: 1
+  distanciaAtaque: 1.5
   tempoEntreAtaques: 2
+  danoAtaque: 2
 --- !u!50 &1652597828
 Rigidbody2D:
   serializedVersion: 5
@@ -14359,8 +14360,8 @@ Transform:
   m_GameObject: {fileID: 1652597826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.63, y: 10.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 47.9779, y: 10.2805, z: 0}
+  m_LocalScale: {x: 0.7285, y: 0.8395, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 261164040}

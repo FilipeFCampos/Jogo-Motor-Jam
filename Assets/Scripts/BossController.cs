@@ -29,6 +29,8 @@ public class BossController : MonoBehaviour
     private bool podeAtacar = true;
     private bool podeMover = true;
 
+    [SerializeField] private float danoAtaque = 1f; // Dano que o boss causa ao jogador
+
     private void Start()
     {
         jogador = GameObject.FindGameObjectWithTag("Player").transform;
@@ -87,7 +89,7 @@ public class BossController : MonoBehaviour
     {
         anim.SetInteger("Direction", direcaoAtual);
         anim.SetBool("IsMoving", estadoAtual == Estado.Andando);
-        sr.flipX = (direcaoAtual == 3); // Flip se for Right
+        sr.flipX = (direcaoAtual == 2); // Left = 2
     }
 
     private IEnumerator Atacar()
@@ -95,10 +97,17 @@ public class BossController : MonoBehaviour
         podeAtacar = false;
         podeMover = false;
 
+        AtualizarDirecao();
+        AtualizarAnimacoes();
+
         anim.SetTrigger("Attack");
         tempoUltimoAtaque = Time.time;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f); // Tempo até o golpe atingir
+
+        TentarCausarDano();
+
+        yield return new WaitForSeconds(0.5f); // Tempo restante da animação
 
         if (estadoAtual != Estado.Morto)
         {
@@ -107,6 +116,22 @@ public class BossController : MonoBehaviour
 
         podeAtacar = true;
         podeMover = true;
+    }
+
+    private void TentarCausarDano()
+    {
+        if (jogador == null) return;
+
+        float distancia = Vector2.Distance(transform.position, jogador.position);
+        if (distancia <= distanciaAtaque)
+        {
+            PlayerController playerController = jogador.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.TakeDamage(danoAtaque);
+                Debug.Log("Boss causou " + danoAtaque + " de dano ao jogador.");
+            }
+        }
     }
 
     public void TomarDano(float dano)
@@ -161,14 +186,11 @@ public class BossController : MonoBehaviour
         estadoAtual = novoEstado;
     }
 
-    // ✅ Novo método: verifica se o boss está visível na câmera
     private bool EstaNaCamera()
     {
         if (Camera.main == null) return false;
 
         Vector3 viewportPos = Camera.main.WorldToViewportPoint(transform.position);
-
-        // Margem interna da tela (aumente para reduzir o campo de visão do boss)
         float margem = 0.2f;
 
         return viewportPos.x >= margem && viewportPos.x <= 1f - margem &&

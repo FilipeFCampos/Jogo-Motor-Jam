@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float meleeRange = 1f;
     private bool canTakeDamage = true; // Flag to control if the player can take damage
 
+    [SerializeField] private LayerMask enemyLayer;
+
     // Awake is called when the script instance is being loaded
     void Awake()
     {
@@ -53,10 +55,26 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Cannot attack right now.");
             return; // Exit if the player cannot attack
         }
+
         Debug.Log("Player attacks with melee damage: " + meleeDamage);
         animator.SetTrigger("Attack");
         canMove = false; // Disable movement during attack
+
+        // Novo: detectar inimigos na área de ataque
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, meleeRange, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            // Verifica se o inimigo tem o script do boss
+            BossController boss = enemy.GetComponent<BossController>();
+            if (boss != null)
+            {
+                boss.TomarDano(meleeDamage);
+                Debug.Log("Boss atingido: " + enemy.name);
+            }
+        }
     }
+
 
     // Handles player input
     private void GetInput()
