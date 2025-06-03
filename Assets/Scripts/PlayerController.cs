@@ -52,33 +52,47 @@ public class PlayerController : MonoBehaviour
         canAttack = animator.GetBool("CanAttack");
     }
 
-    // Handles player attack logic
     private void Attack()
     {
         if (!canAttack)
         {
             Debug.Log("Cannot attack right now.");
-            return; // Exit if the player cannot attack
+            return;
         }
 
         Debug.Log("Player attacks with melee damage: " + meleeDamage);
         animator.SetTrigger("Attack");
-        canMove = false; // Disable movement during attack
+        canMove = false;
 
-        // Novo: detectar inimigos na �rea de ataque
+        // Detecta todos os colliders da camada "enemyLayer" dentro do raio meleeRange
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, meleeRange, enemyLayer);
 
-        foreach (Collider2D enemy in hitEnemies)
+        foreach (Collider2D hit in hitEnemies)
         {
-            // Verifica se o inimigo tem o script do boss
-            BossController boss = enemy.GetComponent<BossController>();
+            // 1) Se for Boss
+            BossController boss = hit.GetComponent<BossController>();
             if (boss != null)
             {
                 boss.TomarDano(meleeDamage);
-                Debug.Log("Boss atingido: " + enemy.name);
+                Debug.Log("Boss atingido: " + hit.name);
+                continue;
             }
+
+            // 2) Se for Slime
+            SlimeController slime = hit.GetComponent<SlimeController>();
+            if (slime != null)
+            {
+                slime.TakeDamage(meleeDamage);
+                Debug.Log("Slime atingido: " + hit.name);
+                continue;
+            }
+
+            // 3) Se você tiver outros inimigos, cheque aqui também
+            // Exemplo: OutroInimigo outro = hit.GetComponent<OutroInimigo>();
+            // if (outro != null) { outro.TakeDamage(meleeDamage); ... }
         }
     }
+
 
 
     // Handles player input
@@ -127,30 +141,30 @@ public class PlayerController : MonoBehaviour
 
     // Handles player damage taking logic
     public void TakeDamage(float damage)
-{
-    if (isInvulnerable)
     {
-        Debug.Log("Jogador está invulnerável. Ignorando dano.");
-        return;
+        if (isInvulnerable)
+        {
+            Debug.Log("Jogador está invulnerável. Ignorando dano.");
+            return;
+        }
+
+        health -= damage;
+
+        // Atualiza os corações na tela
+        if (HealthSystem.Instance != null)
+        {
+            HealthSystem.Instance.UpdateHearts((int)health);
+        }
+
+        if (health <= 0)
+        {
+            Die();
+        }
+
+        // Ativa invulnerabilidade temporária
+        isInvulnerable = true;
+        StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
     }
-
-    health -= damage;
-
-    // Atualiza os corações na tela
-    if (HealthSystem.Instance != null)
-    {
-        HealthSystem.Instance.UpdateHearts((int)health);
-    }
-
-    if (health <= 0)
-    {
-        Die();
-    }
-
-    // Ativa invulnerabilidade temporária
-    isInvulnerable = true;
-    StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
-}
 
     IEnumerator ResetInvulnerability(float time)
     {

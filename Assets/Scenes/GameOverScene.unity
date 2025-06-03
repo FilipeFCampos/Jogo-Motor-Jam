@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JOGAR DENOVO
+  m_text: JOGAR NOVAMENTE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
   m_sharedMaterial: {fileID: -1119605919149115136, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
