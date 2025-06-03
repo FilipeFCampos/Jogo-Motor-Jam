@@ -315,7 +315,7 @@ MonoBehaviour:
   animator: {fileID: 4417096288174877345}
   spriteRenderer: {fileID: 7367951850140502443}
   health: 0
-  maxHealth: 3
+  maxHealth: 5
   meleeDamage: 100
   meleeRange: 1
   enemyLayer:

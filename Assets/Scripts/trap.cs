@@ -35,11 +35,13 @@ public class Trap : MonoBehaviour
                 StartCoroutine(VoltarParaIdleDepois(duracaoAnimacao));
             }
 
-            // Aplica dano ao jogador, se ele tiver o componente PlayerController
+            // Aplica dano ao jogador
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
             {
                 player.TakeDamage(dano);
+                Debug.Log($"Dano aplicado: {dano} | Vida atual do jogador: {player.health}");
+
                 StartCoroutine(RecarregarArmadilha());
             }
             else

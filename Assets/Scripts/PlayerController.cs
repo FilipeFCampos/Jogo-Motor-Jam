@@ -118,20 +118,30 @@ public class PlayerController : MonoBehaviour
 
     // Handles player damage taking logic
     public void TakeDamage(float damage)
+{
+    if (isInvulnerable)
     {
-        if (isInvulnerable)
-        {
-            Debug.Log("Jogador está invulnerável. Ignorando dano.");
-            return;
-        }
-
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
+        Debug.Log("Jogador está invulnerável. Ignorando dano.");
+        return;
     }
 
+    health -= damage;
+
+    // Atualiza os corações na tela
+    if (HealthSystem.Instance != null)
+    {
+        HealthSystem.Instance.UpdateHearts((int)health);
+    }
+
+    if (health <= 0)
+    {
+        Die();
+    }
+
+    // Ativa invulnerabilidade temporária
+    isInvulnerable = true;
+    StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
+}
 
     IEnumerator ResetInvulnerability(float time)
     {
