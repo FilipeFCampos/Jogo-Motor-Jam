@@ -1,0 +1,37 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GameOverManager : MonoBehaviour
+{
+    [Header("Referências")]
+    public string mainMenuScene = "MenuPrincipal";
+    public string gameScene = "Level1";
+
+   public void RetryGame()
+    {
+        Time.timeScale = 1f; // retoma o jogo
+        SceneManager.LoadScene(gameScene);
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(mainMenuScene);
+    }
+
+    // Opcional: Ativar/desativar objetos com animação
+    public void ShowButtons(float delay)
+    {
+        Invoke("EnableButtons", delay);
+    }
+
+    private void EnableButtons()
+    {
+        // Ativar botões após animação
+        foreach (var btn in GetComponentsInChildren<Button>(true))
+        {
+            btn.gameObject.SetActive(true);
+        }
+    }
+}

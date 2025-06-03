@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -105,16 +106,24 @@ public class PlayerController : MonoBehaviour
     // Handles player death and game over logic
     private void Die()
     {
-        gameObject.SetActive(false); // Deactivate the player GameObject
-        canTakeDamage = true; // Reset damage taking ability
-        rb.linearVelocity = Vector2.zero; // Stop player movement
-        animator.SetTrigger("Die"); // Trigger death animation
-        canMove = true; // Disable movement on death
-        canAttack = true; // Disable attack on death
-        currentDirection = Directions.DOWN;
-        health = maxHealth;
-        FindFirstObjectByType<GameManager>().PlayerDied(); // Notify the GameManager that the player has died
+        // Trigger da animação
+        animator.SetTrigger("Die");
+
+        // Para o movimento e ações
+        canMove = false;
+        canAttack = false;
+        rb.linearVelocity = Vector2.zero;
+
+        // Desabilita colisões se necessário
+        GetComponent<Collider2D>().enabled = false;
+
+        // Mostra Game Over
+        SceneManager.LoadScene("GameOverScene", LoadSceneMode.Additive);
+        Time.timeScale = 0f; // pausa o jogo, mas mantém o jogador visível
     }
+
+
+
 
     // Handles player damage taking logic
     public void TakeDamage(float damage)
