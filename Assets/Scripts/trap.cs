@@ -6,7 +6,7 @@ public class Trap : MonoBehaviour
     [Header("Configurações")]
     public GameObject efeitoDaArmadilha;
     public float duracaoAnimacao = 1.0f;
-    public int dano = 1;
+    public double dano = 5.02;
 
     [Header("Cooldown")]
     public float tempoRecarga = 2f;

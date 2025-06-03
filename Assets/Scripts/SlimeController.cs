@@ -86,18 +86,14 @@ public class SlimeController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("PlayerAttack"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            TakeDamage(1f);
-        }
-        else if (other.CompareTag("Player"))
-        {
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                playerController.TakeDamage(1);
+                playerController.TakeDamage(5.02);
             }
         }
     }

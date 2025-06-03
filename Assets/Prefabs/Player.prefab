@@ -222,13 +222,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60114db4b8f12a94ca5039949e514e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
+  moveSpeed: 251
   rb: {fileID: 5787878581529385572}
   animator: {fileID: 4417096288174877345}
   spriteRenderer: {fileID: 7367951850140502443}
   health: 0
-  maxHealth: 5
-  meleeDamage: 10
+  maxHealth: 125.1
+  meleeDamage: 25.1
   meleeRange: 1
   enemyLayer:
     serializedVersion: 2
