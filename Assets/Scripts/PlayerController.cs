@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour
     // Animation related references
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject MeleeAttackHitbox; // Reference to the melee attack hitbox
 
     /* Combat related variables */
     public float health;
     private bool canAttack = true; // Flag to control attack state
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float meleeDamage = 1f;
-    [SerializeField] private float meleeRange = 1f;
+    [SerializeField] private Transform Aim;
     private bool canTakeDamage = true; // Flag to control if the player can take damage
 
     // Awake is called when the script instance is being loaded
@@ -43,6 +44,17 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
         canAttack = animator.GetBool("CanAttack");
+        MeleeAttackHitbox.SetActive(false); // Ensure the melee attack hitbox is inactive at start
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer component is missing from the PlayerController GameObject.");
+        }
+    }
+
+    // Deactivates the melee attack hitbox
+    private void DeactivateMeleeHitbox()
+    {
+        MeleeAttackHitbox.SetActive(false); // Deactivate the melee attack hitbox
     }
 
     // Handles player attack logic
@@ -56,6 +68,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player attacks with melee damage: " + meleeDamage);
         animator.SetTrigger("Attack");
         canMove = false; // Disable movement during attack
+        MeleeAttackHitbox.SetActive(true); // Activate the melee attack hitbox
+        Invoke(nameof(DeactivateMeleeHitbox), 0.2f); // Deactivate hitbox after 0.5 seconds
     }
 
     // Handles player input
@@ -166,6 +180,12 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         canMove = animator.GetBool("CanMove");
         canAttack = animator.GetBool("CanAttack");
+
+        if (moveDir.magnitude > 0)
+        {
+            Vector3 vectorDir = Vector3.left * moveDir.x + Vector3.down * moveDir.y;
+            Aim.rotation = Quaternion.LookRotation(Vector3.forward, vectorDir);
+        }
     }
 
 }
