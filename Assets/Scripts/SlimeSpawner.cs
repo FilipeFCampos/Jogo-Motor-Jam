@@ -1,21 +1,45 @@
 using UnityEngine;
+using System.Collections;
 
 public class SlimeSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] slimePrefabs;  // 5 prefabs
-    [SerializeField] private Transform[] spawnPoints;     // Locais de spawn
+    [Header("Slime Prefabs")]
+    public GameObject[] slimePrefabs;
 
-    void Start()
+    [Header("Spawn Settings")]
+    public float timeBetweenWaves = 6f;
+    public float delayBetweenEachSlime = 0.6f;
+    public int minSlimesPerWave = 1;
+    public int maxSlimesPerWave = 4;
+
+    private void Start()
     {
-        SpawnAll();
+        StartCoroutine(SpawnLoop());
     }
 
-    public void SpawnAll()
+    private IEnumerator SpawnLoop()
     {
-        foreach (Transform point in spawnPoints)
+        while (true)
         {
-            int index = Random.Range(0, slimePrefabs.Length);
-            Instantiate(slimePrefabs[index], point.position, Quaternion.identity);
+            int slimeCount = Random.Range(minSlimesPerWave, maxSlimesPerWave + 1);
+
+            for (int i = 0; i < slimeCount; i++)
+            {
+                SpawnSlime();
+                yield return new WaitForSeconds(delayBetweenEachSlime);
+            }
+
+            yield return new WaitForSeconds(timeBetweenWaves);
         }
+    }
+
+    private void SpawnSlime()
+    {
+        if (slimePrefabs.Length == 0) return;
+
+        int randomIndex = Random.Range(0, slimePrefabs.Length);
+        GameObject slime = slimePrefabs[randomIndex];
+
+        Instantiate(slime, transform.position, Quaternion.identity);
     }
 }

@@ -1,22 +1,36 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class SlimeController : MonoBehaviour
 {
     [SerializeField] private float health = 5.02f;
     [SerializeField] private float moveSpeed = 1.5f;
-    private Vector2 moveDirection;
+    [SerializeField] private float playerDetectRange = 5f;
 
     private Rigidbody2D rb;
+    private Transform player;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveDirection = Random.insideUnitCircle.normalized; // movimento aleatório inicial
+        // Busca o player pela tag
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.deltaTime);
+        if (player == null) return;
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distanceToPlayer < playerDetectRange)
+        {
+            // Foge do player
+            Vector2 fleeDirection = (transform.position - player.position).normalized;
+            rb.MovePosition(rb.position + fleeDirection * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -30,15 +44,14 @@ public class SlimeController : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject); // Remove o slime da cena
+        Destroy(gameObject);
     }
 
-    // Exemplo: se for atingido por ataque do player
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerAttack"))
         {
-            TakeDamage(1f); // valor de dano fixo ou baseado no player
+            TakeDamage(1f);
         }
     }
 }
