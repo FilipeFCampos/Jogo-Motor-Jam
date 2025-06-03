@@ -3,20 +3,46 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class SlimeController : MonoBehaviour
 {
-    [SerializeField] private float health = 5.02f;
+    [Header("Status")]
+    [SerializeField] private float health = 5.0f;
     [SerializeField] private float moveSpeed = 1.5f;
     [SerializeField] private float playerDetectRange = 5f;
 
+    [Header("Wander Settings")]
+    [SerializeField] private float wanderInterval = 2f;
+
     private Rigidbody2D rb;
     private Transform player;
+    private Vector2 wanderDirection;
+    private float wanderTimer;
+    
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Busca o player pela tag
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
+        {
             player = playerObj.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Slime não encontrou objeto com tag 'Player'.");
+        }
+
+        wanderTimer = wanderInterval;
+        wanderDirection = Random.insideUnitCircle.normalized;
+    }
+
+    private void Update()
+    {
+        wanderTimer -= Time.deltaTime;
+        if (wanderTimer <= 0)
+        {
+            wanderDirection = Random.insideUnitCircle.normalized;
+            wanderTimer = wanderInterval;
+        }
     }
 
     private void FixedUpdate()
@@ -25,11 +51,16 @@ public class SlimeController : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (distanceToPlayer < playerDetectRange)
+        if (distanceToPlayer <= playerDetectRange)
         {
-            // Foge do player
-            Vector2 fleeDirection = (transform.position - player.position).normalized;
-            rb.MovePosition(rb.position + fleeDirection * moveSpeed * Time.fixedDeltaTime);
+            // Persegue o player
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            // Movimento aleatório
+            rb.MovePosition(rb.position + wanderDirection * moveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -44,6 +75,7 @@ public class SlimeController : MonoBehaviour
 
     private void Die()
     {
+        SlimeSpawner.slimeCount--; // Diminui o contador global
         Destroy(gameObject);
     }
 
@@ -52,6 +84,14 @@ public class SlimeController : MonoBehaviour
         if (other.CompareTag("PlayerAttack"))
         {
             TakeDamage(1f);
+        }
+        else if (other.CompareTag("Player"))
+        {
+            PlayerController playerController = other.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.TakeDamage(1);
+            }
         }
     }
 }

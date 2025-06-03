@@ -11,6 +11,8 @@ public class SlimeSpawner : MonoBehaviour
     public float delayBetweenEachSlime = 0.6f;
     public int minSlimesPerWave = 1;
     public int maxSlimesPerWave = 4;
+    public static int slimeCount = 0;
+    public int maxSlimes = 10;
 
     private void Start()
     {
@@ -40,6 +42,9 @@ public class SlimeSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, slimePrefabs.Length);
         GameObject slime = slimePrefabs[randomIndex];
 
-        Instantiate(slime, transform.position, Quaternion.identity);
+        Vector2 randomOffset = Random.insideUnitCircle * 2f; // Distância aleatória
+        Vector3 spawnPosition = transform.position + (Vector3)randomOffset;
+
+        Instantiate(slime, spawnPosition, Quaternion.identity);
     }
 }
