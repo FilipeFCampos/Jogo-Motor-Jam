@@ -81,17 +81,13 @@ public class SlimeController : MonoBehaviour
 
     private void Die()
     {
-<<<<<<< HEAD
         SlimeSpawner.slimeCount--;
         
         // Registra slime morto
         int defeated = PlayerPrefs.GetInt("SlimesDefeated", 0);
         PlayerPrefs.SetInt("SlimesDefeated", defeated + 1);
         
-=======
-        SlimeSpawner.slimeCount--; // Diminui o contador global
         timer.ResetTimer(); // Reseta o timer
->>>>>>> develop
         Destroy(gameObject);
     }
 

@@ -179,7 +179,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
-  m_sharedMaterial: {fileID: -1119605919149115136, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
+  m_sharedMaterial: {fileID: 8803505421472844660, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715531524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -479,7 +479,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1506337971}
   timeText: {fileID: 199812798}
-  nextLevel: 
   mainMenu: MenuPrincipal
 --- !u!1 &944479457
 GameObject:
@@ -541,7 +540,7 @@ MonoBehaviour:
   m_text: "VIT\xD3RIA!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
-  m_sharedMaterial: {fileID: -1119605919149115136, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
+  m_sharedMaterial: {fileID: 8803505421472844660, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -756,7 +755,7 @@ MonoBehaviour:
   m_text: Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
-  m_sharedMaterial: {fileID: -1119605919149115136, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
+  m_sharedMaterial: {fileID: 8803505421472844660, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1030,7 +1029,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
-  m_sharedMaterial: {fileID: -1119605919149115136, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
+  m_sharedMaterial: {fileID: 8803505421472844660, guid: 3df17bf078c1d074ab29f10f760aa1c9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1156,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.72156864}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
