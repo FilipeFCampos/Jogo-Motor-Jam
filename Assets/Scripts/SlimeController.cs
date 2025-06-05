@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,6 +18,7 @@ public class SlimeController : MonoBehaviour
     private float wanderTimer;
     
     Timer timer;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -38,6 +40,10 @@ public class SlimeController : MonoBehaviour
         if (timer == null)
         {
             Debug.LogError("Timer não encontrado na cena.");
+        }
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing from the PlayerController GameObject.");
         }
     }
 
@@ -79,15 +85,34 @@ public class SlimeController : MonoBehaviour
         }
     }
 
+    // Die
     private void Die()
     {
         SlimeSpawner.slimeCount--;
-        
+
         // Registra slime morto
        // int defeated = PlayerPrefs.GetInt("SlimesDefeated", 0);
        // PlayerPrefs.SetInt("SlimesDefeated", defeated + 1);
-        
-        timer.ResetTimer(); // Reseta o timer
+        animator.SetTrigger("Die");
+
+        StartCoroutine(DestroyAfterAnimation());
+    }
+
+    // Wait for Death Animation to finish before destroying the object
+    private IEnumerator DestroyAfterAnimation()
+    {
+        // Disable collider and movement logic while animation plays
+        if (GetComponent<Collider2D>() != null)
+            GetComponent<Collider2D>().enabled = false;
+
+        // Wait for the animation to finish
+        // Get the length of the current animation clip
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float animationLength = stateInfo.length;
+        timer.ResetTimer();
+
+        yield return new WaitForSeconds(animationLength);
+        // Destroy the gameObject after animation completes
         Destroy(gameObject);
     }
 
@@ -96,6 +121,7 @@ public class SlimeController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            animator.SetTrigger("Attack");
             if (playerController != null)
             {
                 playerController.TakeDamage(5.02);

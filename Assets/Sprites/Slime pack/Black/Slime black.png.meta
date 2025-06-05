@@ -1,262 +1,262 @@
 fileFormatVersion: 2
-guid: 77b86dc8b6c07144986d4592168f8ba2
+guid: 5a26f722c539586419e5f896fc7032dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8153257033118722256
-    second: Slime black_0
+      213: -587760606756936258
+    second: Slime black 1_0
   - first:
-      213: 7043054213407914013
-    second: Slime black_1
+      213: 3205233356115887983
+    second: Slime black 1_1
   - first:
-      213: -7678070927269828803
-    second: Slime black_2
+      213: -8210907456648303781
+    second: Slime black 1_2
   - first:
-      213: 1766499490153687268
-    second: Slime black_3
+      213: 2130542223979062481
+    second: Slime black 1_3
   - first:
-      213: -9114592984969735878
-    second: Slime black_4
+      213: -8778086553115643677
+    second: Slime black 1_4
   - first:
-      213: -1665390169345734385
-    second: Slime black_5
+      213: 3525073428565666087
+    second: Slime black 1_5
   - first:
-      213: -4016552875597693878
-    second: Slime black_6
+      213: 3802871683953542882
+    second: Slime black 1_6
   - first:
-      213: 221819377850209704
-    second: Slime black_7
+      213: -3576646054783926137
+    second: Slime black 1_7
   - first:
-      213: 9052485457012538007
-    second: Slime black_8
+      213: 1357003606542274817
+    second: Slime black 1_8
   - first:
-      213: -7767524131680574443
-    second: Slime black_9
+      213: -3716874644524108425
+    second: Slime black 1_9
   - first:
-      213: 3547092689510651623
-    second: Slime black_10
+      213: -8192027944391118676
+    second: Slime black 1_10
   - first:
-      213: -5451056804672877377
-    second: Slime black_11
+      213: 128501263503380796
+    second: Slime black 1_11
   - first:
-      213: -7005013418905839012
-    second: Slime black_12
+      213: 508135420140538518
+    second: Slime black 1_12
   - first:
-      213: 3434141255279554652
-    second: Slime black_13
+      213: -5999564224651019817
+    second: Slime black 1_13
   - first:
-      213: -2510902516821886406
-    second: Slime black_14
+      213: -8451721142008735028
+    second: Slime black 1_14
   - first:
-      213: 5734949455607071785
-    second: Slime black_15
+      213: 7038489026467251343
+    second: Slime black 1_15
   - first:
-      213: -6943375623009519703
-    second: Slime black_16
+      213: 2508355490421907790
+    second: Slime black 1_16
   - first:
-      213: 6959295465142376648
-    second: Slime black_17
+      213: 6821571838101211835
+    second: Slime black 1_17
   - first:
-      213: 1918775264797759167
-    second: Slime black_18
+      213: -7936897137727208869
+    second: Slime black 1_18
   - first:
-      213: -3562163033276622148
-    second: Slime black_19
+      213: 7748130491966502822
+    second: Slime black 1_19
   - first:
-      213: -2761757270488504233
-    second: Slime black_20
+      213: 8747224392784044959
+    second: Slime black 1_20
   - first:
-      213: 6246548736011320410
-    second: Slime black_21
+      213: -2489657959448267074
+    second: Slime black 1_21
   - first:
-      213: 8320256762894456417
-    second: Slime black_22
+      213: 7617464473552094604
+    second: Slime black 1_22
   - first:
-      213: -6864209431141488169
-    second: Slime black_23
+      213: 3751950249335158543
+    second: Slime black 1_23
   - first:
-      213: -4598942737792372323
-    second: Slime black_24
+      213: 9029461924649303040
+    second: Slime black 1_24
   - first:
-      213: -4226610117122175176
-    second: Slime black_25
+      213: 7611301284221684624
+    second: Slime black 1_25
   - first:
-      213: -8875166955431788538
-    second: Slime black_26
+      213: -6910486664467442982
+    second: Slime black 1_26
   - first:
-      213: -5058571398639206776
-    second: Slime black_27
+      213: 8448659689585674943
+    second: Slime black 1_27
   - first:
-      213: 3319141752662301309
-    second: Slime black_28
+      213: 4665768621430007620
+    second: Slime black 1_28
   - first:
-      213: -8852825720324558390
-    second: Slime black_29
+      213: 2634630094166144506
+    second: Slime black 1_29
   - first:
-      213: 5617239493355275949
-    second: Slime black_30
+      213: -3779376683599333455
+    second: Slime black 1_30
   - first:
-      213: -2887214457148545784
-    second: Slime black_31
+      213: 8665843303959999193
+    second: Slime black 1_31
   - first:
-      213: -8036333532774311653
-    second: Slime black_32
+      213: -1181026350863793542
+    second: Slime black 1_32
   - first:
-      213: -5298735747313184674
-    second: Slime black_33
+      213: -9194716910226950537
+    second: Slime black 1_33
   - first:
-      213: -1573962716302307392
-    second: Slime black_34
+      213: 6807174497317471924
+    second: Slime black 1_34
   - first:
-      213: -4754357352632411795
-    second: Slime black_35
+      213: -7897290806934789599
+    second: Slime black 1_35
   - first:
-      213: -3383909976152882426
-    second: Slime black_36
+      213: -4729489677300511802
+    second: Slime black 1_36
   - first:
-      213: -1016367257336543322
-    second: Slime black_37
+      213: 3625288204994354023
+    second: Slime black 1_37
   - first:
-      213: -532407632631044427
-    second: Slime black_38
+      213: -4930092035699583285
+    second: Slime black 1_38
   - first:
-      213: -3662638002877917883
-    second: Slime black_39
+      213: 3831870095935499105
+    second: Slime black 1_39
   - first:
-      213: 1407149832849446501
-    second: Slime black_40
+      213: 5150363524001981955
+    second: Slime black 1_40
   - first:
-      213: -6336827201867772021
-    second: Slime black_41
+      213: -6417555072144360586
+    second: Slime black 1_41
   - first:
-      213: 802960731918484917
-    second: Slime black_42
+      213: 4881346756927621982
+    second: Slime black 1_42
   - first:
-      213: -2804594192627063123
-    second: Slime black_43
+      213: 5519606336883454520
+    second: Slime black 1_43
   - first:
-      213: 1867006633273664864
-    second: Slime black_44
+      213: -4019001478450256848
+    second: Slime black 1_44
   - first:
-      213: 6809249780124191301
-    second: Slime black_45
+      213: 2717295609641201712
+    second: Slime black 1_45
   - first:
-      213: -1431582588188202237
-    second: Slime black_46
+      213: 2454597659133676584
+    second: Slime black 1_46
   - first:
-      213: -5578951491054308330
-    second: Slime black_47
+      213: -3802574785582753941
+    second: Slime black 1_47
   - first:
-      213: -3098470096214707192
-    second: Slime black_48
+      213: 3685198194202314452
+    second: Slime black 1_48
   - first:
-      213: 6338791181224602638
-    second: Slime black_49
+      213: 1148300066876883453
+    second: Slime black 1_49
   - first:
-      213: -9140414506009055955
-    second: Slime black_50
+      213: 5763421850367668287
+    second: Slime black 1_50
   - first:
-      213: -6175299552834485968
-    second: Slime black_51
+      213: 5886466324412865859
+    second: Slime black 1_51
   - first:
-      213: -4249987595537367551
-    second: Slime black_52
+      213: 2174329570785020632
+    second: Slime black 1_52
   - first:
-      213: 1915117804196876551
-    second: Slime black_53
+      213: 6010357044640209598
+    second: Slime black 1_53
   - first:
-      213: -2334155039177349549
-    second: Slime black_54
+      213: -6242841998417424819
+    second: Slime black 1_54
   - first:
-      213: -6326870293221343004
-    second: Slime black_55
+      213: 7364090862502747255
+    second: Slime black 1_55
   - first:
-      213: 4834510174263850872
-    second: Slime black_56
+      213: 8200939291009446966
+    second: Slime black 1_56
   - first:
-      213: -4466018144120992806
-    second: Slime black_57
+      213: 3666096212129045597
+    second: Slime black 1_57
   - first:
-      213: 4846919196414259893
-    second: Slime black_58
+      213: 971247715682414656
+    second: Slime black 1_58
   - first:
-      213: 6710313117272558339
-    second: Slime black_59
+      213: 6763756356567072095
+    second: Slime black 1_59
   - first:
-      213: 8084667114727796306
-    second: Slime black_60
+      213: 7726120074775311237
+    second: Slime black 1_60
   - first:
-      213: 7320075596541208349
-    second: Slime black_61
+      213: 742751264252666820
+    second: Slime black 1_61
   - first:
-      213: 6473575590496619
-    second: Slime black_62
+      213: -5816778955653986853
+    second: Slime black 1_62
   - first:
-      213: 7942758211413700130
-    second: Slime black_63
+      213: 9007564862184994791
+    second: Slime black 1_63
   - first:
-      213: 8022679394728433533
-    second: Slime black_64
+      213: 7750307184052663392
+    second: Slime black 1_64
   - first:
-      213: -7210119797521570677
-    second: Slime black_65
+      213: 179009524847904852
+    second: Slime black 1_65
   - first:
-      213: 649126682231102730
-    second: Slime black_66
+      213: 2044755076284674529
+    second: Slime black 1_66
   - first:
-      213: 4512094164080731469
-    second: Slime black_67
+      213: -4911492621220697152
+    second: Slime black 1_67
   - first:
-      213: 7203603462562836529
-    second: Slime black_68
+      213: -1730184736238450481
+    second: Slime black 1_68
   - first:
-      213: -402419092955970884
-    second: Slime black_69
+      213: 6836884741235887737
+    second: Slime black 1_69
   - first:
-      213: 2026599877900891228
-    second: Slime black_70
+      213: -8274315395701997292
+    second: Slime black 1_70
   - first:
-      213: 148632556878196320
-    second: Slime black_71
+      213: 1093670677069759036
+    second: Slime black 1_71
   - first:
-      213: 4592137690108490846
-    second: Slime black_72
+      213: -6943593458355656154
+    second: Slime black 1_72
   - first:
-      213: -3048900625007955862
-    second: Slime black_73
+      213: 2796799436869792066
+    second: Slime black 1_73
   - first:
-      213: 5282779942788115886
-    second: Slime black_74
+      213: -8033791065477317953
+    second: Slime black 1_74
   - first:
-      213: -5404666580598024456
-    second: Slime black_75
+      213: 5830826933265968998
+    second: Slime black 1_75
   - first:
-      213: 3768752130373996849
-    second: Slime black_76
+      213: -4448761866669854293
+    second: Slime black 1_76
   - first:
-      213: -6905555040785983177
-    second: Slime black_77
+      213: -2609168855561022806
+    second: Slime black 1_77
   - first:
-      213: -1598545640236892451
-    second: Slime black_78
+      213: -1341962450298732683
+    second: Slime black 1_78
   - first:
-      213: 3005934781560213157
-    second: Slime black_79
+      213: 7767910978676388565
+    second: Slime black 1_79
   - first:
-      213: -4934868997145831569
-    second: Slime black_80
+      213: 1271201806902790861
+    second: Slime black 1_80
   - first:
-      213: -6018394689399336564
-    second: Slime black_81
+      213: -7718933121558602903
+    second: Slime black 1_81
   - first:
-      213: -6741864277999928057
-    second: Slime black_82
+      213: -4255087893922348150
+    second: Slime black 1_82
   - first:
-      213: -1185377998152624667
-    second: Slime black_83
+      213: -5379788337502266033
+    second: Slime black 1_83
   - first:
-      213: 8708157148554289288
-    second: Slime black_84
+      213: 6649627239586830094
+    second: Slime black 1_84
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -289,7 +289,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -361,24 +361,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime black_0
+      name: Slime black 1_0
       rect:
         serializedVersion: 2
         x: 12
@@ -393,14 +380,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d82f75e210362170800000000000000
-      internalID: 8153257033118722256
+      spriteID: eb5e84d97dad7d7f0800000000000000
+      internalID: -587760606756936258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_1
+      name: Slime black 1_1
       rect:
         serializedVersion: 2
         x: 60
@@ -415,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d183ffbcd74fdb160800000000000000
-      internalID: 7043054213407914013
+      spriteID: f67458d51c64b7c20800000000000000
+      internalID: 3205233356115887983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_2
+      name: Slime black 1_2
       rect:
         serializedVersion: 2
         x: 109
@@ -437,14 +424,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d37e3dbfb23027590800000000000000
-      internalID: -7678070927269828803
+      spriteID: b5b2fd2eb2ffc0e80800000000000000
+      internalID: -8210907456648303781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_3
+      name: Slime black 1_3
       rect:
         serializedVersion: 2
         x: 157
@@ -459,14 +446,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e8e48e4dedd38810800000000000000
-      internalID: 1766499490153687268
+      spriteID: 1d42e375dd4319d10800000000000000
+      internalID: 2130542223979062481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_4
+      name: Slime black 1_4
       rect:
         serializedVersion: 2
         x: 204
@@ -481,14 +468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a319c9aa8f5728180800000000000000
-      internalID: -9114592984969735878
+      spriteID: 3e0b8e9c9c8fd2680800000000000000
+      internalID: -8778086553115643677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_5
+      name: Slime black 1_5
       rect:
         serializedVersion: 2
         x: 252
@@ -503,14 +490,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0948bfe67853e8e0800000000000000
-      internalID: -1665390169345734385
+      spriteID: 72923dc4b939be030800000000000000
+      internalID: 3525073428565666087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_6
+      name: Slime black 1_6
       rect:
         serializedVersion: 2
         x: 300
@@ -525,14 +512,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4cfc64b0765248c0800000000000000
-      internalID: -4016552875597693878
+      spriteID: 2e64178e5a386c430800000000000000
+      internalID: 3802871683953542882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_7
+      name: Slime black 1_7
       rect:
         serializedVersion: 2
         x: 348
@@ -547,14 +534,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a55f058c8f041300800000000000000
-      internalID: 221819377850209704
+      spriteID: 7804d41fc533d5ec0800000000000000
+      internalID: -3576646054783926137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_8
+      name: Slime black 1_8
       rect:
         serializedVersion: 2
         x: 396
@@ -569,14 +556,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79a3f9f9f83e0ad70800000000000000
-      internalID: 9052485457012538007
+      spriteID: 10150e6279b05d210800000000000000
+      internalID: 1357003606542274817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_9
+      name: Slime black 1_9
       rect:
         serializedVersion: 2
         x: 444
@@ -591,14 +578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 514a7e2d4f5343490800000000000000
-      internalID: -7767524131680574443
+      spriteID: 775fb7224320b6cc0800000000000000
+      internalID: -3716874644524108425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_10
+      name: Slime black 1_10
       rect:
         serializedVersion: 2
         x: 11
@@ -613,14 +600,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e6daaff10ec93130800000000000000
-      internalID: 3547092689510651623
+      spriteID: ca07e70ecf1105e80800000000000000
+      internalID: -8192027944391118676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_11
+      name: Slime black 1_11
       rect:
         serializedVersion: 2
         x: 58
@@ -635,14 +622,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbc4ff297b4f954b0800000000000000
-      internalID: -5451056804672877377
+      spriteID: c31de44e73788c100800000000000000
+      internalID: 128501263503380796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_12
+      name: Slime black 1_12
       rect:
         serializedVersion: 2
         x: 106
@@ -657,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5ad54fd86139ce90800000000000000
-      internalID: -7005013418905839012
+      spriteID: 69a454fe8724d0700800000000000000
+      internalID: 508135420140538518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_13
+      name: Slime black 1_13
       rect:
         serializedVersion: 2
         x: 155
@@ -679,14 +666,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c50b37dd64588af20800000000000000
-      internalID: 3434141255279554652
+      spriteID: 7d9b88eef144dbca0800000000000000
+      internalID: -5999564224651019817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_14
+      name: Slime black 1_14
       rect:
         serializedVersion: 2
         x: 203
@@ -701,14 +688,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3a723bd67b772dd0800000000000000
-      internalID: -2510902516821886406
+      spriteID: cca19e5866475ba80800000000000000
+      internalID: -8451721142008735028
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_15
+      name: Slime black 1_15
       rect:
         serializedVersion: 2
         x: 251
@@ -723,14 +710,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 92487421522a69f40800000000000000
-      internalID: 5734949455607071785
+      spriteID: f84c0126a7cbda160800000000000000
+      internalID: 7038489026467251343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_16
+      name: Slime black 1_16
       rect:
         serializedVersion: 2
         x: 299
@@ -745,14 +732,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a7396098ac24af90800000000000000
-      internalID: -6943375623009519703
+      spriteID: e41aff857087fc220800000000000000
+      internalID: 2508355490421907790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_17
+      name: Slime black 1_17
       rect:
         serializedVersion: 2
         x: 347
@@ -767,14 +754,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c85cc68a52649060800000000000000
-      internalID: 6959295465142376648
+      spriteID: bbac4dbc1771bae50800000000000000
+      internalID: 6821571838101211835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_18
+      name: Slime black 1_18
       rect:
         serializedVersion: 2
         x: 395
@@ -789,14 +776,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb6931eefebd0aa10800000000000000
-      internalID: 1918775264797759167
+      spriteID: b5284feca1a7ad190800000000000000
+      internalID: -7936897137727208869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_19
+      name: Slime black 1_19
       rect:
         serializedVersion: 2
         x: 443
@@ -811,14 +798,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cbad4892897a09ec0800000000000000
-      internalID: -3562163033276622148
+      spriteID: 6a7390f81a3e68b60800000000000000
+      internalID: 7748130491966502822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_20
+      name: Slime black 1_20
       rect:
         serializedVersion: 2
         x: 12
@@ -833,14 +820,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7582ea815644ca9d0800000000000000
-      internalID: -2761757270488504233
+      spriteID: f93668e8d32646970800000000000000
+      internalID: 8747224392784044959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_21
+      name: Slime black 1_21
       rect:
         serializedVersion: 2
         x: 60
@@ -855,14 +842,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a5cbe12daf230b650800000000000000
-      internalID: 6246548736011320410
+      spriteID: eb6bcd2d645f27dd0800000000000000
+      internalID: -2489657959448267074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_22
+      name: Slime black 1_22
       rect:
         serializedVersion: 2
         x: 109
@@ -877,14 +864,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1669d58717d777370800000000000000
-      internalID: 8320256762894456417
+      spriteID: c850b33649ba6b960800000000000000
+      internalID: 7617464473552094604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_23
+      name: Slime black 1_23
       rect:
         serializedVersion: 2
         x: 157
@@ -899,14 +886,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d9ece8f3ed6db0a0800000000000000
-      internalID: -6864209431141488169
+      spriteID: f077f828fda911430800000000000000
+      internalID: 3751950249335158543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_24
+      name: Slime black 1_24
       rect:
         serializedVersion: 2
         x: 204
@@ -921,14 +908,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d91f58b32f54d20c0800000000000000
-      internalID: -4598942737792372323
+      spriteID: 00cf2a3c7c71f4d70800000000000000
+      internalID: 9029461924649303040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_25
+      name: Slime black 1_25
       rect:
         serializedVersion: 2
         x: 252
@@ -943,14 +930,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83f4cd4fd701855c0800000000000000
-      internalID: -4226610117122175176
+      spriteID: 09b028c0136c0a960800000000000000
+      internalID: 7611301284221684624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_26
+      name: Slime black 1_26
       rect:
         serializedVersion: 2
         x: 300
@@ -965,14 +952,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 600043b3da215d480800000000000000
-      internalID: -8875166955431788538
+      spriteID: ad21853fdf40910a0800000000000000
+      internalID: -6910486664467442982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_27
+      name: Slime black 1_27
       rect:
         serializedVersion: 2
         x: 348
@@ -987,14 +974,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 88eb8294d185cc9b0800000000000000
-      internalID: -5058571398639206776
+      spriteID: fba8ae9893baf3570800000000000000
+      internalID: 8448659689585674943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_28
+      name: Slime black 1_28
       rect:
         serializedVersion: 2
         x: 396
@@ -1009,14 +996,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7a9a96a6d5ff0e20800000000000000
-      internalID: 3319141752662301309
+      spriteID: 447ef7447d320c040800000000000000
+      internalID: 4665768621430007620
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_29
+      name: Slime black 1_29
       rect:
         serializedVersion: 2
         x: 444
@@ -1031,14 +1018,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac1fc9169e1742580800000000000000
-      internalID: -8852825720324558390
+      spriteID: af5b35d9c16109420800000000000000
+      internalID: 2634630094166144506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_30
+      name: Slime black 1_30
       rect:
         serializedVersion: 2
         x: 60
@@ -1053,14 +1040,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da68cbbce8174fd40800000000000000
-      internalID: 5617239493355275949
+      spriteID: 1b7faa52ee4fc8bc0800000000000000
+      internalID: -3779376683599333455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_31
+      name: Slime black 1_31
       rect:
         serializedVersion: 2
         x: 157
@@ -1075,14 +1062,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 805e9439fbd8ee7d0800000000000000
-      internalID: -2887214457148545784
+      spriteID: 9d2bbb34292434870800000000000000
+      internalID: 8665843303959999193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_32
+      name: Slime black 1_32
       rect:
         serializedVersion: 2
         x: 163
@@ -1097,14 +1084,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b195d62fa35397090800000000000000
-      internalID: -8036333532774311653
+      spriteID: a72436e8ac62c9fe0800000000000000
+      internalID: -1181026350863793542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_33
+      name: Slime black 1_33
       rect:
         serializedVersion: 2
         x: 12
@@ -1119,14 +1106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e50dbb669eb1776b0800000000000000
-      internalID: -5298735747313184674
+      spriteID: 77635a39fadc56080800000000000000
+      internalID: -9194716910226950537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_34
+      name: Slime black 1_34
       rect:
         serializedVersion: 2
         x: 107
@@ -1141,14 +1128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0cf871daf39282ae0800000000000000
-      internalID: -1573962716302307392
+      spriteID: 4b6c4bca321f77e50800000000000000
+      internalID: 6807174497317471924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_35
+      name: Slime black 1_35
       rect:
         serializedVersion: 2
         x: 205
@@ -1163,14 +1150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d69141d6d21250eb0800000000000000
-      internalID: -4754357352632411795
+      spriteID: 122a1bc4adf276290800000000000000
+      internalID: -7897290806934789599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_36
+      name: Slime black 1_36
       rect:
         serializedVersion: 2
         x: 254
@@ -1185,14 +1172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 603c18f2ecfe901d0800000000000000
-      internalID: -3383909976152882426
+      spriteID: 6cb40a7423a7d5eb0800000000000000
+      internalID: -4729489677300511802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_37
+      name: Slime black 1_37
       rect:
         serializedVersion: 2
         x: 304
@@ -1207,14 +1194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a70e194d5325e1f0800000000000000
-      internalID: -1016367257336543322
+      spriteID: 76b1a133a6c9f4230800000000000000
+      internalID: 3625288204994354023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_38
+      name: Slime black 1_38
       rect:
         serializedVersion: 2
         x: 353
@@ -1229,14 +1216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b6e15534128c98f0800000000000000
-      internalID: -532407632631044427
+      spriteID: bc6d42e0a6bc49bb0800000000000000
+      internalID: -4930092035699583285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_39
+      name: Slime black 1_39
       rect:
         serializedVersion: 2
         x: 402
@@ -1251,14 +1238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5459d915422bb2dc0800000000000000
-      internalID: -3662638002877917883
+      spriteID: 16b6da5dc898d2530800000000000000
+      internalID: 3831870095935499105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_40
+      name: Slime black 1_40
       rect:
         serializedVersion: 2
         x: 408
@@ -1273,14 +1260,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 566ddbc4153378310800000000000000
-      internalID: 1407149832849446501
+      spriteID: 30664485654c97740800000000000000
+      internalID: 5150363524001981955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_41
+      name: Slime black 1_41
       rect:
         serializedVersion: 2
         x: 452
@@ -1295,14 +1282,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8f83addb311f08a0800000000000000
-      internalID: -6336827201867772021
+      spriteID: 67b345ed9a340f6a0800000000000000
+      internalID: -6417555072144360586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_42
+      name: Slime black 1_42
       rect:
         serializedVersion: 2
         x: 101
@@ -1317,14 +1304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b5c69a0880b42b00800000000000000
-      internalID: 802960731918484917
+      spriteID: e5b0d2053070eb340800000000000000
+      internalID: 4881346756927621982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_43
+      name: Slime black 1_43
       rect:
         serializedVersion: 2
         x: 154
@@ -1339,14 +1326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da62751f0741419d0800000000000000
-      internalID: -2804594192627063123
+      spriteID: 832fee128b4999c40800000000000000
+      internalID: 5519606336883454520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_44
+      name: Slime black 1_44
       rect:
         serializedVersion: 2
         x: 155
@@ -1361,14 +1348,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 065239124a0f8e910800000000000000
-      internalID: 1867006633273664864
+      spriteID: 034e33de273a938c0800000000000000
+      internalID: -4019001478450256848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_45
+      name: Slime black 1_45
       rect:
         serializedVersion: 2
         x: 12
@@ -1383,14 +1370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54a853b19905f7e50800000000000000
-      internalID: 6809249780124191301
+      spriteID: 030746ac5f5c5b520800000000000000
+      internalID: 2717295609641201712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_46
+      name: Slime black 1_46
       rect:
         serializedVersion: 2
         x: 59
@@ -1405,14 +1392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30b686c883ff12ce0800000000000000
-      internalID: -1431582588188202237
+      spriteID: 82c0b23e09b701220800000000000000
+      internalID: 2454597659133676584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_47
+      name: Slime black 1_47
       rect:
         serializedVersion: 2
         x: 204
@@ -1427,14 +1414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 614729c6d259392b0800000000000000
-      internalID: -5578951491054308330
+      spriteID: b679b71216a8a3bc0800000000000000
+      internalID: -3802574785582753941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_48
+      name: Slime black 1_48
       rect:
         serializedVersion: 2
         x: 254
@@ -1449,14 +1436,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 804b3f72dd50005d0800000000000000
-      internalID: -3098470096214707192
+      spriteID: 4d6075c8b34742330800000000000000
+      internalID: 3685198194202314452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_49
+      name: Slime black 1_49
       rect:
         serializedVersion: 2
         x: 304
@@ -1471,14 +1458,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e0c6546bef8e7f750800000000000000
-      internalID: 6338791181224602638
+      spriteID: df101cda3d49fef00800000000000000
+      internalID: 1148300066876883453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_50
+      name: Slime black 1_50
       rect:
         serializedVersion: 2
         x: 353
@@ -1493,14 +1480,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2da08d4f69b62180800000000000000
-      internalID: -9140414506009055955
+      spriteID: f30b3e113a9cbff40800000000000000
+      internalID: 5763421850367668287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_51
+      name: Slime black 1_51
       rect:
         serializedVersion: 2
         x: 402
@@ -1515,14 +1502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0310cab56cdec4aa0800000000000000
-      internalID: -6175299552834485968
+      spriteID: 34d9de82fede0b150800000000000000
+      internalID: 5886466324412865859
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_52
+      name: Slime black 1_52
       rect:
         serializedVersion: 2
         x: 408
@@ -1537,14 +1524,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 10ebd2c9cc20505c0800000000000000
-      internalID: -4249987595537367551
+      spriteID: 8dac44b7935cc2e10800000000000000
+      internalID: 2174329570785020632
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_53
+      name: Slime black 1_53
       rect:
         serializedVersion: 2
         x: 453
@@ -1559,14 +1546,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7015e260f7dd39a10800000000000000
-      internalID: 1915117804196876551
+      spriteID: ebadb0b43e3196350800000000000000
+      internalID: 6010357044640209598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_54
+      name: Slime black 1_54
       rect:
         serializedVersion: 2
         x: 0
@@ -1581,14 +1568,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3566527db5a6b9fd0800000000000000
-      internalID: -2334155039177349549
+      spriteID: d4e80774748fc59a0800000000000000
+      internalID: -6242841998417424819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_55
+      name: Slime black 1_55
       rect:
         serializedVersion: 2
         x: 156
@@ -1603,14 +1590,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e002905df07238a0800000000000000
-      internalID: -6326870293221343004
+      spriteID: 77c1d217f91823660800000000000000
+      internalID: 7364090862502747255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_56
+      name: Slime black 1_56
       rect:
         serializedVersion: 2
         x: 163
@@ -1625,14 +1612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8773200a361a71340800000000000000
-      internalID: 4834510174263850872
+      spriteID: 6347921b5d69fc170800000000000000
+      internalID: 8200939291009446966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_57
+      name: Slime black 1_57
       rect:
         serializedVersion: 2
         x: 205
@@ -1647,14 +1634,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: adb083fe8248502c0800000000000000
-      internalID: -4466018144120992806
+      spriteID: d5c5b54c41790e230800000000000000
+      internalID: 3666096212129045597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_58
+      name: Slime black 1_58
       rect:
         serializedVersion: 2
         x: 254
@@ -1669,14 +1656,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b23b4d3457b34340800000000000000
-      internalID: 4846919196414259893
+      spriteID: 040f82ac6a09a7d00800000000000000
+      internalID: 971247715682414656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_59
+      name: Slime black 1_59
       rect:
         serializedVersion: 2
         x: 304
@@ -1691,14 +1678,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 30bcca63a32df1d50800000000000000
-      internalID: 6710313117272558339
+      spriteID: f5d78740290bddd50800000000000000
+      internalID: 6763756356567072095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_60
+      name: Slime black 1_60
       rect:
         serializedVersion: 2
         x: 353
@@ -1713,14 +1700,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25ee1ac08e1823070800000000000000
-      internalID: 8084667114727796306
+      spriteID: 5833ff4f541b83b60800000000000000
+      internalID: 7726120074775311237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_61
+      name: Slime black 1_61
       rect:
         serializedVersion: 2
         x: 402
@@ -1735,14 +1722,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1728dcb8f1269560800000000000000
-      internalID: 7320075596541208349
+      spriteID: 4c3a04ee658ce4a00800000000000000
+      internalID: 742751264252666820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_62
+      name: Slime black 1_62
       rect:
         serializedVersion: 2
         x: 408
@@ -1757,14 +1744,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b698f75ceaff61000800000000000000
-      internalID: 6473575590496619
+      spriteID: bd5c643cb56a64fa0800000000000000
+      internalID: -5816778955653986853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_63
+      name: Slime black 1_63
       rect:
         serializedVersion: 2
         x: 452
@@ -1779,14 +1766,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22e6120c2885a3e60800000000000000
-      internalID: 7942758211413700130
+      spriteID: 7e7b3dd948c410d70800000000000000
+      internalID: 9007564862184994791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_64
+      name: Slime black 1_64
       rect:
         serializedVersion: 2
         x: 12
@@ -1801,14 +1788,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7752ad4768465f60800000000000000
-      internalID: 8022679394728433533
+      spriteID: 064fd9d225f9e8b60800000000000000
+      internalID: 7750307184052663392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_65
+      name: Slime black 1_65
       rect:
         serializedVersion: 2
         x: 21
@@ -1823,14 +1810,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8427b8be3280fb90800000000000000
-      internalID: -7210119797521570677
+      spriteID: 45888f3e638fb7200800000000000000
+      internalID: 179009524847904852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_66
+      name: Slime black 1_66
       rect:
         serializedVersion: 2
         x: 69
@@ -1845,14 +1832,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a0ddc9c3749220900800000000000000
-      internalID: 649126682231102730
+      spriteID: 1e1ff9688ed606c10800000000000000
+      internalID: 2044755076284674529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_67
+      name: Slime black 1_67
       rect:
         serializedVersion: 2
         x: 108
@@ -1867,14 +1854,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4525237cbd2e9e30800000000000000
-      internalID: 4512094164080731469
+      spriteID: 0cb2033bb7fd6dbb0800000000000000
+      internalID: -4911492621220697152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_68
+      name: Slime black 1_68
       rect:
         serializedVersion: 2
         x: 191
@@ -1889,14 +1876,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 130f4d0de2758f360800000000000000
-      internalID: 7203603462562836529
+      spriteID: fc844b836262df7e0800000000000000
+      internalID: -1730184736238450481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_69
+      name: Slime black 1_69
       rect:
         serializedVersion: 2
         x: 60
@@ -1911,14 +1898,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb2468197f15a6af0800000000000000
-      internalID: -402419092955970884
+      spriteID: 97e47a3e27e71ee50800000000000000
+      internalID: 6836884741235887737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_70
+      name: Slime black 1_70
       rect:
         serializedVersion: 2
         x: 155
@@ -1933,14 +1920,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c54f1200addef1c10800000000000000
-      internalID: 2026599877900891228
+      spriteID: 41103af9cf9bb2d80800000000000000
+      internalID: -8274315395701997292
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_71
+      name: Slime black 1_71
       rect:
         serializedVersion: 2
         x: 11
@@ -1955,14 +1942,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06e68c2e58c001200800000000000000
-      internalID: 148632556878196320
+      spriteID: c320100bfaf7d2f00800000000000000
+      internalID: 1093670677069759036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_72
+      name: Slime black 1_72
       rect:
         serializedVersion: 2
         x: 21
@@ -1977,14 +1964,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e54799226ec8abf30800000000000000
-      internalID: 4592137690108490846
+      spriteID: 62a2cf1d98663af90800000000000000
+      internalID: -6943593458355656154
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_73
+      name: Slime black 1_73
       rect:
         serializedVersion: 2
         x: 69
@@ -1999,14 +1986,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a603fea090120b5d0800000000000000
-      internalID: -3048900625007955862
+      spriteID: 241f2ae054a30d620800000000000000
+      internalID: 2796799436869792066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_74
+      name: Slime black 1_74
       rect:
         serializedVersion: 2
         x: 59
@@ -2021,14 +2008,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eada17c5e54305940800000000000000
-      internalID: 5282779942788115886
+      spriteID: fba748e379d328090800000000000000
+      internalID: -8033791065477317953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_75
+      name: Slime black 1_75
       rect:
         serializedVersion: 2
         x: 104
@@ -2043,14 +2030,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f6970e4164cef4b0800000000000000
-      internalID: -5404666580598024456
+      spriteID: 66f2918e3324be050800000000000000
+      internalID: 5830826933265968998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_76
+      name: Slime black 1_76
       rect:
         serializedVersion: 2
         x: 150
@@ -2065,14 +2052,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1315079481c4d4430800000000000000
-      internalID: 3768752130373996849
+      spriteID: ba1f6de17a2d242c0800000000000000
+      internalID: -4448761866669854293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_77
+      name: Slime black 1_77
       rect:
         serializedVersion: 2
         x: 12
@@ -2087,14 +2074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7391b01174a8a20a0800000000000000
-      internalID: -6905555040785983177
+      spriteID: aa2d545ffbe5acbd0800000000000000
+      internalID: -2609168855561022806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_78
+      name: Slime black 1_78
       rect:
         serializedVersion: 2
         x: 21
@@ -2109,14 +2096,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dde3e6ca533d0d9e0800000000000000
-      internalID: -1598545640236892451
+      spriteID: 57ff700f244606de0800000000000000
+      internalID: -1341962450298732683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_79
+      name: Slime black 1_79
       rect:
         serializedVersion: 2
         x: 69
@@ -2131,14 +2118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ae43e8f1c937b920800000000000000
-      internalID: 3005934781560213157
+      spriteID: 5d2fcd201e92dcb60800000000000000
+      internalID: 7767910978676388565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_80
+      name: Slime black 1_80
       rect:
         serializedVersion: 2
         x: 60
@@ -2153,14 +2140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f67d80c0bc2d38bb0800000000000000
-      internalID: -4934868997145831569
+      spriteID: dca864aee4734a110800000000000000
+      internalID: 1271201806902790861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_81
+      name: Slime black 1_81
       rect:
         serializedVersion: 2
         x: 100
@@ -2175,14 +2162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c815144baed5a7ca0800000000000000
-      internalID: -6018394689399336564
+      spriteID: 96b908cf837d0e490800000000000000
+      internalID: -7718933121558602903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_82
+      name: Slime black 1_82
       rect:
         serializedVersion: 2
         x: 123
@@ -2197,14 +2184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 70d3be9b8261072a0800000000000000
-      internalID: -6741864277999928057
+      spriteID: a8381bada14e2f4c0800000000000000
+      internalID: -4255087893922348150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_83
+      name: Slime black 1_83
       rect:
         serializedVersion: 2
         x: 148
@@ -2219,14 +2206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e59c87bdf0bc8fe0800000000000000
-      internalID: -1185377998152624667
+      spriteID: f4d5368a2072755b0800000000000000
+      internalID: -5379788337502266033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime black_84
+      name: Slime black 1_84
       rect:
         serializedVersion: 2
         x: 172
@@ -2241,8 +2228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8806bdfe9c699d870800000000000000
-      internalID: 8708157148554289288
+      spriteID: e0795504eb8384c50800000000000000
+      internalID: 6649627239586830094
       vertices: []
       indices: 
       edges: []
@@ -2261,91 +2248,91 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Slime black_0: 8153257033118722256
-      Slime black_1: 7043054213407914013
-      Slime black_10: 3547092689510651623
-      Slime black_11: -5451056804672877377
-      Slime black_12: -7005013418905839012
-      Slime black_13: 3434141255279554652
-      Slime black_14: -2510902516821886406
-      Slime black_15: 5734949455607071785
-      Slime black_16: -6943375623009519703
-      Slime black_17: 6959295465142376648
-      Slime black_18: 1918775264797759167
-      Slime black_19: -3562163033276622148
-      Slime black_2: -7678070927269828803
-      Slime black_20: -2761757270488504233
-      Slime black_21: 6246548736011320410
-      Slime black_22: 8320256762894456417
-      Slime black_23: -6864209431141488169
-      Slime black_24: -4598942737792372323
-      Slime black_25: -4226610117122175176
-      Slime black_26: -8875166955431788538
-      Slime black_27: -5058571398639206776
-      Slime black_28: 3319141752662301309
-      Slime black_29: -8852825720324558390
-      Slime black_3: 1766499490153687268
-      Slime black_30: 5617239493355275949
-      Slime black_31: -2887214457148545784
-      Slime black_32: -8036333532774311653
-      Slime black_33: -5298735747313184674
-      Slime black_34: -1573962716302307392
-      Slime black_35: -4754357352632411795
-      Slime black_36: -3383909976152882426
-      Slime black_37: -1016367257336543322
-      Slime black_38: -532407632631044427
-      Slime black_39: -3662638002877917883
-      Slime black_4: -9114592984969735878
-      Slime black_40: 1407149832849446501
-      Slime black_41: -6336827201867772021
-      Slime black_42: 802960731918484917
-      Slime black_43: -2804594192627063123
-      Slime black_44: 1867006633273664864
-      Slime black_45: 6809249780124191301
-      Slime black_46: -1431582588188202237
-      Slime black_47: -5578951491054308330
-      Slime black_48: -3098470096214707192
-      Slime black_49: 6338791181224602638
-      Slime black_5: -1665390169345734385
-      Slime black_50: -9140414506009055955
-      Slime black_51: -6175299552834485968
-      Slime black_52: -4249987595537367551
-      Slime black_53: 1915117804196876551
-      Slime black_54: -2334155039177349549
-      Slime black_55: -6326870293221343004
-      Slime black_56: 4834510174263850872
-      Slime black_57: -4466018144120992806
-      Slime black_58: 4846919196414259893
-      Slime black_59: 6710313117272558339
-      Slime black_6: -4016552875597693878
-      Slime black_60: 8084667114727796306
-      Slime black_61: 7320075596541208349
-      Slime black_62: 6473575590496619
-      Slime black_63: 7942758211413700130
-      Slime black_64: 8022679394728433533
-      Slime black_65: -7210119797521570677
-      Slime black_66: 649126682231102730
-      Slime black_67: 4512094164080731469
-      Slime black_68: 7203603462562836529
-      Slime black_69: -402419092955970884
-      Slime black_7: 221819377850209704
-      Slime black_70: 2026599877900891228
-      Slime black_71: 148632556878196320
-      Slime black_72: 4592137690108490846
-      Slime black_73: -3048900625007955862
-      Slime black_74: 5282779942788115886
-      Slime black_75: -5404666580598024456
-      Slime black_76: 3768752130373996849
-      Slime black_77: -6905555040785983177
-      Slime black_78: -1598545640236892451
-      Slime black_79: 3005934781560213157
-      Slime black_8: 9052485457012538007
-      Slime black_80: -4934868997145831569
-      Slime black_81: -6018394689399336564
-      Slime black_82: -6741864277999928057
-      Slime black_83: -1185377998152624667
-      Slime black_84: 8708157148554289288
-      Slime black_9: -7767524131680574443
+      Slime black 1_0: -587760606756936258
+      Slime black 1_1: 3205233356115887983
+      Slime black 1_10: -8192027944391118676
+      Slime black 1_11: 128501263503380796
+      Slime black 1_12: 508135420140538518
+      Slime black 1_13: -5999564224651019817
+      Slime black 1_14: -8451721142008735028
+      Slime black 1_15: 7038489026467251343
+      Slime black 1_16: 2508355490421907790
+      Slime black 1_17: 6821571838101211835
+      Slime black 1_18: -7936897137727208869
+      Slime black 1_19: 7748130491966502822
+      Slime black 1_2: -8210907456648303781
+      Slime black 1_20: 8747224392784044959
+      Slime black 1_21: -2489657959448267074
+      Slime black 1_22: 7617464473552094604
+      Slime black 1_23: 3751950249335158543
+      Slime black 1_24: 9029461924649303040
+      Slime black 1_25: 7611301284221684624
+      Slime black 1_26: -6910486664467442982
+      Slime black 1_27: 8448659689585674943
+      Slime black 1_28: 4665768621430007620
+      Slime black 1_29: 2634630094166144506
+      Slime black 1_3: 2130542223979062481
+      Slime black 1_30: -3779376683599333455
+      Slime black 1_31: 8665843303959999193
+      Slime black 1_32: -1181026350863793542
+      Slime black 1_33: -9194716910226950537
+      Slime black 1_34: 6807174497317471924
+      Slime black 1_35: -7897290806934789599
+      Slime black 1_36: -4729489677300511802
+      Slime black 1_37: 3625288204994354023
+      Slime black 1_38: -4930092035699583285
+      Slime black 1_39: 3831870095935499105
+      Slime black 1_4: -8778086553115643677
+      Slime black 1_40: 5150363524001981955
+      Slime black 1_41: -6417555072144360586
+      Slime black 1_42: 4881346756927621982
+      Slime black 1_43: 5519606336883454520
+      Slime black 1_44: -4019001478450256848
+      Slime black 1_45: 2717295609641201712
+      Slime black 1_46: 2454597659133676584
+      Slime black 1_47: -3802574785582753941
+      Slime black 1_48: 3685198194202314452
+      Slime black 1_49: 1148300066876883453
+      Slime black 1_5: 3525073428565666087
+      Slime black 1_50: 5763421850367668287
+      Slime black 1_51: 5886466324412865859
+      Slime black 1_52: 2174329570785020632
+      Slime black 1_53: 6010357044640209598
+      Slime black 1_54: -6242841998417424819
+      Slime black 1_55: 7364090862502747255
+      Slime black 1_56: 8200939291009446966
+      Slime black 1_57: 3666096212129045597
+      Slime black 1_58: 971247715682414656
+      Slime black 1_59: 6763756356567072095
+      Slime black 1_6: 3802871683953542882
+      Slime black 1_60: 7726120074775311237
+      Slime black 1_61: 742751264252666820
+      Slime black 1_62: -5816778955653986853
+      Slime black 1_63: 9007564862184994791
+      Slime black 1_64: 7750307184052663392
+      Slime black 1_65: 179009524847904852
+      Slime black 1_66: 2044755076284674529
+      Slime black 1_67: -4911492621220697152
+      Slime black 1_68: -1730184736238450481
+      Slime black 1_69: 6836884741235887737
+      Slime black 1_7: -3576646054783926137
+      Slime black 1_70: -8274315395701997292
+      Slime black 1_71: 1093670677069759036
+      Slime black 1_72: -6943593458355656154
+      Slime black 1_73: 2796799436869792066
+      Slime black 1_74: -8033791065477317953
+      Slime black 1_75: 5830826933265968998
+      Slime black 1_76: -4448761866669854293
+      Slime black 1_77: -2609168855561022806
+      Slime black 1_78: -1341962450298732683
+      Slime black 1_79: 7767910978676388565
+      Slime black 1_8: 1357003606542274817
+      Slime black 1_80: 1271201806902790861
+      Slime black 1_81: -7718933121558602903
+      Slime black 1_82: -4255087893922348150
+      Slime black 1_83: -5379788337502266033
+      Slime black 1_84: 6649627239586830094
+      Slime black 1_9: -3716874644524108425
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
