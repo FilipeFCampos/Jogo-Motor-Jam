@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
 
     // Awake is called when the script instance is being loaded
+
+    public bool hasKey = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -120,6 +123,12 @@ public class PlayerController : MonoBehaviour
                 TakeDamage(1f); // Take damage from the trap
                 //canTakeDamage = false; // Disable further damage until reset
             }
+        }
+        if (other.CompareTag("Key"))
+        {
+            hasKey = true;
+            Destroy(other.gameObject); // Remove a chave da cena
+            Debug.Log("Chave coletada!");
         }
     }
 
@@ -254,5 +263,7 @@ public class PlayerController : MonoBehaviour
         canMove = animator.GetBool("CanMove");
         canAttack = animator.GetBool("CanAttack");
     }
+
+
 
 }
