@@ -7,12 +7,10 @@ public class WinManager : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text slimesText;
     [SerializeField] private TMP_Text timeText;
 
     [Header("Settings")]
     [SerializeField] private string scorePrefix = "TOTAL SCORE: ";
-    [SerializeField] private string slimesPrefix = "DEFEATED SLIMES: ";
     [SerializeField] private string timePrefix = "PLAYING TIME: ";
 
     void Start()
@@ -26,7 +24,6 @@ public class WinManager : MonoBehaviour
         GameData data = new GameData
         {
             score = PlayerPrefs.GetInt("TotalScore", 0),
-            slimesDefeated = PlayerPrefs.GetInt("SlimesDefeated", 0),
             playTime = PlayerPrefs.GetFloat("PlayTime", 0f)
         };
 
@@ -37,7 +34,6 @@ public class WinManager : MonoBehaviour
     private void UpdateUI(GameData data)
     {
         scoreText.text = $"{scorePrefix}{data.score}";
-        slimesText.text = $"{slimesPrefix}{data.slimesDefeated}";
         timeText.text = $"{timePrefix}{FormatTime(data.playTime)}";
     }
 
@@ -63,7 +59,6 @@ public class WinManager : MonoBehaviour
     private class GameData
     {
         public int score;
-        public int slimesDefeated;
         public float playTime;
     }
 
