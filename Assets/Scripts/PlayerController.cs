@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioSource swordAudio;
+    [SerializeField] private AudioSource pickupKey;
     
 
     /* Combat related variables */
@@ -134,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             hasKey = true;
             Destroy(other.gameObject); // Remove a chave da cena
+            pickupKey.Play();
             Debug.Log("Chave coletada!");
         }
     }

@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
 
     private int score;
+    
     private TMP_Text scoreText;
 
     private void Awake()
