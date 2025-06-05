@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class BossController : MonoBehaviour
 {
@@ -28,6 +30,7 @@ public class BossController : MonoBehaviour
 
     private bool podeAtacar = true;
     private bool podeMover = true;
+
 
     [SerializeField] private float danoAtaque = 1f; // Dano que o boss causa ao jogador
 
@@ -168,11 +171,30 @@ public class BossController : MonoBehaviour
 
     private void Morrer()
     {
+        Debug.Log("Morrer boss.");
         MudarEstado(Estado.Morto);
         anim.SetTrigger("Die");
         podeMover = false;
         rb.linearVelocity = Vector2.zero;
-        Destroy(gameObject, 2f);
+
+        // Salvar dados para a tela de vitória
+        PlayerPrefs.SetInt("SlimesDefeated", PlayerPrefs.GetInt("SlimesDefeated", 0));
+        PlayerPrefs.SetFloat("PlayTime", Time.timeSinceLevelLoad); // ou outro tempo do jogo
+        PlayerPrefs.Save();
+
+
+        // Carrega a cena de vitória após um pequeno delay
+        StartCoroutine(MorrerEComecarCena());
+
+    }
+
+   private IEnumerator MorrerEComecarCena()
+    {
+        yield return new WaitForSeconds(3f); // Espera para mostrar animação de morte
+        SceneManager.LoadScene("WinScene", LoadSceneMode.Additive);
+        Time.timeScale = 0f;
+        Debug.Log("Cena da vitória carregada?");
+        Destroy(gameObject);
     }
 
     private void AtualizarFlagsAnimator()

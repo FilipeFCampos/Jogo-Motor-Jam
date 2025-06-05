@@ -50,7 +50,8 @@ MonoBehaviour:
   - {fileID: 3649478360267744013, guid: 8d6c1c6a6c155f249943ff4a151cc172, type: 3}
   - {fileID: 6430157324609342468, guid: 5bf99db522b502e478cacadac6adbc18, type: 3}
   - {fileID: 7852601489304482891, guid: 0f30e9000c660ad4d886ef81e3bd0d2e, type: 3}
-  timeBetweenWaves: 6
-  delayBetweenEachSlime: 0.6
+  timeBetweenWaves: 8
+  delayBetweenEachSlime: 1
   minSlimesPerWave: 1
-  maxSlimesPerWave: 4
+  maxSlimesPerWave: 1
+  maxSlimes: 5
