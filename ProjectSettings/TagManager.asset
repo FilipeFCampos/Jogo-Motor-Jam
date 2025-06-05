@@ -49,5 +49,8 @@ TagManager:
   - name: Player
     uniqueID: 63778469
     locked: 0
+  - name: roof
+    uniqueID: 3472880115
+    locked: 0
   m_RenderingLayers:
   - Default
