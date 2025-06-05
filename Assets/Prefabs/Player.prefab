@@ -232,7 +232,7 @@ MonoBehaviour:
   pickupKey: {fileID: -5287896960358133260}
   health: 0
   maxHealth: 125.1
-  meleeDamage: 5.21
+  meleeDamage: 10.25
   meleeRange: 1
   enemyLayer:
     serializedVersion: 2

@@ -321,12 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e109cbc39f85d247ad8a2e7ae25a792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 251
+  vidaMaxima: 125.1
   velocidade: 3
   distanciaAtaque: 2
   tempoEntreAtaques: 4
   deathEffect: {fileID: 0}
-  danoAtaque: 50.2
+  danoAtaque: 25.1
 --- !u!95 &3446637523676768260
 Animator:
   serializedVersion: 7
