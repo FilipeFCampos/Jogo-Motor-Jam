@@ -325,6 +325,7 @@ MonoBehaviour:
   velocidade: 3
   distanciaAtaque: 2
   tempoEntreAtaques: 4
+  deathEffect: {fileID: 0}
   danoAtaque: 50.2
 --- !u!95 &3446637523676768260
 Animator:

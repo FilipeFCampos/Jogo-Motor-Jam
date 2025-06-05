@@ -12,6 +12,14 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetInt("CurrentScore", 0); // Se usar um score temporário
+        PlayerPrefs.Save();
+
+        // Destrói o ScoreManager se ele existir (vindo da tela de vitória)
+        if (ScoreManager.Instance != null)
+        {
+            Destroy(ScoreManager.Instance.gameObject);
+        }
         loadingScreen.SetActive(true); // Ativa o painel
         StartCoroutine(LoadLevelAsync(1)); // Índice da cena Level1
         Debug.Log($"Percentage is child of LoadingScreen: {percentage.transform.parent == loadingScreen.transform}");
