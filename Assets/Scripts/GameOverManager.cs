@@ -8,8 +8,21 @@ public class GameOverManager : MonoBehaviour
     public string mainMenuScene = "MenuPrincipal";
     public string gameScene = "Level1";
 
-   public void RetryGame()
-    {
+    public void RetryGame()
+    {   
+        PlayerPrefs.SetInt("CurrentScore", 0); // Se usar um score temporário
+        PlayerPrefs.Save();
+
+        // Destrói o ScoreManager se ele existir (vindo da tela de vitória)
+        if (ScoreManager.Instance != null)
+        {
+            Destroy(ScoreManager.Instance.gameObject);
+        }
+        // Destrói o ScoreManager (se existir)
+        if (ScoreManager.Instance != null)
+        {
+            Destroy(ScoreManager.Instance.gameObject);
+        }
         Time.timeScale = 1f; // retoma o jogo
         SceneManager.LoadScene(gameScene);
     }
