@@ -1,40 +1,65 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Data.Common;
 
 public class WinManager : MonoBehaviour
 {
     [Header("UI References")]
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timeText;
-    
-    [Header("Cenas")]
-    public string mainMenu = "MenuPrincipal";
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text timeText;
+
+    [Header("Settings")]
+    [SerializeField] private string scorePrefix = "TOTAL SCORE: ";
+    [SerializeField] private string timePrefix = "PLAYING TIME: ";
 
     void Start()
     {
-        // Carrega dados do jogador
-        int slimesDefeated = PlayerPrefs.GetInt("SlimesDefeated", 0);
-        float playTime = PlayerPrefs.GetFloat("PlayTime", 0f);
-        
-        // Atualiza UI
-        scoreText.text = $"Slimes Derrotados: {slimesDefeated}";
-        timeText.text = $"Tempo: {FormatTime(playTime)}";
-        
-        // Opcional: Toca som de vitória
-        // AudioManager.Instance.Play("Victory");
+        LoadAndDisplayGameData();
     }
 
-    string FormatTime(float seconds)
+    private void LoadAndDisplayGameData()
     {
-        int minutes = Mathf.FloorToInt(seconds / 60f);
-        int secs = Mathf.FloorToInt(seconds % 60f);
-        return $"{minutes:00}:{secs:00}";
+        // Carrega dados persistentes
+        GameData data = new GameData
+        {
+            score = PlayerPrefs.GetInt("TotalScore", 0),
+            playTime = PlayerPrefs.GetFloat("PlayTime", 0f)
+        };
+
+        // Atualiza UI
+        UpdateUI(data);
     }
 
+    private void UpdateUI(GameData data)
+    {
+        scoreText.text = $"{scorePrefix}{data.score}";
+        timeText.text = $"{timePrefix}{FormatTime(data.playTime)}";
+    }
+
+    private string FormatTime(float totalSeconds)
+    {
+        int minutes = Mathf.FloorToInt(totalSeconds / 60f);
+        int seconds = Mathf.FloorToInt(totalSeconds % 60f);
+        return $"{minutes:00}:{seconds:00}";
+    }
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene(mainMenu);
+            // Destrói o ScoreManager (se existir)
+        if (ScoreManager.Instance != null)
+        {
+            Destroy(ScoreManager.Instance.gameObject);
+        }
+        
+        SceneManager.LoadScene("MenuPrincipal");
     }
+    
+    // Classe auxiliar para organização dos dados
+    private class GameData
+    {
+        public int score;
+        public float playTime;
+    }
+
 }

@@ -16,6 +16,11 @@ public class GameOverManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
+            // Destrói o ScoreManager (se existir)
+        if (ScoreManager.Instance != null)
+        {
+            Destroy(ScoreManager.Instance.gameObject);
+        }
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuScene);
     }
