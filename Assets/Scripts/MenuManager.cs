@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;       
-using TMPro;   
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -60,5 +60,14 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    
+    public void OpenCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+    public void OpenMenu()
+    {
+        SceneManager.LoadScene("MenuPrincipal");
     }
 }

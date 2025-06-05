@@ -29,7 +29,11 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer()
     {
-        timeElapsed = 25.1f;
+        timeElapsed += 5.2f;
+        if (timeElapsed > 25.1f)
+        {
+            timeElapsed = 25.1f; // Cap the timer at 25.1 seconds
+        }
         timerText.text = timeElapsed.ToString("F1");
         enabled = true; // Re-enable the timer if it was disabled
     }
