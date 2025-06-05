@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96392ec91cf98fc49be236a497e3e41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5.02
+  health: 15
   moveSpeed: 1.5
   playerDetectRange: 3
   wanderInterval: 2

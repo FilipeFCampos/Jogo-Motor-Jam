@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5.02
-  moveSpeed: 2
-  playerDetectRange: 5
+  moveSpeed: 3
+  playerDetectRange: 8
   wanderInterval: 2
   animator: {fileID: 7048143475946627352}
