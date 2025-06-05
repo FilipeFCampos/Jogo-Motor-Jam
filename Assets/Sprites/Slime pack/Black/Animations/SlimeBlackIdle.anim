@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Black_Walk_Down
+  m_Name: SlimeBlackIdle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 8153257033118722256, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
+      value: {fileID: -3779376683599333455, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
     - time: 0.083333336
-      value: {fileID: 7043054213407914013, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
+      value: {fileID: -9194716910226950537, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
     - time: 0.16666667
-      value: {fileID: -7678070927269828803, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
+      value: {fileID: 6807174497317471924, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
     - time: 0.25
-      value: {fileID: 1766499490153687268, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
+      value: {fileID: 21300000, guid: 29b28465a8d58604eaf4b7882db867a5, type: 2}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 8153257033118722256, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
-    - {fileID: 7043054213407914013, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
-    - {fileID: -7678070927269828803, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
-    - {fileID: 1766499490153687268, guid: 77b86dc8b6c07144986d4592168f8ba2, type: 3}
+    - {fileID: -3779376683599333455, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
+    - {fileID: -9194716910226950537, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
+    - {fileID: 6807174497317471924, guid: 5a26f722c539586419e5f896fc7032dd, type: 3}
+    - {fileID: 21300000, guid: 29b28465a8d58604eaf4b7882db867a5, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
