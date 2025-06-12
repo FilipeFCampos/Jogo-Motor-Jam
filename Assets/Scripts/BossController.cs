@@ -20,6 +20,19 @@ public class BossController : MonoBehaviour
     [SerializeField] private float tempoEntreAtaques = 2f;
     private float tempoUltimoAtaque;
 
+    [Header("Áudio de Passos do Boss")]
+    [SerializeField] private AudioSource footstepAudioBoss; // AudioSource para os passos do boss
+    [SerializeField] private AudioClip[] footstepSoundsBoss; // Array de sons variados de passos do boss
+    [SerializeField] private float footstepCooldownBoss = 0.4f; // Tempo entre cada som de passo do boss
+    private float lastFootstepTimeBoss;
+
+    // --- NOVAS VARIÁVEIS PARA O ÁUDIO DE ATAQUE DO BOSS ---
+    [Header("Áudio de Ataque do Boss")]
+    [SerializeField] private AudioSource attackAudioSourceBoss; // AudioSource para o som de ataque do boss
+    [SerializeField] private AudioClip attackSoundBoss;         // O clipe de áudio do ataque do boss
+    // --- FIM DAS NOVAS VARIÁVEIS ---
+
+
     private Transform jogador;
     private Rigidbody2D rb;
     private Animator anim;
@@ -44,6 +57,61 @@ public class BossController : MonoBehaviour
 
         vidaAtual = vidaMaxima;
         tempoUltimoAtaque = -tempoEntreAtaques;
+
+        // Inicialização do AudioSource de passos (mantido como está)
+        if (footstepAudioBoss == null)
+        {
+            footstepAudioBoss = GetComponent<AudioSource>();
+            if (footstepAudioBoss == null)
+            {
+                Debug.LogError("BossController: AudioSource para passos não encontrado no GameObject do boss!");
+            }
+        }
+        lastFootstepTimeBoss = Time.time;
+
+        // --- INICIALIZAÇÃO DO AUDIO SOURCE DE ATAQUE DO BOSS ---
+        if (attackAudioSourceBoss == null)
+        {
+            // Tenta pegar o AudioSource no próprio GameObject do boss
+            attackAudioSourceBoss = GetComponent<AudioSource>();
+            if (attackAudioSourceBoss == null)
+            {
+                Debug.LogError("BossController: AudioSource para ataque não encontrado no GameObject do boss.");
+            }
+        }
+        // --- FIM DA INICIALIZAÇÃO ---
+    }
+
+    private void HandleBossFootstepSound()
+    {
+        // Apenas toque o som se o boss estiver no estado de Andando e se movendo de fato
+        if (estadoAtual == Estado.Andando && rb.linearVelocity.magnitude > 0.1f) // Use linearVelocity aqui também
+        {
+            if (Time.time - lastFootstepTimeBoss >= footstepCooldownBoss)
+            {
+                if (footstepAudioBoss != null && footstepSoundsBoss.Length > 0)
+                {
+                    // Escolha um som aleatório e toque-o
+                    AudioClip stepSound = footstepSoundsBoss[Random.Range(0, footstepSoundsBoss.Length)];
+                    footstepAudioBoss.PlayOneShot(stepSound);
+                    lastFootstepTimeBoss = Time.time;
+                    // Debug.Log("Som de passos do boss tocado!"); // Descomente para depurar
+                }
+                else
+                {
+                    Debug.LogWarning("BossController: Footstep Audio ou Clipes do boss não atribuídos!");
+                }
+            }
+        }
+        else
+        {
+            // Se o boss não estiver andando, pare o som de passos se estiver tocando
+            if (footstepAudioBoss != null && footstepAudioBoss.isPlaying)
+            {
+                footstepAudioBoss.Stop();
+                // Debug.Log("Boss parado, som de passos interrompido."); // Descomente para depurar
+            }
+        }
     }
 
     private void Update()
@@ -71,7 +139,14 @@ public class BossController : MonoBehaviour
         if (estadoAtual == Estado.Andando && podeMover && EstaNaCamera())
         {
             Mover();
+            HandleBossFootstepSound();
         }
+        else
+        {
+            // Certifique-se de que o som pare se o boss não estiver se movendo
+            HandleBossFootstepSound();
+        }
+
     }
 
     private void Mover()
@@ -105,6 +180,17 @@ public class BossController : MonoBehaviour
         AtualizarAnimacoes();
 
         anim.SetTrigger("Attack");
+        // --- ADIÇÃO DO SOM DE ATAQUE AQUI ---
+        if (attackAudioSourceBoss != null && attackSoundBoss != null)
+        {
+            attackAudioSourceBoss.PlayOneShot(attackSoundBoss);
+            Debug.Log("Som de ataque do Boss tocado!"); // Para depuração
+        }
+        else
+        {
+            Debug.LogWarning("BossController: AudioSource de ataque ou AudioClip não atribuídos para o ataque do Boss!");
+        }
+        // --- FIM DA ADIÇÃO ---
         tempoUltimoAtaque = Time.time;
 
         yield return new WaitForSeconds(0.5f); // Tempo até o golpe atingir
@@ -176,7 +262,7 @@ public class BossController : MonoBehaviour
         MudarEstado(Estado.Morto);
         anim.SetTrigger("Die");
         podeMover = false;
-        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero; // Corrigido para linearVelocity
 
         // Adiciona pontos ao ScoreManager (de forma segura)
         if (ScoreManager.Instance != null)
@@ -204,9 +290,9 @@ public class BossController : MonoBehaviour
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
-        
+
         yield return new WaitForSeconds(1f);
-        
+
         SceneManager.LoadScene("WinScene");
     }
 

@@ -1,33 +1,48 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;       
+using UnityEngine.UI;
 using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen; // Painel de loading
     [SerializeField] private Image progressBar;       // Barra de progresso (UI Image)
-    [SerializeField] private TMP_Text percentage;   // Texto (opcional)
+    [SerializeField] private TMP_Text percentage;     // Texto de carregamento
+
+    private void Start()
+    {
+        // Toca a música do menu ao iniciar
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayBackgroundMusic();
+        }
+    }
 
     public void StartGame()
     {
-        PlayerPrefs.SetInt("CurrentScore", 0); // Se usar um score temporário
+        PlayerPrefs.SetInt("CurrentScore", 0); // Reset do score temporário
         PlayerPrefs.Save();
 
-        // Destrói o ScoreManager se ele existir (vindo da tela de vitória)
+        // Destrói o ScoreManager se ele existir
         if (ScoreManager.Instance != null)
         {
             Destroy(ScoreManager.Instance.gameObject);
         }
-        loadingScreen.SetActive(true); // Ativa o painel
+
+        // Toca som de clique ao iniciar o jogo
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
+        loadingScreen.SetActive(true); // Exibe tela de carregamento
         StartCoroutine(LoadLevelAsync(1)); // Índice da cena Level1
-        Debug.Log($"Percentage is child of LoadingScreen: {percentage.transform.parent == loadingScreen.transform}");
     }
 
     IEnumerator LoadLevelAsync(int levelIndex)
     {
-        // Garante que tudo está resetado
+        // Reset da UI de carregamento
         progressBar.fillAmount = 0;
         percentage.text = "CARREGANDO: 0%";
         loadingScreen.SetActive(true);
@@ -35,7 +50,6 @@ public class MenuManager : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(levelIndex);
         operation.allowSceneActivation = false;
 
-        // Tempo mínimo de loading (2 segundos)
         float minDisplayTime = 2f;
         float elapsedTime = 0f;
 
@@ -50,7 +64,15 @@ public class MenuManager : MonoBehaviour
             {
                 percentage.text = "PRESSIONE QUALQUER TECLA";
                 if (Input.anyKeyDown)
+                {
                     operation.allowSceneActivation = true;
+
+                    // Som ao avançar da tela de loading
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayButtonClickSound();
+                    }
+                }
             }
 
             yield return null;
@@ -59,15 +81,28 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
         Application.Quit();
     }
-    
+
     public void OpenCredits()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
         SceneManager.LoadScene("Credits");
     }
+
     public void OpenMenu()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
         SceneManager.LoadScene("MenuPrincipal");
     }
 }
