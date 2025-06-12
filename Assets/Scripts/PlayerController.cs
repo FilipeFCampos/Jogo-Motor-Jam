@@ -21,7 +21,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioSource swordAudio;
     [SerializeField] private AudioSource pickupKey;
-    
+    [SerializeField] private AudioSource footstepAudio; // AudioSource para os passos
+    [SerializeField] private AudioClip[] footstepSounds; // Array de sons variados de passos
+
+    private float footstepCooldown = 0.3f; // Tempo entre cada som de passo
+    private float lastFootstepTime;
+
 
     /* Combat related variables */
     public double health;
@@ -210,6 +215,29 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = (canMove ? 1 : 0) * moveSpeed * Time.fixedDeltaTime * moveDir;
         rb.linearVelocity.Normalize();
     }
+    //w
+    private void HandleFootstepSound()
+    {
+        if (moveDir.magnitude == 0)
+        {
+            footstepAudio.Stop(); // Para o som quando parar
+            return;
+        }
+
+        if (Time.time - lastFootstepTime >= footstepCooldown)
+        {
+            if (footstepAudio != null && footstepSounds.Length > 0)
+            {
+                footstepAudio.volume = 0.9f; // Ajuste de volume
+                AudioClip stepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
+                footstepAudio.PlayOneShot(stepSound);
+                lastFootstepTime = Time.time;
+            }
+        }
+    }
+
+
+
 
     private void CalculateFacingDirection()
     {
@@ -253,8 +281,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         // Get horizontal input
         GetInput();
+        HandleFootstepSound(); // Chamado dentro de Update()
         CalculateFacingDirection();
         HandleAnimations();
         if (timer.timeElapsed <= 0 && isDead == false)
