@@ -17,19 +17,21 @@ public class SlimeController : MonoBehaviour
     private Vector2 wanderDirection;
     private float wanderTimer;
 
+    // --- NOVO: Para o controle de áudio baseado em posição ---
+    private Vector2 previousPosition;
+    [SerializeField] private float minMovementThreshold = 0.005f; // Quão pouco o slime precisa se mover para ser considerado "em movimento"
+    // --------------------------------------------------------
+
     Timer timer;
     [SerializeField] private Animator animator;
 
     [Header("Áudio de Ataque")]
     [SerializeField] private AudioSource attackAudioSource; // AudioSource para o som de ataque
-    [SerializeField] private AudioClip attackSound;         // O clipe de áudio do ataque
+    [SerializeField] private AudioClip attackSound;          // O clipe de áudio do ataque
 
- 
     [Header("Áudio de Movimento")]
     [SerializeField] private AudioSource moveAudioSource; // AudioSource para o som de movimento
-    [SerializeField] private AudioClip moveSound;         // O clipe de áudio do movimento
-
-
+    [SerializeField] private AudioClip moveSound;          // O clipe de áudio do movimento
 
     private void Awake()
     {
@@ -63,20 +65,43 @@ public class SlimeController : MonoBehaviour
             attackAudioSource = GetComponent<AudioSource>();
             if (attackAudioSource == null)
             {
-                Debug.LogError("SlimeController: AudioSource para ataque não encontrado no GameObject do Slime.");
+                Debug.LogError("SlimeController: AudioSource para ataque não encontrado no GameObject do Slime. Por favor, adicione um AudioSource ou atribua-o no Inspector.");
             }
         }
 
-        //INICIALIZAÇÃO DO AUDIO SOURCE DE MOVIMENTO
+        // Inicialização do AudioSource de movimento
         if (moveAudioSource == null)
         {
-            moveAudioSource = GetComponent<AudioSource>();
+            AudioSource[] allAudioSources = GetComponents<AudioSource>();
+            if (allAudioSources.Length > 1)
+            {
+                if (allAudioSources[0] == attackAudioSource)
+                {
+                    moveAudioSource = allAudioSources[1];
+                }
+                else
+                {
+                    moveAudioSource = allAudioSources[0];
+                }
+            }
+            else if (allAudioSources.Length == 1)
+            {
+                moveAudioSource = allAudioSources[0];
+            }
+
             if (moveAudioSource == null)
             {
-                Debug.LogError("SlimeController: AudioSource para movimento não encontrado no GameObject do Slime.");
+                Debug.LogError("SlimeController: AudioSource para movimento não encontrado no GameObject do Slime. Por favor, adicione um AudioSource ou atribua-o no Inspector.");
+            }
+            else if (moveAudioSource == attackAudioSource)
+            {
+                Debug.LogWarning("SlimeController: O mesmo AudioSource está sendo usado para ataque e movimento. Isso pode causar problemas. Considere adicionar outro AudioSource para um dos sons.");
             }
         }
-     
+
+        // --- NOVO: Inicializa a posição anterior ---
+        previousPosition = rb.position;
+        // ------------------------------------------
     }
 
     private void Update()
@@ -94,7 +119,6 @@ public class SlimeController : MonoBehaviour
         if (player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        Vector2 currentVelocity = rb.linearVelocity; // Pega a velocidade atual para verificar movimento
 
         if (distanceToPlayer <= playerDetectRange)
         {
@@ -108,9 +132,11 @@ public class SlimeController : MonoBehaviour
             rb.MovePosition(rb.position + wanderDirection * moveSpeed * Time.fixedDeltaTime);
         }
 
-        // 
-        HandleMoveSound(currentVelocity.magnitude); // Passa a magnitude da velocidade atual
-
+        // --- NOVO: Calcula a distância percorrida e passa para HandleMoveSound ---
+        float distanceMoved = Vector2.Distance(rb.position, previousPosition);
+        HandleMoveSound(distanceMoved);
+        previousPosition = rb.position; // Atualiza a posição anterior para o próximo frame
+        // -----------------------------------------------------------------------
     }
 
     public void TakeDamage(float damage)
@@ -122,25 +148,22 @@ public class SlimeController : MonoBehaviour
         }
     }
 
-    // Die
     private void Die()
     {
         SlimeSpawner.slimeCount--;
         animator.SetTrigger("Die");
 
-        //Parar som de movimento ao morrer
         if (moveAudioSource != null && moveAudioSource.isPlaying)
         {
             moveAudioSource.Stop();
+            Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado ao morrer.");
         }
-   
+
         StartCoroutine(DestroyAfterAnimation());
     }
 
-    // Wait for Death Animation to finish before destroying the object
     private IEnumerator DestroyAfterAnimation()
     {
-        // Disable collider and movement logic while animation plays
         if (GetComponent<Collider2D>() != null)
             GetComponent<Collider2D>().enabled = false;
 
@@ -162,7 +185,7 @@ public class SlimeController : MonoBehaviour
             if (attackAudioSource != null && attackSound != null)
             {
                 attackAudioSource.PlayOneShot(attackSound);
-                Debug.Log("Som de ataque do Slime tocado!");
+                Debug.Log($"Som de ataque do Slime '{gameObject.name}' tocado!");
             }
             else
             {
@@ -176,26 +199,29 @@ public class SlimeController : MonoBehaviour
         }
     }
 
-    //MÉTODO PARA GERENCIAR O SOM DE MOVIMENTO 
-    private void HandleMoveSound(float currentSpeed)
+    // MÉTODO PARA GERENCIAR O SOM DE MOVIMENTO
+    // Agora recebe a distância percorrida em vez da velocidade
+    private void HandleMoveSound(float distanceMoved)
     {
-        // Se o slime estiver se movendo (velocidade > um pequeno limiar)
-        if (currentSpeed > 0.1f) // Use um limiar pequeno para garantir que ele esteja realmente se movendo
+        // DEBUG: Mostra a distância percorrida pelo Slime no último FixedUpdate
+        Debug.Log($"Slime '{gameObject.name}' Distância Movida: {distanceMoved:F6}"); // Mais casas decimais para depuração
+
+        // Se o slime estiver se movendo (distância percorrida > um pequeno limiar)
+        if (distanceMoved > minMovementThreshold) // Usa o novo parâmetro minMovementThreshold
         {
             if (moveAudioSource != null && moveSound != null)
             {
-                // Se o som não estiver tocando, comece a tocar em loop
                 if (!moveAudioSource.isPlaying)
                 {
-                    moveAudioSource.clip = moveSound; // Atribui o clipe
-                    moveAudioSource.loop = true;      // Define para loop
-                    moveAudioSource.Play();           // Começa a tocar
-                    // Debug.Log("Som de movimento do Slime iniciado."); // Para depuração
+                    moveAudioSource.clip = moveSound;
+                    moveAudioSource.loop = true;
+                    moveAudioSource.Play();
+                    Debug.Log($"Som de movimento do Slime '{gameObject.name}' iniciado. (Distância: {distanceMoved:F6})");
                 }
             }
             else
             {
-                Debug.LogWarning("SlimeController: AudioSource de movimento ou AudioClip de movimento não atribuídos!");
+                Debug.LogWarning("SlimeController: AudioSource de movimento ou AudioClip de movimento não atribuídos para '" + gameObject.name + "'!");
             }
         }
         // Se o slime estiver parado
@@ -203,10 +229,9 @@ public class SlimeController : MonoBehaviour
         {
             if (moveAudioSource != null && moveAudioSource.isPlaying)
             {
-                moveAudioSource.Stop(); // Para o som
-                // Debug.Log("Som de movimento do Slime parado."); // Para depuração
+                moveAudioSource.Stop();
+                Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado. (Distância: {distanceMoved:F6})");
             }
         }
     }
-    
 }
