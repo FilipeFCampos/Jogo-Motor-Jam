@@ -204,7 +204,7 @@ public class SlimeController : MonoBehaviour
     private void HandleMoveSound(float distanceMoved)
     {
         // DEBUG: Mostra a distância percorrida pelo Slime no último FixedUpdate
-        Debug.Log($"Slime '{gameObject.name}' Distância Movida: {distanceMoved:F6}"); // Mais casas decimais para depuração
+        //Debug.Log($"Slime '{gameObject.name}' Distância Movida: {distanceMoved:F6}"); // Mais casas decimais para depuração
 
         // Se o slime estiver se movendo (distância percorrida > um pequeno limiar)
         if (distanceMoved > minMovementThreshold) // Usa o novo parâmetro minMovementThreshold
