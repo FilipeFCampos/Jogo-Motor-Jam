@@ -195,9 +195,10 @@ MonoBehaviour:
   moveSpeed: 1
   playerDetectRange: 3
   wanderInterval: 2
+  minMovementThreshold: 0.005
   animator: {fileID: -6489780358004030861}
   attackAudioSource: {fileID: 6713019557654988508}
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 864c3686b3b656f428933ea77201155a, type: 3}
   moveAudioSource: {fileID: 5601711513868764738}
   moveSound: {fileID: 8300000, guid: e07e473f8e357ec40ae1903590793500, type: 3}
 --- !u!82 &6713019557654988508
@@ -310,7 +311,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
