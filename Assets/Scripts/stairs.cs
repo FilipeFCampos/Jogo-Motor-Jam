@@ -30,7 +30,7 @@ public class TeleportOnTouch : MonoBehaviour
         Debug.Log("Teleportado para nova sala.");
 
         // Espera brevemente
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         // Fade de volta
         yield return StartCoroutine(fadePanel.FadeIn());
