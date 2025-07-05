@@ -3,28 +3,28 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     // Campo para o componente AudioSource anexado a este GameObject
-    [Header("Componentes de Áudio")]
-    [SerializeField] private AudioSource _bgmAudioSource; // AudioSource para a música de fundo
+    [Header("Componentes de ï¿½udio")]
+    [SerializeField] private AudioSource _bgmAudioSource; // AudioSource para a mï¿½sica de fundo
     [SerializeField] private AudioSource _sfxAudioSource; // AudioSource para efeitos sonoros (SFX)
 
-    [Header("Clipes de Áudio")]
-    public AudioClip backgroundMusic;    // Música de fundo para o menu
-    public AudioClip buttonClickSound;   // Som ao clicar em um botão
-    public AudioClip buttonHoverSound;   // Som ao passar o mouse sobre um botão (opcional)
+    [Header("Clipes de ï¿½udio")]
+    public AudioClip backgroundMusic;    // Mï¿½sica de fundo para o menu
+    public AudioClip buttonClickSound;   // Som ao clicar em um botï¿½o
+    public AudioClip buttonHoverSound;   // Som ao passar o mouse sobre um botï¿½o (opcional)
     public AudioClip footplayerSound;   // Som do caminhar do personagem
 
-    // Acessador estático para facilitar o acesso de outros scripts (Singleton)
+    // Acessador estï¿½tico para facilitar o acesso de outros scripts (Singleton)
     public static AudioManager Instance;
 
     private void Awake()
     {
-        // Garante que só haja uma instância do AudioManager
+        // Garante que sï¿½ haja uma instï¿½ncia do AudioManager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Mantém o AudioManager entre as cenas
+            DontDestroyOnLoad(gameObject); // Mantï¿½m o AudioManager entre as cenas
         }
-        else if (Instance != this) // Evita bugs caso haja outra instância errada
+        else if (Instance != this) // Evita bugs caso haja outra instï¿½ncia errada
         {
             Destroy(gameObject);
         }
@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        // Tenta pegar os componentes AudioSource se não foram atribuídos no Inspector
+        // Tenta pegar os componentes AudioSource se nï¿½o foram atribuï¿½dos no Inspector
         if (_bgmAudioSource == null)
         {
             _bgmAudioSource = GetComponent<AudioSource>();
@@ -44,33 +44,33 @@ public class AudioManager : MonoBehaviour
 
         PlayBackgroundMusic();
 
-        // Definir volumes iniciais (ajuste conforme necessário)
+        // Definir volumes iniciais (ajuste conforme necessï¿½rio)
         SetMusicVolume(0.5f);
         SetSfxVolume(0.5f);
     }
 
-    // Método para tocar a música de fundo
+    // Mï¿½todo para tocar a mï¿½sica de fundo
     public void PlayBackgroundMusic()
     {
         if (backgroundMusic != null && _bgmAudioSource != null)
         {
             _bgmAudioSource.clip = backgroundMusic;
-            _bgmAudioSource.loop = true; // A música de fundo deve tocar em loop
+            _bgmAudioSource.loop = true; // A mï¿½sica de fundo deve tocar em loop
             _bgmAudioSource.Play();
         }
         else
         {
-            Debug.LogWarning("AudioManager: Problema ao iniciar a música de fundo!");
+            Debug.LogWarning("AudioManager: Problema ao iniciar a mï¿½sica de fundo!");
         }
     }
 
-    // Método para tocar um som de clique de botão
+    // Mï¿½todo para tocar um som de clique de botï¿½o
     public void PlayButtonClickSound()
     {
         PlaySfx(buttonClickSound);
     }
 
-    // Método para tocar um som de hover de botão com proteção contra spam
+    // Mï¿½todo para tocar um som de hover de botï¿½o com proteï¿½ï¿½o contra spam
     private float _hoverCooldown = 0.1f;
     private float _lastHoverTime;
 
@@ -83,7 +83,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Método genérico para tocar efeitos sonoros
+    // Mï¿½todo genï¿½rico para tocar efeitos sonoros
     private void PlaySfx(AudioClip clip)
     {
         if (clip != null && _sfxAudioSource != null)
@@ -96,7 +96,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Métodos para controlar o volume
+    // Mï¿½todos para controlar o volume
     public void SetMusicVolume(float volume)
     {
         if (_bgmAudioSource != null)
@@ -111,5 +111,17 @@ public class AudioManager : MonoBehaviour
         {
             _sfxAudioSource.volume = Mathf.Clamp01(volume);
         }
+    }
+
+    public void PlayMusic()
+    {
+        if (!_bgmAudioSource.isPlaying)
+            _bgmAudioSource.Play();
+    }
+
+    public void PauseMusic()
+    {
+        if (_bgmAudioSource.isPlaying)
+            _bgmAudioSource.Pause();
     }
 }
