@@ -99,6 +99,14 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
+            orcController greenOrc = hit.GetComponent<orcController>();
+            if(greenOrc != null)
+            {
+                greenOrc.TomarDano(meleeDamage);
+                Debug.Log("Green Orc atingido: " + hit.name);
+                continue;
+            }
+
             // 2) Se for Slime
             SlimeController slime = hit.GetComponent<SlimeController>();
             if (slime != null)
