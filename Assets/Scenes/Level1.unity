@@ -6372,7 +6372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3643b8b3b5d976d408b1f11c22b54dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossPrefab: {fileID: 3192008899530571705, guid: 9c83918cd0db5204fbc978ecc3b9e3f4, type: 3}
+  bossPrefab: {fileID: 6249503788913644561, guid: 857e4cac7247360419397ce5d0a5d540, type: 3}
   spawnPoint: {fileID: 844878076}
 --- !u!61 &564299448
 BoxCollider2D:

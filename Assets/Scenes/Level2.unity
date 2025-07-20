@@ -16253,7 +16253,7 @@ Tilemap:
       - {fileID: -5911397470096975488, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: -4523623588274359541, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: 1955352534120309933, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
-      m_AnimationSpeed: 15.000001
+      m_AnimationSpeed: 15
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 3, y: 7, z: 0}
@@ -16422,7 +16422,7 @@ Tilemap:
       - {fileID: -5911397470096975488, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: -4523623588274359541, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: 1955352534120309933, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
-      m_AnimationSpeed: 15
+      m_AnimationSpeed: 15.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -16683,7 +16683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3643b8b3b5d976d408b1f11c22b54dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossPrefab: {fileID: 6249503788913644561, guid: 857e4cac7247360419397ce5d0a5d540, type: 3}
+  bossPrefab: {fileID: 1542589037097430660, guid: 4dae84cf33016da488090545477fc7b2, type: 3}
   spawnPoint: {fileID: 67212088}
 --- !u!61 &1262654921
 BoxCollider2D:
@@ -40539,11 +40539,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1826897491404906309, guid: 45aa0d159bd8ca74e92e243a73d2bc00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.49
+      value: -21.07
       objectReference: {fileID: 0}
     - target: {fileID: 1826897491404906309, guid: 45aa0d159bd8ca74e92e243a73d2bc00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.4
+      value: 32.26
       objectReference: {fileID: 0}
     - target: {fileID: 1826897491404906309, guid: 45aa0d159bd8ca74e92e243a73d2bc00, type: 3}
       propertyPath: m_LocalPosition.z
