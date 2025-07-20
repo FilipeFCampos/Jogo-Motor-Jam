@@ -244,7 +244,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
 
     private void CalculateFacingDirection()
