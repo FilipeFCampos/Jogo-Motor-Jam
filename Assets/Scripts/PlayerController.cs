@@ -1,5 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting; // Esta linha pode não ser necessária se você não usar Visual Scripting
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     // Animation related references
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private AudioSource swordAudio;   // AudioSource para o som da espada
-    [SerializeField] private AudioSource pickupKey;    // AudioSource para o som de coletar chave
+    [SerializeField] private AudioSource swordAudio;
+    [SerializeField] private AudioSource pickupKey;
     [SerializeField] private AudioSource footstepAudio; // AudioSource para os passos
     [SerializeField] private AudioClip[] footstepSounds; // Array de sons variados de passos
 
@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer;
     public Timer timer;
+
+    // Awake is called when the script instance is being loaded
 
     public bool hasKey = false;
 
@@ -64,46 +66,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Timer component not found in the scene.");
         }
-
-        // === CONTROLE DE VOLUME DOS ÁUDIOS VIA SCRIPT AQUI ===
-
-        // Volume do áudio da espada
-        if (swordAudio != null)
-        {
-            swordAudio.volume = 0.35f; 
-            swordAudio.loop = false; // Garante que não está em loop
-            swordAudio.playOnAwake = false; // Garante que não toca ao iniciar
-        }
-        else
-        {
-            Debug.LogWarning("PlayerController: AudioSource para espada não atribuído!");
-        }
-
-        // Volume do áudio de coletar chave
-        if (pickupKey != null)
-        {
-            pickupKey.volume = 0.45f; 
-            pickupKey.loop = false;
-            pickupKey.playOnAwake = false;
-        }
-        else
-        {
-            Debug.LogWarning("PlayerController: AudioSource para coletar chave não atribuído!");
-        }
-
-        // Volume do áudio de passos (já existente, movido para Awake para centralizar controle)
-        if (footstepAudio != null)
-        {
-            footstepAudio.volume = 0.15f; // 
-            footstepAudio.loop = false; // Garante que não está em loop (controlado pelo HandleFootstepSound)
-            footstepAudio.playOnAwake = false;
-        }
-        else
-        {
-            Debug.LogWarning("PlayerController: AudioSource para passos não atribuído!");
-        }
-
-        // ======================================================
     }
 
     private void Attack()
@@ -114,7 +76,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // AQUI o volume já foi definido em Awake, então não precisa mudar aqui
         if (swordAudio != null && !swordAudio.isPlaying)
         {
             swordAudio.Play();
@@ -124,10 +85,12 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Attack");
         canMove = false;
 
+        // Detecta todos os colliders da camada "enemyLayer" dentro do raio meleeRange
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, meleeRange, enemyLayer);
 
         foreach (Collider2D hit in hitEnemies)
         {
+            // 1) Se for Boss
             BossController boss = hit.GetComponent<BossController>();
             if (boss != null)
             {
@@ -136,18 +99,15 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-<<<<<<< Updated upstream
-            // 2) Se for Slime
-=======
             orcController greenOrc = hit.GetComponent<orcController>();
-            if (greenOrc != null)
+            if(greenOrc != null)
             {
                 greenOrc.TomarDano(meleeDamage);
                 Debug.Log("Green Orc atingido: " + hit.name);
                 continue;
             }
 
->>>>>>> Stashed changes
+            // 2) Se for Slime
             SlimeController slime = hit.GetComponent<SlimeController>();
             if (slime != null)
             {
@@ -155,12 +115,19 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Slime atingido: " + hit.name);
                 continue;
             }
+
+            // 3) Se você tiver outros inimigos, cheque aqui também
+            // Exemplo: OutroInimigo outro = hit.GetComponent<OutroInimigo>();
+            // if (outro != null) { outro.TakeDamage(meleeDamage); ... }
         }
     }
 
+
+
+    // Handles player input
     private void GetInput()
     {
-        moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        moveDir.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // Might change to Input.GetAxisRaw for instant response
         if (Input.GetButtonDown("Fire1"))
         {
             Attack();
@@ -169,46 +136,47 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Trap"))
-        {
+        if (other.CompareTag("Trap")) {
             Debug.Log("Player has entered a trap!");
 
-            if (canTakeDamage)
-            {
-                TakeDamage(1f);
+            if (canTakeDamage) {
+                TakeDamage(1f); // Take damage from the trap
+                //canTakeDamage = false; // Disable further damage until reset
             }
         }
         if (other.CompareTag("Key"))
         {
             hasKey = true;
-            Destroy(other.gameObject);
-            // AQUI o volume já foi definido em Awake, então não precisa mudar aqui
-            if (pickupKey != null)
-            {
-                pickupKey.Play();
-            }
+            Destroy(other.gameObject); // Remove a chave da cena
+            pickupKey.Play();
             Debug.Log("Chave coletada!");
         }
     }
 
+    // Handles player death and game over logic
     private void Die()
     {
+        // Trigger da animação
         animator.SetTrigger("Die");
+
+        // Para o movimento e ações
         canMove = false;
         canAttack = false;
         rb.linearVelocity = Vector2.zero;
+
+        // Desabilita colisões se necessário
         GetComponent<Collider2D>().enabled = false;
         isDead = true;
 
-        // Parar todos os sons do player ao morrer
-        if (swordAudio != null && swordAudio.isPlaying) swordAudio.Stop();
-        if (pickupKey != null && pickupKey.isPlaying) pickupKey.Stop();
-        if (footstepAudio != null && footstepAudio.isPlaying) footstepAudio.Stop();
-
+        // Mostra Game Over
         SceneManager.LoadScene("GameOverScene", LoadSceneMode.Additive);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // pausa o jogo, mas mantém o jogador visível
     }
 
+
+
+
+    // Handles player damage taking logic
     public void TakeDamage(double damage)
     {
         if (isInvulnerable)
@@ -219,6 +187,7 @@ public class PlayerController : MonoBehaviour
 
         health -= damage;
 
+        // Atualiza os corações na tela
         if (HealthSystem.Instance != null)
         {
             HealthSystem.Instance.UpdateHearts((int)health);
@@ -229,8 +198,9 @@ public class PlayerController : MonoBehaviour
             Die();
         }
 
+        // Ativa invulnerabilidade temporária
         isInvulnerable = true;
-        StartCoroutine(ResetInvulnerability(1.0f));
+        StartCoroutine(ResetInvulnerability(1.0f)); // 1 segundo de invulnerabilidade
     }
 
     IEnumerator ResetInvulnerability(float time)
@@ -241,25 +211,24 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // Inicializa o HUD com vida máxima
         if (HealthSystem.Instance != null)
             HealthSystem.Instance.UpdateHearts((int)maxHealth);
-        isDead = false;
+        isDead = false; // Reset dead state at start
     }
 
+    // Move the player based on move direction and speed
     private void MovePlayer()
     {
         rb.linearVelocity = (canMove ? 1 : 0) * moveSpeed * Time.fixedDeltaTime * moveDir;
         rb.linearVelocity.Normalize();
     }
-
+    //w
     private void HandleFootstepSound()
     {
         if (moveDir.magnitude == 0)
         {
-            if (footstepAudio != null && footstepAudio.isPlaying) // Adicionado verificação para evitar NullReference se footstepAudio for nulo
-            {
-                footstepAudio.Stop(); // Para o som quando parar
-            }
+            footstepAudio.Stop(); // Para o som quando parar
             return;
         }
 
@@ -267,20 +236,18 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepAudio != null && footstepSounds.Length > 0)
             {
-                // O volume agora é definido em Awake(), então remova a linha daqui
-                // footstepAudio.volume = 0.9f; 
-
+                footstepAudio.volume = 0.9f; // Ajuste de volume
                 AudioClip stepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
                 footstepAudio.PlayOneShot(stepSound);
                 lastFootstepTime = Time.time;
             }
-            else
-            {
-                Debug.LogWarning("PlayerController: Footstep AudioSource ou Clipes de passos não atribuídos!");
-            }
         }
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
 
     private void CalculateFacingDirection()
@@ -305,7 +272,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimations()
     {
+        // This function can be used to handle animations based on the player's state
+        // For now, we will just set the animator's speed based on movement
         animator.SetBool("IsMoving", moveDir.magnitude != 0);
+        // Update animator parameters based on direction
         animator.SetInteger("Direction", (int)currentDirection);
 
         if (currentDirection == Directions.LEFT || currentDirection == Directions.RIGHT)
@@ -314,26 +284,36 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = false; // Reset flip for vertical movement
         }
     }
 
+
+    // Update is called once per frame
     void Update()
     {
+        
+
+        // Get horizontal input
         GetInput();
-        HandleFootstepSound();
+        HandleFootstepSound(); // Chamado dentro de Update()
         CalculateFacingDirection();
         HandleAnimations();
-        if (timer != null && timer.timeElapsed <= 0 && isDead == false) // Adicionado verificação de nulo para timer
+        if (timer.timeElapsed <= 0 && isDead == false)
         {
             Die();
         }
     }
 
+    // FixedUpdate is called at a fixed interval and is used for physics calculations
     private void FixedUpdate()
     {
+        // Move the player based on input
         MovePlayer();
         canMove = animator.GetBool("CanMove");
         canAttack = animator.GetBool("CanAttack");
     }
+
+
+
 }
