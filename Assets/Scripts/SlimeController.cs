@@ -156,7 +156,7 @@ public class SlimeController : MonoBehaviour
         if (moveAudioSource != null && moveAudioSource.isPlaying)
         {
             moveAudioSource.Stop();
-            Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado ao morrer.");
+            //Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado ao morrer.");
         }
 
         StartCoroutine(DestroyAfterAnimation());
@@ -216,7 +216,7 @@ public class SlimeController : MonoBehaviour
                     moveAudioSource.clip = moveSound;
                     moveAudioSource.loop = true;
                     moveAudioSource.Play();
-                    Debug.Log($"Som de movimento do Slime '{gameObject.name}' iniciado. (Distância: {distanceMoved:F6})");
+                    //Debug.Log($"Som de movimento do Slime '{gameObject.name}' iniciado. (Distância: {distanceMoved:F6})");
                 }
             }
             else
@@ -230,7 +230,7 @@ public class SlimeController : MonoBehaviour
             if (moveAudioSource != null && moveAudioSource.isPlaying)
             {
                 moveAudioSource.Stop();
-                Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado. (Distância: {distanceMoved:F6})");
+                //Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado. (Distância: {distanceMoved:F6})");
             }
         }
     }

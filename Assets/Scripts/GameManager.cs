@@ -18,8 +18,17 @@ public class GameManager : MonoBehaviour
         if (currentPlayer != null) {
             Destroy(currentPlayer); // Destroy the current player if it exists
         }
+
         currentPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+
+        // Informa a câmera sobre o novo jogador
+        CameraFollow camFollow = FindFirstObjectByType<CameraFollow>();
+        if (camFollow != null)
+        {
+            camFollow.SetTarget(currentPlayer.transform);
+        }
     }
+
     
     void RespawnPlayer()
     {

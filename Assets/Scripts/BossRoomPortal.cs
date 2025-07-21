@@ -35,7 +35,7 @@ public class BossRoomPortal : MonoBehaviour
         Debug.Log("Player entrou na sala do boss!");
 
         // Espera um pouquinho se quiser dar mais tempo (opcional)
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         // Fade para o jogo novamente
         yield return StartCoroutine(fadePanel.FadeIn());

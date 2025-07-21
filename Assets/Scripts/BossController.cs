@@ -309,7 +309,7 @@ public class BossController : MonoBehaviour
             Debug.LogWarning("ScoreManager não encontrado!");
         }
 
-        StartCoroutine(MorrerEComecarCena());
+        //StartCoroutine(MorrerEComecarCena());
     }
 
     private IEnumerator MorrerEComecarCena()
@@ -349,5 +349,16 @@ public class BossController : MonoBehaviour
         return viewportPos.x >= margem && viewportPos.x <= 1f - margem &&
                viewportPos.y >= margem && viewportPos.y <= 1f - margem &&
                viewportPos.z > 0;
+    }
+
+    public Estado GetEstadoAtual()
+    {
+        return estadoAtual;
+    }
+
+    public bool IsDead()
+    {
+        Debug.Log($"Estado do Boss: {GetEstadoAtual()}");
+        return estadoAtual == Estado.Morto;
     }
 }

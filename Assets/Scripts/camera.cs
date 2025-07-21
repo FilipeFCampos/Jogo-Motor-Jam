@@ -8,7 +8,15 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        target = FindFirstObjectByType<GameManager>().currentPlayer.transform;
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            target = playerObj.transform;
+        }
+        else
+        {
+            Debug.LogError("Player não encontrado na cena para a câmera seguir!");
+        }
     }
 
     void LateUpdate()
@@ -18,5 +26,10 @@ public class CameraFollow : MonoBehaviour
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothed = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
         transform.position = new Vector3(smoothed.x, smoothed.y, transform.position.z);
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
     }
 }
