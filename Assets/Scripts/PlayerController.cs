@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepAudio != null && footstepSounds.Length > 0)
             {
-                footstepAudio.volume = 0.9f; // Ajuste de volume
+                footstepAudio.volume = 0.10f; // Ajuste de volume
                 AudioClip stepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
                 footstepAudio.PlayOneShot(stepSound);
                 lastFootstepTime = Time.time;
