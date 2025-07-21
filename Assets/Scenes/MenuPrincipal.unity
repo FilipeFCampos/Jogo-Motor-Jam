@@ -288,10 +288,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgmAudioSource: {fileID: 124648425}
   _sfxAudioSource: {fileID: 124648424}
-  backgroundMusic: {fileID: 8300000, guid: 4271eef584190e8478296961779854da, type: 3}
+  defaultBackgroundMusic: {fileID: 8300000, guid: d6098724cda8e4e4d856f804dbf1ec27, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 11ca624ce58df6140898e5070ea59a4d, type: 3}
   buttonHoverSound: {fileID: 8300000, guid: df8a396e5f7d4cd479ccba714ce7a738, type: 3}
-  footplayerSound: {fileID: 8300000, guid: 41d9de0cb3fd86d41a2a49404a2bc333, type: 3}
+  level1Music: {fileID: 8300000, guid: 4271eef584190e8478296961779854da, type: 3}
+  level2Music: {fileID: 8300000, guid: f1eac84430c8cd046ba2bd8e6127a519, type: 3}
+  level3Music: {fileID: 8300000, guid: 2232971a3f50e444eb785d49d91731bd, type: 3}
 --- !u!82 &124648424
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1648,6 +1650,9 @@ MonoBehaviour:
   loadingScreen: {fileID: 602278412}
   progressBar: {fileID: 1261290380}
   percentage: {fileID: 624771146}
+  fase1Music: {fileID: 0}
+  fase2Music: {fileID: 0}
+  fase3Music: {fileID: 0}
 --- !u!1 &1261290378
 GameObject:
   m_ObjectHideFlags: 0
