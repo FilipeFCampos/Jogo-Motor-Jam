@@ -1,69 +1,60 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using TMPro;
 
 public class HoleTrigger : MonoBehaviour
 {
     public string nextSceneName;
     public string phaseText;
-    private BossController bossController;
+
+    private OrcController orcController;
     public Collider2D solidCollider;
     public Collider2D triggerCollider;
+
+    public string playerSpawnPoint;
+
     private bool transitioning = false;
 
     private void Start()
     {
-        bossController = Object.FindFirstObjectByType<BossController>();
+        TryFindOrc();
 
         if (solidCollider != null)
         {
             solidCollider.enabled = true;
-            Debug.Log($"[Start] solidCollider habilitado: {solidCollider.enabled}");
+            Debug.Log("[Start] solidCollider habilitado: true");
         }
         else
         {
-            Debug.LogWarning("[Start] solidCollider não está atribuído!");
+            Debug.LogWarning("[Start] solidCollider não atribuído!");
         }
 
         if (triggerCollider != null)
         {
             triggerCollider.enabled = false;
-            Debug.Log($"[Start] triggerCollider habilitado: {triggerCollider.enabled}");
+            Debug.Log("[Start] triggerCollider habilitado: false");
         }
         else
         {
-            Debug.LogWarning("[Start] triggerCollider não está atribuído!");
+            Debug.LogWarning("[Start] triggerCollider não atribuído!");
         }
     }
 
     private void Update()
     {
-        if (bossController == null)
+        if (orcController == null)
         {
-            bossController = Object.FindFirstObjectByType<BossController>();
-            if (bossController == null)
-            {
-                Debug.Log("[HoleTrigger] Boss não encontrado (morto). Permitindo passagem.");
-                solidCollider.enabled = false;
-                triggerCollider.enabled = true;
-                return;
-            }
-            else
-            {
-                Debug.Log("Achou pelo Find");
-            }
+            TryFindOrc();
+            return; // aguarda próximo frame para tentar de novo
         }
 
-        if (bossController.IsDead())
+        if (orcController.IsDead())
         {
-            Debug.Log("[HoleTrigger] Boss está morto. Permitindo passagem.");
+            Debug.Log("[HoleTrigger] Orc está morto. Permitindo passagem.");
             solidCollider.enabled = false;
             triggerCollider.enabled = true;
         }
         else
         {
-            Debug.Log("[HoleTrigger] Boss ainda está vivo.");
             solidCollider.enabled = true;
             triggerCollider.enabled = false;
         }
@@ -71,12 +62,27 @@ public class HoleTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (transitioning) return;
+        if (transitioning || orcController == null) return;
 
-        if (collision.CompareTag("Player") && bossController != null && bossController.IsDead())
+        if (collision.CompareTag("Player") && orcController.IsDead())
         {
+            Debug.Log("Entrei no buraco vou mudar de cena");
             transitioning = true;
-            SceneTransitionManager.Instance.LoadSceneWithFade(nextSceneName, phaseText);
+            SceneTransitionManager.Instance.LoadSceneWithFade(nextSceneName, phaseText, playerSpawnPoint);
+        }
+    }
+
+    private void TryFindOrc()
+    {
+        orcController = FindFirstObjectByType<OrcController>();
+
+        if (orcController != null)
+        {
+            Debug.Log("[HoleTrigger] Orc encontrado.");
+        }
+        else
+        {
+            Debug.LogWarning("[HoleTrigger] Orc ainda não foi encontrado.");
         }
     }
 }

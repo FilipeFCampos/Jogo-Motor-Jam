@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor.Rendering;
 
 public class SceneTransitionManager : MonoBehaviour
 {
@@ -8,28 +9,27 @@ public class SceneTransitionManager : MonoBehaviour
 
     public FadePanelController fadePanel;
 
-    private void Awake()
+
+
+    void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Debug.Log("[SceneTransitionManager] Instância criada e marcada como DontDestroyOnLoad.");
-        }
-        else
-        {
-            Debug.LogWarning("[SceneTransitionManager] Instância duplicada detectada. Destruindo esta.");
             Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // Apenas se for o único
     }
 
-    public void LoadSceneWithFade(string sceneName, string phaseText)
+    public void LoadSceneWithFade(string sceneName, string phaseText, string playerSpawnPoint)
     {
         Debug.Log($"[SceneTransitionManager] Iniciando transição para a cena '{sceneName}' com texto '{phaseText}'.");
-        StartCoroutine(DoTransition(sceneName, phaseText));
+        StartCoroutine(DoTransition(sceneName, phaseText, playerSpawnPoint));
     }
 
-    private IEnumerator DoTransition(string sceneName, string phaseText)
+    private IEnumerator DoTransition(string sceneName, string phaseText, string playerSpawn)
     {
         if (fadePanel == null)
         {
@@ -37,14 +37,21 @@ public class SceneTransitionManager : MonoBehaviour
             yield break;
         }
 
+        fadePanel.gameObject.SetActive(true);
+
+
+        /*GameObject menuIncial = GameObject.FindWithTag("MenuInicial");
+        if (menuIncial != null)
+        {
+            menuIncial.SetActive(false);
+        }*/
+
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             DontDestroyOnLoad(player);
         }
 
-        // Atualiza o texto da fase e ativa o texto
-        fadePanel.SetPhaseText(phaseText);
         Debug.Log("[SceneTransitionManager] Texto da fase definido no FadePanel.");
 
         // Desativa o HUD no início da transição
@@ -56,6 +63,12 @@ public class SceneTransitionManager : MonoBehaviour
         else
         {
             Debug.LogWarning("[SceneTransitionManager] HUDPersistence.Instance é null ao tentar desativar o HUD.");
+        }
+
+        // Atualiza o texto da fase e ativa o texto
+        if (phaseText != null)
+        {
+            fadePanel.SetPhaseText(phaseText);
         }
 
         // Fade out (com texto visível)
@@ -70,6 +83,22 @@ public class SceneTransitionManager : MonoBehaviour
         // Pequena espera para garantir que a cena carregou
         yield return new WaitForSeconds(0.1f);
         Debug.Log("[SceneTransitionManager] Espera após carregar a cena concluída.");
+
+        //Move o player pro spawnPointer do level
+        // Procura o ponto de spawn
+        if (player != null && !string.IsNullOrEmpty(playerSpawn))
+        {
+            GameObject spawnPoint = GameObject.Find(playerSpawn);
+            if (spawnPoint != null)
+            {
+                player.transform.position = spawnPoint.transform.position;
+                Debug.Log($"[SceneTransitionManager] Player posicionado no spawn '{playerSpawn}'.");
+            }
+            else
+            {
+                Debug.LogWarning($"[SceneTransitionManager] SpawnPoint '{playerSpawn}' não encontrado.");
+            }
+        }
 
         // Fade in (texto some ao final do fade in)
         Debug.Log("[SceneTransitionManager] Iniciando FadeIn...");
@@ -87,4 +116,12 @@ public class SceneTransitionManager : MonoBehaviour
             Debug.LogWarning("[SceneTransitionManager] HUDPersistence.Instance é null ao tentar reativar o HUD.");
         }
     }
+
+    public void LoadSceneNoFade(string sceneName)
+    {
+        Debug.Log("oioii");
+        SceneManager.LoadScene(sceneName);
+    }
+    
+
 }

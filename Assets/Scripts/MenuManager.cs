@@ -7,42 +7,99 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen; // Painel de loading
-    [SerializeField] private Image progressBar;       // Barra de progresso (UI Image)
-    [SerializeField] private TMP_Text percentage;     // Texto de carregamento
+    [SerializeField] private Image progressBar;        // Barra de progresso (UI Image)
+    [SerializeField] private TMP_Text percentage;      // Texto de carregamento
+
+    [Header("Músicas das Fases")]
+    [SerializeField] private AudioClip fase1Music; // Música específica para a Fase 1
+    // NOVO: Adicione as referências para as músicas das fases 2 e 3 aqui
+    [SerializeField] private AudioClip fase2Music; // Música específica para a Fase 2
+    [SerializeField] private AudioClip fase3Music; // Música específica para a Fase 3
 
     private void Start()
     {
-        // Toca a música do menu ao iniciar
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayBackgroundMusic();
+            AudioManager.Instance.PlayDefaultBackgroundMusic();
+        }
+        else
+        {
+            Debug.LogWarning("MenuManager: AudioManager.Instance não encontrado em Start(). A música do menu não será tocada.");
+        }
+        if (loadingScreen != null)
+        {
+            loadingScreen.SetActive(false);
         }
     }
 
     public void StartGame()
+{
+    PlayerPrefs.SetInt("CurrentScore", 0);
+    PlayerPrefs.Save();
+
+    if (ScoreManager.Instance != null)
     {
-        PlayerPrefs.SetInt("CurrentScore", 0); // Reset do score temporário
-        PlayerPrefs.Save();
+        Destroy(ScoreManager.Instance.gameObject);
+    }
 
-        // Destrói o ScoreManager se ele existir
-        if (ScoreManager.Instance != null)
-        {
-            Destroy(ScoreManager.Instance.gameObject);
-        }
+    if (AudioManager.Instance != null)
+    {
+        AudioManager.Instance.PlayButtonClickSound();
+    }
 
-        // Toca som de clique ao iniciar o jogo
+    // Remove loadingScreen.SetActive(true);
+
+    if (SceneTransitionManager.Instance != null)
+    {
+        SceneTransitionManager.Instance.LoadSceneWithFade("Level1", "Level 1", null);
+    }
+    else
+    {
+        Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+        SceneManager.LoadScene("Level1"); // fallback simples
+    }
+}
+
+    // Se você tiver botões específicos para cada fase, pode criar métodos como este:
+    public void LoadFase2Button()
+    {
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-
-        loadingScreen.SetActive(true); // Exibe tela de carregamento
-        StartCoroutine(LoadLevelAsync(1)); // Índice da cena Level1
+        
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneWithFade("Level2", "Level 2", null);
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Level2");
+        }
     }
+
+    public void LoadFase3Button()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+        
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneWithFade("Level3", "Level 3", null);
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Level3");
+        }
+    }
+
 
     IEnumerator LoadLevelAsync(int levelIndex)
     {
-        // Reset da UI de carregamento
         progressBar.fillAmount = 0;
         percentage.text = "CARREGANDO: 0%";
         loadingScreen.SetActive(true);
@@ -65,16 +122,60 @@ public class MenuManager : MonoBehaviour
                 percentage.text = "PRESSIONE QUALQUER TECLA";
                 if (Input.anyKeyDown)
                 {
-                    operation.allowSceneActivation = true;
-
-                    // Som ao avançar da tela de loading
+                    // === LÓGICA DE ÁUDIO PARA TRANSIÇÃO DE FASE AQUI ===
                     if (AudioManager.Instance != null)
                     {
+                        AudioClip musicToPlay = null; // Variável para armazenar a música correta
+
+                        // Seleciona a música baseada no índice da fase
+                        switch (levelIndex)
+                        {
+                            case 1:
+                                musicToPlay = fase1Music;
+                                break;
+                            case 2:
+                                musicToPlay = fase2Music;
+                                break;
+                            case 3:
+                                musicToPlay = fase3Music;
+                                break;
+                            // Adicione mais cases se tiver mais fases
+                            default:
+                                Debug.LogWarning($"MenuManager: Nenhuma música definida para o índice de fase {levelIndex}. Usando música padrão.");
+                                musicToPlay = AudioManager.Instance.defaultBackgroundMusic; // Fallback para a música padrão
+                                break;
+                        }
+
+                        // 1. Troca a música de fundo para a da fase selecionada
+                        if (musicToPlay != null)
+                        {
+                            AudioManager.Instance.PlayBackgroundMusic(musicToPlay);
+                            Debug.Log($"Música da Fase {levelIndex} ({musicToPlay.name}) solicitada ao AudioManager.");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"MenuManager: AudioClip da música para a Fase {levelIndex} não atribuído ou nulo após seleção!");
+                        }
+
+                        // 2. Ajusta o volume da música e dos SFX para os valores específicos da fase
+                        // Você pode criar uma lógica mais complexa aqui (e.g., um array de volumes por fase)
+                        // Por simplicidade, usaremos valores fixos aqui, mas você pode ajustá-los.
+                        AudioManager.Instance.SetMusicVolume(0.6f); // Exemplo: Música um pouco mais alta na fase
+                        AudioManager.Instance.SetSfxVolume(0.05f);   // Exemplo: SFX mais proeminente na fase
+                        Debug.Log($"Volumes de áudio ajustados para a Fase {levelIndex}.");
+
+                        // 3. Toca som de clique ao avançar da tela de loading
                         AudioManager.Instance.PlayButtonClickSound();
                     }
+                    else
+                    {
+                        Debug.LogError("MenuManager: AudioManager.Instance não encontrado ao tentar ajustar áudio antes da transição da cena!");
+                    }
+                    // ====================================================
+
+                    operation.allowSceneActivation = true; // Permite que a cena carregada seja ativada
                 }
             }
-
             yield return null;
         }
     }
@@ -86,6 +187,7 @@ public class MenuManager : MonoBehaviour
             AudioManager.Instance.PlayButtonClickSound();
         }
         Application.Quit();
+        Debug.Log("Saindo do jogo...");
     }
 
     public void OpenCredits()
@@ -94,15 +196,33 @@ public class MenuManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-        SceneManager.LoadScene("Credits");
+         if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneNoFade("Credits");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Credits");
+        }
     }
 
-    public void OpenMenu()
+    public void ReturnMenu()
     {
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayButtonClickSound();
+            AudioManager.Instance.PlayDefaultBackgroundMusic();
         }
-        SceneManager.LoadScene("MenuPrincipal");
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneNoFade("MenuPrincipal");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("MenuPrincipal");
+        }
     }
 }

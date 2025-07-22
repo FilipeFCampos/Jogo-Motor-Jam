@@ -33,7 +33,7 @@ public class GameOverManager : MonoBehaviour
 
         if (SceneTransitionManager.Instance != null)
         {
-            Destroy(SceneTransitionManager.Instance.gameObject);
+            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
         }
 
         Time.timeScale = 1f; // volta ao tempo normal do jogo
@@ -62,7 +62,7 @@ public class GameOverManager : MonoBehaviour
 
         if (SceneTransitionManager.Instance != null)
         {
-            Destroy(SceneTransitionManager.Instance.gameObject);
+            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
         }
 
         Time.timeScale = 1f;

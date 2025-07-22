@@ -7,6 +7,8 @@ TagManager:
   - Trap
   - PlayerAttack
   - Key
+  - MenuInicial
+  - Orc
   layers:
   - Default
   - TransparentFX
@@ -41,11 +43,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: FadePanelLayer
     uniqueID: 2787432895
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Character
     uniqueID: 2432534543

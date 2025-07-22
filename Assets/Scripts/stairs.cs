@@ -4,10 +4,18 @@ using System.Collections;
 public class TeleportOnTouch : MonoBehaviour
 {
     public Transform targetPosition; // Para onde o player será movido
-    public FadePanelController fadePanel; // Arraste aqui o FadePanel no Inspector
+    private FadePanelController fadePanel;
 
     private bool isTeleporting = false;
-
+    void Start()
+    {
+        fadePanel = FadePanelController.Instance;
+        if (fadePanel == null)
+        {
+            Debug.LogWarning("FadePanelController.Instance é null! Verifique se o FadePanel está presente e foi inicializado.");
+        }
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isTeleporting) return;
@@ -22,6 +30,15 @@ public class TeleportOnTouch : MonoBehaviour
     {
         isTeleporting = true;
 
+        fadePanel.SetPhaseText(null);
+
+        // Desativa o controle do jogador
+        var playerController = player.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.SetMovementEnabled(false);
+        }
+
         // Fade para preto
         yield return StartCoroutine(fadePanel.FadeOut());
 
@@ -34,6 +51,8 @@ public class TeleportOnTouch : MonoBehaviour
 
         // Fade de volta
         yield return StartCoroutine(fadePanel.FadeIn());
+
+        playerController.SetMovementEnabled(true);
 
         isTeleporting = false;
     }

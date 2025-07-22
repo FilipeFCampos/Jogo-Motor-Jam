@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     /* Enums */
     private enum Directions { UP, DOWN, LEFT, RIGHT };
 
+    public static PlayerController Instance { get; private set; }
+
     /* Basic player movement variables */
     private Vector2 moveDir;
     [SerializeField] private float moveSpeed = 200f;
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-            orcController greenOrc = hit.GetComponent<orcController>();
+            OrcController greenOrc = hit.GetComponent<OrcController>();
             if(greenOrc != null)
             {
                 greenOrc.TomarDano(meleeDamage);
@@ -236,7 +238,7 @@ public class PlayerController : MonoBehaviour
         {
             if (footstepAudio != null && footstepSounds.Length > 0)
             {
-                footstepAudio.volume = 0.9f; // Ajuste de volume
+                footstepAudio.volume = 0.10f; // Ajuste de volume
                 AudioClip stepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
                 footstepAudio.PlayOneShot(stepSound);
                 lastFootstepTime = Time.time;
@@ -244,7 +246,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 
 
     private void CalculateFacingDirection()
@@ -311,6 +316,13 @@ public class PlayerController : MonoBehaviour
         canAttack = animator.GetBool("CanAttack");
     }
 
-
+    public void SetMovementEnabled(bool enabled)
+    {
+        canMove = enabled;
+        if (!enabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
 
 }
