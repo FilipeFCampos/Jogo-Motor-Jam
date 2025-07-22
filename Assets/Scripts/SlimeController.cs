@@ -226,7 +226,7 @@ public class SlimeController : MonoBehaviour
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationLength = stateInfo.length; // Pega a duração da animação atual
-        //timer.ResetTimer(); // Assumindo que o timer deve ser resetado aqui
+        timer.ResetTimer(); // Assumindo que o timer deve ser resetado aqui
 
         yield return new WaitForSeconds(animationLength); // Espera a duração da animação
         Destroy(gameObject); // Destroi o GameObject do slime
