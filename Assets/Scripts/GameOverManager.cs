@@ -9,36 +9,71 @@ public class GameOverManager : MonoBehaviour
     public string gameScene = "Level1";
 
     public void RetryGame()
-    {   
-        PlayerPrefs.SetInt("CurrentScore", 0); // Se usar um score temporário
+    {
+        PlayerPrefs.SetInt("CurrentScore", 0); // zera pontuação temporária
         PlayerPrefs.Save();
 
-        // Destrói o ScoreManager se ele existir (vindo da tela de vitória)
+        // Destrói o player se ele ainda existir
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Destroy(player);
+        }
+
+        // Destroi objetos persistentes
         if (ScoreManager.Instance != null)
         {
             Destroy(ScoreManager.Instance.gameObject);
         }
-        // Destrói o ScoreManager (se existir)
-        if (ScoreManager.Instance != null)
+
+        if (HUDPersistence.Instance != null)
         {
-            Destroy(ScoreManager.Instance.gameObject);
+            Destroy(HUDPersistence.Instance.gameObject);
         }
-        Time.timeScale = 1f; // retoma o jogo
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
+        }
+
+        Time.timeScale = 1f; // volta ao tempo normal do jogo
+
+        // Reinicia a cena
         SceneManager.LoadScene(gameScene);
     }
 
     public void GoToMainMenu()
     {
-            // Destrói o ScoreManager (se existir)
+         // Destrói o player se ele ainda existir
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Destroy(player);
+        }
         if (ScoreManager.Instance != null)
         {
             Destroy(ScoreManager.Instance.gameObject);
         }
+
+        if (HUDPersistence.Instance != null)
+        {
+            Destroy(HUDPersistence.Instance.gameObject);
+        }
+
+        if (FadePanelController.Instance != null)
+        {
+            Destroy(FadePanelController.Instance.gameObject);
+        }
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuScene);
     }
 
-    // Opcional: Ativar/desativar objetos com animação
     public void ShowButtons(float delay)
     {
         Invoke("EnableButtons", delay);
@@ -46,7 +81,6 @@ public class GameOverManager : MonoBehaviour
 
     private void EnableButtons()
     {
-        // Ativar botões após animação
         foreach (var btn in GetComponentsInChildren<Button>(true))
         {
             btn.gameObject.SetActive(true);

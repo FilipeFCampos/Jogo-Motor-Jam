@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class orcController : MonoBehaviour
+public class OrcController : MonoBehaviour
 {
     public enum Estado { Andando, Atacando, TomandoDano, Morto }
 
@@ -293,7 +293,7 @@ public class orcController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene("WinScene");
+        //SceneManager.LoadScene("WinScene");
     }
 
     private void AtualizarFlagsAnimator()
@@ -317,5 +317,16 @@ public class orcController : MonoBehaviour
         return viewportPos.x >= margem && viewportPos.x <= 1f - margem &&
                viewportPos.y >= margem && viewportPos.y <= 1f - margem &&
                viewportPos.z > 0;
+    }
+
+    public Estado GetEstadoAtual()
+    {
+        return estadoAtual;
+    }
+
+    public bool IsDead()
+    {
+        Debug.Log($"Estado do Boss: {GetEstadoAtual()}");
+        return estadoAtual == Estado.Morto;
     }
 }

@@ -20,10 +20,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(currentPlayer); // Destroy the current player if it exists
         }
+
         currentPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
-        healthBarController.SetPlayer(currentPlayer.GetComponent<PlayerController>()); // Set the player reference in the health bar controller
+        healthBarController.SetPlayer(currentPlayer.GetComponent<PlayerController>());
+
+        // Informa a câmera sobre o novo jogador
+        CameraFollow camFollow = FindFirstObjectByType<CameraFollow>();
+        if (camFollow != null)
+        {
+            camFollow.SetTarget(currentPlayer.transform);
+        }
     }
 
+    
     void RespawnPlayer()
     {
         currentPlayer.transform.position = spawnPoint.position; // Move the player to the spawn point

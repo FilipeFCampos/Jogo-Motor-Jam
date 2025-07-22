@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e109cbc39f85d247ad8a2e7ae25a792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 125.1
+  vidaMaxima: 1
   velocidade: 3
   distanciaAtaque: 2
   tempoEntreAtaques: 4
@@ -333,6 +333,7 @@ MonoBehaviour:
   footstepCooldownBoss: 0.4
   attackAudioSourceBoss: {fileID: 8638692554255736364}
   attackSoundBoss: {fileID: 8300000, guid: 864c3686b3b656f428933ea77201155a, type: 3}
+  minBossMovementThreshold: 0.005
   deathEffect: {fileID: 0}
   danoAtaque: 25.1
 --- !u!95 &3446637523676768260

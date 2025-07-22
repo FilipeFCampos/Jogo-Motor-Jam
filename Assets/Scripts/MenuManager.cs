@@ -33,27 +33,32 @@ public class MenuManager : MonoBehaviour
     }
 
     public void StartGame()
+{
+    PlayerPrefs.SetInt("CurrentScore", 0);
+    PlayerPrefs.Save();
+
+    if (ScoreManager.Instance != null)
     {
-        PlayerPrefs.SetInt("CurrentScore", 0);
-        PlayerPrefs.Save();
-
-        if (ScoreManager.Instance != null)
-        {
-            Destroy(ScoreManager.Instance.gameObject);
-        }
-
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayButtonClickSound();
-        }
-
-        if (loadingScreen != null)
-        {
-            loadingScreen.SetActive(true);
-        }
-        // CHAMANDO PARA A FASE 1
-        StartCoroutine(LoadLevelAsync(1)); // Índice da cena Level1
+        Destroy(ScoreManager.Instance.gameObject);
     }
+
+    if (AudioManager.Instance != null)
+    {
+        AudioManager.Instance.PlayButtonClickSound();
+    }
+
+    // Remove loadingScreen.SetActive(true);
+
+    if (SceneTransitionManager.Instance != null)
+    {
+        SceneTransitionManager.Instance.LoadSceneWithFade("Level1", "Level 1", null);
+    }
+    else
+    {
+        Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+        SceneManager.LoadScene("Level1"); // fallback simples
+    }
+}
 
     // Se você tiver botões específicos para cada fase, pode criar métodos como este:
     public void LoadFase2Button()
@@ -62,11 +67,16 @@ public class MenuManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-        if (loadingScreen != null)
+        
+        if (SceneTransitionManager.Instance != null)
         {
-            loadingScreen.SetActive(true);
+            SceneTransitionManager.Instance.LoadSceneWithFade("Level2", "Level 2", null);
         }
-        StartCoroutine(LoadLevelAsync(2)); // Índice da cena Level2
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Level2");
+        }
     }
 
     public void LoadFase3Button()
@@ -75,11 +85,16 @@ public class MenuManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-        if (loadingScreen != null)
+        
+        if (SceneTransitionManager.Instance != null)
         {
-            loadingScreen.SetActive(true);
+            SceneTransitionManager.Instance.LoadSceneWithFade("Level3", "Level 3", null);
         }
-        StartCoroutine(LoadLevelAsync(3)); // Índice da cena Level3
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Level3");
+        }
     }
 
 
@@ -181,16 +196,33 @@ public class MenuManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-        SceneManager.LoadScene("Credits");
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneNoFade("Credits");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("Credits");
+        }
     }
 
-    public void OpenMenu()
+    public void ReturnMenu()
     {
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayButtonClickSound();
             AudioManager.Instance.PlayDefaultBackgroundMusic();
         }
-        SceneManager.LoadScene("MenuPrincipal");
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneNoFade("MenuPrincipal");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("MenuPrincipal");
+        }
     }
 }

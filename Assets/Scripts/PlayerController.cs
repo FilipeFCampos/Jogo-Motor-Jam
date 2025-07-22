@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     /* Enums */
     private enum Directions { UP, DOWN, LEFT, RIGHT };
+
+    public static PlayerController Instance { get; private set; }
     public enum Ability { BLACK, BLUE, GREEN, RED };
 
     /* Basic player movement variables */
@@ -112,8 +114,8 @@ public class PlayerController : MonoBehaviour
                 continue;
             }
 
-            orcController greenOrc = hit.GetComponent<orcController>();
-            if (greenOrc != null)
+            OrcController greenOrc = hit.GetComponent<OrcController>();
+            if(greenOrc != null)
             {
                 greenOrc.TomarDano(meleeDamage);
                 Debug.Log("Green Orc atingido: " + hit.name);
@@ -331,6 +333,15 @@ public class PlayerController : MonoBehaviour
         canAttack = animator.GetBool("CanAttack");
     }
 
+    public void SetMovementEnabled(bool enabled)
+    {
+        canMove = enabled;
+        if (!enabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
+    
     public void AbsorveAbility(int ability)
     {
 
