@@ -4,8 +4,17 @@ using System.Collections;
 public class BossRoomPortal : MonoBehaviour
 {
     public Transform bossSpawnPoint;
-    public FadePanelController fadePanel; // Referência ao painel de fade
+    private FadePanelController fadePanel;
 
+
+    void Start()
+    {
+        fadePanel = FadePanelController.Instance;
+        if (fadePanel == null)
+        {
+            Debug.LogWarning("FadePanelController.Instance é null! Verifique se o FadePanel está presente e foi inicializado.");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor.Rendering;
+using Unity.VisualScripting;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance;
 
-    public FadePanelController fadePanel;
+    private FadePanelController fadePanel;
 
 
 
@@ -21,6 +22,15 @@ public class SceneTransitionManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject); // Apenas se for o único
+    }
+
+    void Start()
+    {
+         fadePanel = FadePanelController.Instance;
+        if (fadePanel == null)
+        {
+            Debug.LogWarning("FadePanelController.Instance é null! Verifique se o FadePanel está presente e foi inicializado.");
+        }
     }
 
     public void LoadSceneWithFade(string sceneName, string phaseText, string playerSpawnPoint)
@@ -85,12 +95,13 @@ public class SceneTransitionManager : MonoBehaviour
         Debug.Log("[SceneTransitionManager] Espera após carregar a cena concluída.");
 
         //Move o player pro spawnPointer do level
-        // Procura o ponto de spawn
         if (player != null && !string.IsNullOrEmpty(playerSpawn))
         {
             GameObject spawnPoint = GameObject.Find(playerSpawn);
             if (spawnPoint != null)
             {
+                Scene activeScene = SceneManager.GetActiveScene();
+                SceneManager.MoveGameObjectToScene(player, activeScene);
                 player.transform.position = spawnPoint.transform.position;
                 Debug.Log($"[SceneTransitionManager] Player posicionado no spawn '{playerSpawn}'.");
             }
@@ -108,11 +119,16 @@ public class SceneTransitionManager : MonoBehaviour
         // Reativa o HUD após a transição
         if (HUDPersistence.Instance != null)
         {
-            HUDPersistence.Instance.SetActiveHUD(true);
-            Debug.Log("[SceneTransitionManager] HUD reativado.");
-        }
-        else
-        {
+            if (sceneName != "WinScene")
+            {
+                HUDPersistence.Instance.SetActiveHUD(true);
+                Debug.Log("[SceneTransitionManager] HUD reativado.");
+            }
+            else
+            {
+                Destroy(HUDPersistence.Instance.gameObject);
+            }
+        }else{
             Debug.LogWarning("[SceneTransitionManager] HUDPersistence.Instance é null ao tentar reativar o HUD.");
         }
     }

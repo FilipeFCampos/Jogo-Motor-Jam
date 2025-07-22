@@ -196,7 +196,7 @@ public class MenuManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-         if (SceneTransitionManager.Instance != null)
+        if (SceneTransitionManager.Instance != null)
         {
             SceneTransitionManager.Instance.LoadSceneNoFade("Credits");
         }
