@@ -46,7 +46,6 @@ public class WinManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
-            // Destrói o ScoreManager (se existir)
         // Destrói o player se ele ainda existir
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -70,7 +69,7 @@ public class WinManager : MonoBehaviour
 
         if (SceneTransitionManager.Instance != null)
         {
-            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
+            Destroy(SceneTransitionManager.Instance.gameObject);
         }
 
         Time.timeScale = 1f;
