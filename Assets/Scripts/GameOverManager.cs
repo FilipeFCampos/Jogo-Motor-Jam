@@ -60,6 +60,11 @@ public class GameOverManager : MonoBehaviour
             Destroy(HUDPersistence.Instance.gameObject);
         }
 
+        if (FadePanelController.Instance != null)
+        {
+            Destroy(FadePanelController.Instance.gameObject);
+        }
+
         if (SceneTransitionManager.Instance != null)
         {
             DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);

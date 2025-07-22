@@ -51,8 +51,16 @@ public class WinManager : MonoBehaviour
         {
             Destroy(ScoreManager.Instance.gameObject);
         }
-        
-        SceneManager.LoadScene("MenuPrincipal");
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.LoadSceneNoFade("MenuPrincipal");
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
+            SceneManager.LoadScene("MenuPrincipal");
+        }
     }
     
     // Classe auxiliar para organização dos dados
