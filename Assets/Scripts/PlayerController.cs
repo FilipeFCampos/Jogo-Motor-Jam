@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     /* Enums */
     private enum Directions { UP, DOWN, LEFT, RIGHT };
 
+    public static PlayerController Instance { get; private set; }
+
     /* Basic player movement variables */
     private Vector2 moveDir;
     [SerializeField] private float moveSpeed = 200f;
@@ -21,7 +23,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioSource swordAudio;
     [SerializeField] private AudioSource pickupKey;
-    
+    [SerializeField] private AudioSource footstepAudio; // AudioSource para os passos
+    [SerializeField] private AudioClip[] footstepSounds; // Array de sons variados de passos
+
+    private float footstepCooldown = 0.3f; // Tempo entre cada som de passo
+    private float lastFootstepTime;
+
 
     /* Combat related variables */
     public double health;
@@ -91,6 +98,14 @@ public class PlayerController : MonoBehaviour
             {
                 boss.TomarDano(meleeDamage);
                 Debug.Log("Boss atingido: " + hit.name);
+                continue;
+            }
+
+            OrcController greenOrc = hit.GetComponent<OrcController>();
+            if(greenOrc != null)
+            {
+                greenOrc.TomarDano(meleeDamage);
+                Debug.Log("Green Orc atingido: " + hit.name);
                 continue;
             }
 
@@ -210,6 +225,32 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = (canMove ? 1 : 0) * moveSpeed * Time.fixedDeltaTime * moveDir;
         rb.linearVelocity.Normalize();
     }
+    //w
+    private void HandleFootstepSound()
+    {
+        if (moveDir.magnitude == 0)
+        {
+            footstepAudio.Stop(); // Para o som quando parar
+            return;
+        }
+
+        if (Time.time - lastFootstepTime >= footstepCooldown)
+        {
+            if (footstepAudio != null && footstepSounds.Length > 0)
+            {
+                footstepAudio.volume = 0.10f; // Ajuste de volume
+                AudioClip stepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
+                footstepAudio.PlayOneShot(stepSound);
+                lastFootstepTime = Time.time;
+            }
+        }
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
 
     private void CalculateFacingDirection()
     {
@@ -253,8 +294,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         // Get horizontal input
         GetInput();
+        HandleFootstepSound(); // Chamado dentro de Update()
         CalculateFacingDirection();
         HandleAnimations();
         if (timer.timeElapsed <= 0 && isDead == false)
@@ -272,6 +316,13 @@ public class PlayerController : MonoBehaviour
         canAttack = animator.GetBool("CanAttack");
     }
 
-
+    public void SetMovementEnabled(bool enabled)
+    {
+        canMove = enabled;
+        if (!enabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
 
 }
