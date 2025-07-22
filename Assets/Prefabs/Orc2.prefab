@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1027103984665501590}
   - component: {fileID: 4519321760919258223}
   - component: {fileID: 1666394048764535977}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Orc2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
