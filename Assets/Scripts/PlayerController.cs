@@ -7,14 +7,16 @@ public class PlayerController : MonoBehaviour
 {
     /* Enums */
     private enum Directions { UP, DOWN, LEFT, RIGHT };
+    public enum Ability { BLACK, BLUE, GREEN, RED };
 
     /* Basic player movement variables */
     private Vector2 moveDir;
-    [SerializeField] private float moveSpeed = 200f;
+    [SerializeField] private float moveSpeed;
     private Directions currentDirection;
     private bool canMove = true; // Flag to control player movement
 
     /* References to components */
+    public PowerTimer powerBar;
     [SerializeField] private Rigidbody2D rb;
     // Animation related references
     [SerializeField] private Animator animator;
@@ -33,9 +35,9 @@ public class PlayerController : MonoBehaviour
     private bool isInvulnerable = false;
     private bool isDead = false; // Flag to check if the player is dead
     private bool canAttack = true; // Flag to control attack state
-    [SerializeField] private float maxHealth = 3f;
-    [SerializeField] private float meleeDamage = 1f;
-    [SerializeField] private float meleeRange = 1f;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float meleeDamage;
+    [SerializeField] private float meleeRange;
     private bool canTakeDamage = true; // Flag to control if the player can take damage
 
     [SerializeField] private LayerMask enemyLayer;
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour
     // Awake is called when the script instance is being loaded
 
     public bool hasKey = false;
+    private float defaultHealth;
+    private float defaultSpeed;
+    private float defaultAttackDamage;
+    private float defaultMeleeRange;
 
     void Awake()
     {
@@ -66,6 +72,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Timer component not found in the scene.");
         }
+        powerBar = FindFirstObjectByType<PowerTimer>();
+
+        // Set default values for variables
+        defaultHealth = maxHealth;
+        defaultSpeed = moveSpeed;
+        defaultAttackDamage = meleeDamage;
+        defaultMeleeRange = meleeRange;
     }
 
     private void Attack()
@@ -100,7 +113,7 @@ public class PlayerController : MonoBehaviour
             }
 
             orcController greenOrc = hit.GetComponent<orcController>();
-            if(greenOrc != null)
+            if (greenOrc != null)
             {
                 greenOrc.TomarDano(meleeDamage);
                 Debug.Log("Green Orc atingido: " + hit.name);
@@ -136,10 +149,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Trap")) {
+        if (other.CompareTag("Trap"))
+        {
             Debug.Log("Player has entered a trap!");
 
-            if (canTakeDamage) {
+            if (canTakeDamage)
+            {
                 TakeDamage(1f); // Take damage from the trap
                 //canTakeDamage = false; // Disable further damage until reset
             }
@@ -163,6 +178,8 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         canAttack = false;
         rb.linearVelocity = Vector2.zero;
+        ResetAbilities(); // Reseta habilidades do jogador
+        powerBar.ResetTimer(0f); // Reseta a barra de poder
 
         // Desabilita colisões se necessário
         GetComponent<Collider2D>().enabled = false;
@@ -292,7 +309,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
         // Get horizontal input
         GetInput();
@@ -314,6 +331,100 @@ public class PlayerController : MonoBehaviour
         canAttack = animator.GetBool("CanAttack");
     }
 
+    public void AbsorveAbility(int ability)
+    {
 
+        Color color = Color.yellow; // Default color
+        switch (ability)
+        {
+            case (int)Ability.BLACK:
+                ResetRange();
+                ResetSpeed();
+                if (meleeDamage < 30f)
+                {
+                    meleeDamage *= 1.5f; // Aumenta o dano do ataque corpo a corpo
+                }
+                if (meleeDamage > 30f)
+                {
+                    meleeDamage = 30f; // Garante que o dano não ultrapasse o máximo
+                }
+                color = Color.black;
+                powerBar.ChangeColor(color); // Muda a cor da barra de poder
+                Debug.Log("Absorbed BLACK ability. Melee damage increased to: " + meleeDamage);
+                powerBar.ResetTimer(10f); // Reseta o timer da barra de poder
+                break;
+            case (int)Ability.BLUE:
+                ResetAttackDamage();
+                ResetSpeed();
+                if (meleeRange < 5f)
+                {
+                    meleeRange *= 2f; // Aumenta o alcance do ataque corpo a corpo
+                }
+                if (meleeRange > 5f)
+                {
+                    meleeRange = 5f; // Garante que o alcance não ultrapasse o máximo
+                }
+                color = Color.blue;
+                powerBar.ChangeColor(color); // Muda a cor da barra de poder
+                Debug.Log("Absorbed BLUE ability. Melee range increased to: " + meleeRange);
+                powerBar.ResetTimer(15f); // Reseta o timer da barra de poder
+                break;
+            case (int)Ability.GREEN:
+                health += 40; // Restaura parte da vida do jogador
+                if (health > maxHealth) health = maxHealth; // Garante que a vida não ultrapasse o máximo
+                color = Color.green;
+                powerBar.ChangeColor(color); // Muda a cor da barra de poder
+                Debug.Log("Absorbed GREEN ability. Health increased to: " + health);
+                powerBar.ResetTimer(2.5f); // Reseta o timer da barra de poder
+                break;
+            case (int)Ability.RED:
+                ResetAttackDamage();
+                ResetRange();
+                if (moveSpeed < 400f)
+                {
+                    moveSpeed *= 1.5f; // Aumenta a velocidade de movimento
+                }
+                if (moveSpeed > 400f)
+                {
+                    moveSpeed = 400f; // Garante que a velocidade não ultrapasse o máximo
+                }
+                color = Color.red;
+                powerBar.ChangeColor(color); // Muda a cor da barra de poder
+                Debug.Log("Absorbed RED ability. Move speed increased to: " + moveSpeed);
+                powerBar.ResetTimer(10f); // Reseta o timer da barra de poder
+                break;
+            default:
+                Debug.LogError("Unknown ability type: " + ability);
+                break;
+        }
+    }
 
+    public void ResetAbilities()
+    {
+        // Reseta todas as habilidades do jogador para os valores padrão
+        meleeDamage = defaultAttackDamage;
+        moveSpeed = defaultSpeed;
+        maxHealth = defaultHealth;
+        meleeRange = defaultMeleeRange;
+
+        // Reset power bar color to default
+        powerBar.ChangeColor(Color.white);
+        Debug.Log("All abilities reset to default values.");
+    }
+
+    public void ResetRange()
+    {
+        meleeRange = defaultMeleeRange;
+        Debug.Log("Melee range reset to default value: " + meleeRange);
+    }
+    public void ResetAttackDamage()
+    {
+        meleeDamage = defaultAttackDamage;
+        Debug.Log("Melee damage reset to default value: " + meleeDamage);
+    }
+    public void ResetSpeed()
+    {
+        moveSpeed = defaultSpeed;
+        Debug.Log("Move speed reset to default value: " + moveSpeed);
+    }
 }

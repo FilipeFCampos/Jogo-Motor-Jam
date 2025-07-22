@@ -27,6 +27,10 @@ public class SlimeController : MonoBehaviour
     // minMovementThreshold: O quão pouco o slime precisa se mover para ser considerado "em movimento".
     // Isso evita que o som toque quando o Slime está parado ou tem um movimento mínimo.
     [SerializeField] private float minMovementThreshold = 0.005f;
+    [SerializeField] private SlimeType slimeType; // Tipo de slime, usado para identificar diferentes tipos de slimes
+    private enum SlimeType { BLACK, BLUE, GREEN, RED }; // Tipos de slimes disponíveis
+    private ParticleSystem slimeParticles; // Partículas associadas ao slime, se houver
+    private bool isSpecialSLime = false; // Indica se o slime é um slime especial (ex: Slime de Poder)
 
     // === Outras Referências ===
     Timer timer; // Referência ao componente Timer (assumindo que existe um na cena)
@@ -75,6 +79,19 @@ public class SlimeController : MonoBehaviour
         if (animator == null)
         {
             Debug.LogError("SlimeController: Animator component is missing from the Slime GameObject.");
+        }
+
+        // === Calcula a lógica de habilidades ===
+        slimeParticles = GetComponentInChildren<ParticleSystem>();
+        if (slimeParticles == null)
+        {
+            Debug.LogError("SlimeController: ParticleSystem não encontrado no Slime.");
+        } else {
+            if (Random.Range(0, 100) < 25) // 25% de chance de ser um slime especial
+            {
+                isSpecialSLime = true;
+                slimeParticles.Play(); // Inicia as partículas se existirem
+            }
         }
 
         // === Inicialização e Configuração dos AudioSources ===
@@ -213,6 +230,15 @@ public class SlimeController : MonoBehaviour
             Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado ao morrer.");
         }
 
+        if (isSpecialSLime)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) {
+                playerObj.GetComponent<PlayerController>().AbsorveAbility((int)slimeType); // Adiciona o poder do slime especial ao jogador
+            }
+            
+        }
+
         StartCoroutine(DestroyAfterAnimation()); // Inicia corrotina para destruir após animação
     }
 
@@ -226,7 +252,7 @@ public class SlimeController : MonoBehaviour
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float animationLength = stateInfo.length; // Pega a duração da animação atual
-        //timer.ResetTimer(); // Assumindo que o timer deve ser resetado aqui
+        timer.ResetTimer(); // Assumindo que o timer deve ser resetado aqui
 
         yield return new WaitForSeconds(animationLength); // Espera a duração da animação
         Destroy(gameObject); // Destroi o GameObject do slime
