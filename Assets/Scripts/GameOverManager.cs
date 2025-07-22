@@ -67,7 +67,7 @@ public class GameOverManager : MonoBehaviour
 
         if (SceneTransitionManager.Instance != null)
         {
-            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
+            Destroy(SceneTransitionManager.Instance.gameObject);
         }
 
         Time.timeScale = 1f;

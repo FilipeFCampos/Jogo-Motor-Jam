@@ -125,7 +125,7 @@ public class SceneTransitionManager : MonoBehaviour
             }
             else
             {
-                Destroy(HUDPersistence.Instance.gameObject);
+                HUDPersistence.Instance.SetActiveHUD(false);
             }
         }else{
             Debug.LogWarning("[SceneTransitionManager] HUDPersistence.Instance é null ao tentar reativar o HUD.");
