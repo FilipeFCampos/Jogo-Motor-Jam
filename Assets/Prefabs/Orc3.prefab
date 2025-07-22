@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b8ef82a8c522247bab508fb9ff7fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 10
+  vidaMaxima: 100
   velocidade: 3
   distanciaAtaque: 2
   tempoEntreAtaques: 3
@@ -200,7 +200,7 @@ MonoBehaviour:
   attackAudioSourceBoss: {fileID: 0}
   attackSoundBoss: {fileID: 0}
   deathEffect: {fileID: 0}
-  danoAtaque: 1
+  danoAtaque: 10
 --- !u!82 &-2001195091991421713
 AudioSource:
   m_ObjectHideFlags: 0
