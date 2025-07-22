@@ -87,7 +87,7 @@ public class SlimeController : MonoBehaviour
         {
             Debug.LogError("SlimeController: ParticleSystem não encontrado no Slime.");
         } else {
-            if (Random.Range(0, 100) < 20) // 20% de chance de ser um slime especial
+            if (Random.Range(0, 100) < 25) // 25% de chance de ser um slime especial
             {
                 isSpecialSLime = true;
                 slimeParticles.Play(); // Inicia as partículas se existirem
@@ -228,6 +228,15 @@ public class SlimeController : MonoBehaviour
         {
             moveAudioSource.Stop();
             Debug.Log($"Som de movimento do Slime '{gameObject.name}' parado ao morrer.");
+        }
+
+        if (isSpecialSLime)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null) {
+                playerObj.GetComponent<PlayerController>().AbsorveAbility((int)slimeType); // Adiciona o poder do slime especial ao jogador
+            }
+            
         }
 
         StartCoroutine(DestroyAfterAnimation()); // Inicia corrotina para destruir após animação

@@ -5890,6 +5890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerSlider: {fileID: 220309545}
+  playerController: {fileID: 0}
 --- !u!1 &298222812
 GameObject:
   m_ObjectHideFlags: 0
@@ -14092,7 +14093,7 @@ Tilemap:
       - {fileID: -5911397470096975488, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: -4523623588274359541, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: 1955352534120309933, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
-      m_AnimationSpeed: 15
+      m_AnimationSpeed: 15.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 8, y: 6, z: 0}
@@ -14118,7 +14119,7 @@ Tilemap:
       - {fileID: -5911397470096975488, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: -4523623588274359541, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
       - {fileID: 1955352534120309933, guid: 7c2b41c61eb00c1469b8408c81a69602, type: 3}
-      m_AnimationSpeed: 15
+      m_AnimationSpeed: 15.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -2, y: 13, z: 0}
