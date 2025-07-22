@@ -47,20 +47,34 @@ public class WinManager : MonoBehaviour
     public void ReturnToMenu()
     {
             // Destrói o ScoreManager (se existir)
+        // Destrói o player se ele ainda existir
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Destroy(player);
+        }
         if (ScoreManager.Instance != null)
         {
             Destroy(ScoreManager.Instance.gameObject);
         }
 
+        if (HUDPersistence.Instance != null)
+        {
+            Destroy(HUDPersistence.Instance.gameObject);
+        }
+
+        if (FadePanelController.Instance != null)
+        {
+            Destroy(FadePanelController.Instance.gameObject);
+        }
+
         if (SceneTransitionManager.Instance != null)
         {
-            SceneTransitionManager.Instance.LoadSceneNoFade("MenuPrincipal");
+            DontDestroyOnLoad(SceneTransitionManager.Instance.gameObject);
         }
-        else
-        {
-            Debug.LogError("SceneTransitionManager.Instance não encontrado!");
-            SceneManager.LoadScene("MenuPrincipal");
-        }
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MenuPrincipal");
     }
     
     // Classe auxiliar para organização dos dados
